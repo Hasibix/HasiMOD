@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hasimod:mythril_block"
+    }
+  ],
+  "result": {
+    "item": "hasimod:mythril_gem",
+    "count": 9
+  }
+}

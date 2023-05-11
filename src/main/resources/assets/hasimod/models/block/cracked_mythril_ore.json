@@ -1,0 +1,6 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "hasimod:blocks/cracked_mythril_ore"
+    }
+}

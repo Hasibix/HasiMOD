@@ -1,0 +1,33 @@
+{
+	"schemaVersion": 1,
+	"id": "hasimod",
+	"version": "${version}",
+	"name": "HasiMOD",
+	"description": "A mod made by Hasibix",
+	"authors": [
+		"Hasibix Hasib"
+	],
+	"contact": {
+		"sources": "https://github.com/Hasibix/HasiMOD"
+	},
+	"license": "GNU General Public License version 3 (GPLv3)",
+	"icon": "assets/hasimod/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"io.hasibix.minecraft.hasimod.HasiMOD"
+		],
+		"client": [
+			"io.hasibix.minecraft.hasimod.ClientInit"
+		]
+	},
+	"mixins": [
+		"hasimod.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.14.19",
+		"minecraft": "~1.19.3",
+		"java": ">=17",
+		"fabric-api": "*"
+	}
+}

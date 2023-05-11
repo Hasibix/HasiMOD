@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "hasimod:items/mythril_chestplate"
+  }
+}

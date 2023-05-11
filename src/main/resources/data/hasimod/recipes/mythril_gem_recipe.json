@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hasimod:mythril_dust"
+    },
+    {
+      "item": "hasimod:mythril_dust"
+    },
+    {
+      "item": "hasimod:mythril_dust"
+    },
+    {
+      "item": "minecraft:netherite_ingot"
+    },
+    {
+      "item": "minecraft:end_crystal"
+    },
+    {
+      "item": "minecraft:netherite_ingot"
+    },
+    {
+      "item": "hasimod:mythril_dust"
+    },
+    {
+      "item": "hasimod:mythril_dust"
+    },
+    {
+      "item": "hasimod:mythril_dust"
+    }
+  ],
+  "result": {
+    "item": "hasimod:mythril_gem",
+    "count": 1
+  }
+}

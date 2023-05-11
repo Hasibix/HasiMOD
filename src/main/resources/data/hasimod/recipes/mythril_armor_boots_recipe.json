@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "0 2",
+    "3 5"
+  ],
+  "key": {
+    "0": {
+      "item": "hasimod:mythril_gem"
+    },
+    "2": {
+      "item": "hasimod:mythril_gem"
+    },
+    "3": {
+      "item": "hasimod:mythril_gem"
+    },
+    "5": {
+      "item": "hasimod:mythril_gem"
+    }
+  },
+  "result": {
+    "item": "hasimod:mythril_armor_boots",
+    "count": 1
+  }
+}

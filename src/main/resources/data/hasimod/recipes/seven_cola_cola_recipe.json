@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hasimod:empty_can"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "hasimod:mythril_apple"
+    },
+    {
+      "item": "minecraft:red_dye"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "hasimod:carbonated_water"
+    },
+    {
+      "item": "minecraft:white_dye"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "minecraft:soul_campfire"
+    }
+  ],
+  "result": {
+    "item": "hasimod:seven_cola_cola",
+    "count": 1
+  }
+}
