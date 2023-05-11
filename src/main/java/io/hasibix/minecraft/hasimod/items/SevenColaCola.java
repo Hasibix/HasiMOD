@@ -1,40 +1,38 @@
 package io.hasibix.minecraft.hasimod.items;
 
-import net.minecraft.world.level.Level;
-import net.minecraft.world.item.UseAnim;
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.LivingEntity;
-
-import io.hasibix.minecraft.hasimod.procedures.AfterDrinkingSevenColaCola;
-import io.hasibix.minecraft.hasimod.init.CreativeTabs;
 import io.hasibix.minecraft.hasimod.init.Items;
+import io.hasibix.minecraft.hasimod.procedures.AfterDrinkingSevenColaCola;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.FoodComponent;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.Rarity;
+import net.minecraft.util.UseAction;
+import net.minecraft.world.World;
 
 public class SevenColaCola extends Item {
 	public SevenColaCola() {
-		super(new Item.Properties().tab(CreativeTabs.TAB_HASI_MOD).stacksTo(8).rarity(Rarity.EPIC)
-				.food((new FoodProperties.Builder()).nutrition(6).saturationMod(4f).alwaysEat()
+		super(new Item.Settings().maxCount(8).rarity(Rarity.EPIC)
+				.food((new FoodComponent.Builder()).hunger(6).saturationModifier(4f).alwaysEdible()
 
 						.build()));
 	}
 
 	@Override
-	public UseAnim getUseAnimation(ItemStack itemstack) {
-		return UseAnim.DRINK;
+	public UseAction getUseAction(ItemStack itemstack) {
+		return UseAction.DRINK;
 	}
 
 	@Override
-	public int getUseDuration(ItemStack itemstack) {
+	public int getMaxUseTime(ItemStack itemstack) {
 		return 32;
 	}
 
 	@Override
-	public ItemStack finishUsingItem(ItemStack itemstack, Level world, LivingEntity entity) {
+	public ItemStack finishUsing(ItemStack itemstack, World world, LivingEntity entity) {
 		ItemStack retval = new ItemStack(Items.EMPTY_CAN);
-		super.finishUsingItem(itemstack, world, entity);
+		super.finishUsing(itemstack, world, entity);
 		double x = entity.getX();
 		double y = entity.getY();
 		double z = entity.getZ();
@@ -44,9 +42,9 @@ public class SevenColaCola extends Item {
 		if (itemstack.isEmpty()) {
 			return retval;
 		} else {
-			if (entity instanceof Player player && !player.getAbilities().instabuild) {
-				if (!player.getInventory().add(retval))
-					player.drop(retval, false);
+			if (entity instanceof PlayerEntity player) {
+				if (!player.getInventory().insertStack(retval))
+					player.dropItem(retval, false);
 			}
 			return itemstack;
 		}

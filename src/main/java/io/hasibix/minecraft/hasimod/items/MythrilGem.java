@@ -1,18 +1,16 @@
 package io.hasibix.minecraft.hasimod.items;
 
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Item;
-
-import io.hasibix.minecraft.hasimod.init.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.Rarity;
 
 public class MythrilGem extends Item {
 	public MythrilGem() {
-		super(new Item.Properties().tab(CreativeTabs.TAB_HASI_MOD).stacksTo(64).fireResistant().rarity(Rarity.EPIC));
+		super(new Item.Settings().maxCount(64).fireproof().rarity(Rarity.EPIC));
 	}
 
 	@Override
-	public int getUseDuration(ItemStack itemstack) {
+	public int getMaxUseTime(ItemStack itemstack) {
 		return 0;
 	}
 }

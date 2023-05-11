@@ -1,15 +1,15 @@
 package io.hasibix.minecraft.hasimod.procedures;
 
-import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.entity.LightningBolt;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.core.BlockPos;
-
 import java.util.Map;
 
 import io.hasibix.minecraft.hasimod.HasiMOD;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LightningEntity;
+import net.minecraft.entity.MovementType;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 
 public class MythrilScytheLivingEntityIsHitWithTool {
 
@@ -38,18 +38,17 @@ public class MythrilScytheLivingEntityIsHitWithTool {
 						.warn("Failed to load dependency z for procedure MythrilScytheLivingEntityIsHitWithTool!");
 			return;
 		}
-		LevelAccessor world = (LevelAccessor) dependencies.get("world");
+		World world = (World) dependencies.get("world");
 		double x = dependencies.get("x") instanceof Integer ? (int) dependencies.get("x")
 				: (double) dependencies.get("x");
 		double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y")
 				: (double) dependencies.get("y");
 		double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z")
 				: (double) dependencies.get("z");
-		if (world instanceof ServerLevel _level) {
-			LightningBolt entityToSpawn = EntityType.LIGHTNING_BOLT.create(_level);
-			entityToSpawn.moveTo(Vec3.atBottomCenterOf(new BlockPos(x, y, z)));
-			entityToSpawn.setVisualOnly(false);
-			_level.addFreshEntity(entityToSpawn);
+		if (world instanceof ServerWorld _level) {
+			LightningEntity entityToSpawn = EntityType.LIGHTNING_BOLT.create(_level);
+			entityToSpawn.move(MovementType.SELF, Vec3d.ofCenter(new BlockPos(x, y, z)));
+			_level.spawnEntity(entityToSpawn);
 		}
 	}
 }

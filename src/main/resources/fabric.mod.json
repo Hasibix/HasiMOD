@@ -21,9 +21,6 @@
 			"io.hasibix.minecraft.hasimod.ClientInit"
 		]
 	},
-	"mixins": [
-		"hasimod.mixins.json"
-	],
 	"depends": {
 		"fabricloader": ">=0.14.19",
 		"minecraft": "~1.19.3",

@@ -1,46 +1,43 @@
 package io.hasibix.minecraft.hasimod.items;
 
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundEvent;
-
-import net.fabricmc.api.Environment;
-import net.fabricmc.api.EnvType;
-
-import io.hasibix.minecraft.hasimod.init.CreativeTabs;
 import io.hasibix.minecraft.hasimod.init.Items;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.recipe.Ingredient;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 
 public abstract class MythrilArmor extends ArmorItem {
-	public MythrilArmor(EquipmentSlot slot, Item.Properties properties) {
+	public MythrilArmor(EquipmentSlot slot, Item.Settings properties) {
 		super(new ArmorMaterial() {
 			@Override
-			public int getDurabilityForSlot(EquipmentSlot slot) {
-				return new int[] { 13, 15, 16, 11 }[slot.getIndex()] * 150;
+			public int getDurability(EquipmentSlot slot) {
+				return new int[] { 13, 15, 16, 11 }[slot.getEntitySlotId()] * 150;
 			}
 
 			@Override
-			public int getDefenseForSlot(EquipmentSlot slot) {
-				return new int[] { 20, 60, 50, 20 }[slot.getIndex()];
+			public int getProtectionAmount(EquipmentSlot slot) {
+				return new int[] { 20, 60, 50, 20 }[slot.getEntitySlotId()];
 			}
 
 			@Override
-			public int getEnchantmentValue() {
+			public int getEnchantability() {
 				return 90;
 			}
 
 			@Override
 			public SoundEvent getEquipSound() {
-				return SoundEvents.ARMOR_EQUIP_NETHERITE;
+				return SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE;
 			}
 
 			@Override
 			public Ingredient getRepairIngredient() {
-				return Ingredient.of(new ItemStack(Items.MYTHRIL_GEM));
+				return Ingredient.ofStacks(new ItemStack(Items.MYTHRIL_GEM));
 			}
 
 			@Environment(EnvType.CLIENT)
@@ -64,7 +61,7 @@ public abstract class MythrilArmor extends ArmorItem {
 	public static class Helmet extends MythrilArmor {
 
 		public Helmet() {
-			super(EquipmentSlot.HEAD, new Item.Properties().tab(CreativeTabs.TAB_HASI_MOD).fireResistant());
+			super(EquipmentSlot.HEAD, new Item.Settings().fireproof());
 		}
 
 	}
@@ -72,7 +69,7 @@ public abstract class MythrilArmor extends ArmorItem {
 	public static class Chestplate extends MythrilArmor {
 
 		public Chestplate() {
-			super(EquipmentSlot.CHEST, new Item.Properties().tab(CreativeTabs.TAB_HASI_MOD).fireResistant());
+			super(EquipmentSlot.CHEST, new Item.Settings().fireproof());
 		}
 
 	}
@@ -80,7 +77,7 @@ public abstract class MythrilArmor extends ArmorItem {
 	public static class Leggings extends MythrilArmor {
 
 		public Leggings() {
-			super(EquipmentSlot.LEGS, new Item.Properties().tab(CreativeTabs.TAB_HASI_MOD).fireResistant());
+			super(EquipmentSlot.LEGS, new Item.Settings().fireproof());
 		}
 
 	}
@@ -88,7 +85,7 @@ public abstract class MythrilArmor extends ArmorItem {
 	public static class Boots extends MythrilArmor {
 
 		public Boots() {
-			super(EquipmentSlot.FEET, new Item.Properties().tab(CreativeTabs.TAB_HASI_MOD).fireResistant());
+			super(EquipmentSlot.FEET, new Item.Settings().fireproof());
 		}
 
 	}

@@ -1,13 +1,12 @@
 package io.hasibix.minecraft.hasimod.procedures;
 
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.effect.MobEffectInstance;
-
 import java.util.Map;
 
 import io.hasibix.minecraft.hasimod.HasiMOD;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 
 public class AfterDrinkingSevenColaCola {
 
@@ -19,14 +18,14 @@ public class AfterDrinkingSevenColaCola {
 		}
 		Entity entity = (Entity) dependencies.get("entity");
 		if (entity instanceof LivingEntity _entity)
-			_entity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 80, 5, (false), (false)));
+			_entity.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 80, 5, (false), (false)));
 		if (entity instanceof LivingEntity _entity)
-			_entity.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 24000, 20, (false), (false)));
+			_entity.addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 24000, 20, (false), (false)));
 		if (entity instanceof LivingEntity _entity)
-			_entity.addEffect(new MobEffectInstance(MobEffects.SATURATION, 24000, 5, (false), (false)));
+			_entity.addStatusEffect(new StatusEffectInstance(StatusEffects.SATURATION, 24000, 5, (false), (false)));
 		if (entity instanceof LivingEntity _entity)
-			_entity.addEffect(new MobEffectInstance(MobEffects.WATER_BREATHING, 24000, 5, (false), (false)));
+			_entity.addStatusEffect(new StatusEffectInstance(StatusEffects.WATER_BREATHING, 24000, 5, (false), (false)));
 		if (entity instanceof LivingEntity _entity)
-			_entity.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 12000, 10, (false), (false)));
+			_entity.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 12000, 10, (false), (false)));
 	}
 }

@@ -1,17 +1,11 @@
 package io.hasibix.minecraft.hasimod.procedures;
 
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.entity.vehicle.MinecartTNT;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.server.level.ServerLevel;
-
 import java.util.Map;
 
 import io.hasibix.minecraft.hasimod.HasiMOD;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.world.World;
 
 public class MythrilScytheRightclicked {
 
@@ -41,7 +35,7 @@ public class MythrilScytheRightclicked {
 				HasiMOD.LOGGER.warn("Failed to load dependency entity for procedure MythrilScytheRightclicked!");
 			return;
 		}
-		LevelAccessor world = (LevelAccessor) dependencies.get("world");
+		World world = (World) dependencies.get("world");
 		double x = dependencies.get("x") instanceof Integer ? (int) dependencies.get("x")
 				: (double) dependencies.get("x");
 		double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y")
@@ -49,50 +43,7 @@ public class MythrilScytheRightclicked {
 		double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z")
 				: (double) dependencies.get("z");
 		Entity entity = (Entity) dependencies.get("entity");
-		if (world instanceof ServerLevel _level) {
-			Entity entityToSpawn = new MinecartTNT(EntityType.TNT_MINECART, _level);
-			entityToSpawn.moveTo(x, y, z, entity.getYRot(), entity.getXRot());
-			entityToSpawn.setYBodyRot(entity.getYRot());
-			entityToSpawn.setYHeadRot(entity.getYRot());
-			entityToSpawn.setDeltaMovement(1, 1, 1);
-			if (entityToSpawn instanceof Mob _mobToSpawn)
-				_mobToSpawn.finalizeSpawn(_level, world.getCurrentDifficultyAt(entityToSpawn.blockPosition()),
-						MobSpawnType.MOB_SUMMONED, null, null);
-			world.addFreshEntity(entityToSpawn);
-		}
-		if (world instanceof ServerLevel _level) {
-			Entity entityToSpawn = new MinecartTNT(EntityType.TNT_MINECART, _level);
-			entityToSpawn.moveTo(x, y, z, entity.getYRot(), entity.getXRot());
-			entityToSpawn.setYBodyRot(entity.getYRot());
-			entityToSpawn.setYHeadRot(entity.getYRot());
-			entityToSpawn.setDeltaMovement(1, 1, 1);
-			if (entityToSpawn instanceof Mob _mobToSpawn)
-				_mobToSpawn.finalizeSpawn(_level, world.getCurrentDifficultyAt(entityToSpawn.blockPosition()),
-						MobSpawnType.MOB_SUMMONED, null, null);
-			world.addFreshEntity(entityToSpawn);
-		}
-		if (world instanceof ServerLevel _level) {
-			Entity entityToSpawn = new MinecartTNT(EntityType.TNT_MINECART, _level);
-			entityToSpawn.moveTo(x, y, z, entity.getYRot(), entity.getXRot());
-			entityToSpawn.setYBodyRot(entity.getYRot());
-			entityToSpawn.setYHeadRot(entity.getYRot());
-			entityToSpawn.setDeltaMovement(1, 1, 1);
-			if (entityToSpawn instanceof Mob _mobToSpawn)
-				_mobToSpawn.finalizeSpawn(_level, world.getCurrentDifficultyAt(entityToSpawn.blockPosition()),
-						MobSpawnType.MOB_SUMMONED, null, null);
-			world.addFreshEntity(entityToSpawn);
-		}
-		if (world instanceof ServerLevel _level) {
-			Entity entityToSpawn = new MinecartTNT(EntityType.TNT_MINECART, _level);
-			entityToSpawn.moveTo(x, y, z, entity.getYRot(), entity.getXRot());
-			entityToSpawn.setYBodyRot(entity.getYRot());
-			entityToSpawn.setYHeadRot(entity.getYRot());
-			entityToSpawn.setDeltaMovement(1, 1, 1);
-			if (entityToSpawn instanceof Mob _mobToSpawn)
-				_mobToSpawn.finalizeSpawn(_level, world.getCurrentDifficultyAt(entityToSpawn.blockPosition()),
-						MobSpawnType.MOB_SUMMONED, null, null);
-			world.addFreshEntity(entityToSpawn);
-		}
-		entity.hurt(DamageSource.GENERIC, 2);
+		
+		entity.damage(DamageSource.GENERIC, 2);
 	}
 }

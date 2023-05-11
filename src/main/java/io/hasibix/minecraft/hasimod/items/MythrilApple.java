@@ -1,31 +1,27 @@
 package io.hasibix.minecraft.hasimod.items;
 
-import net.minecraft.world.level.Level;
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.entity.LivingEntity;
-
 import io.hasibix.minecraft.hasimod.procedures.AfterEatingMythrilApple;
-import io.hasibix.minecraft.hasimod.init.CreativeTabs;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.FoodComponent;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.Rarity;
+import net.minecraft.world.World;
 
 public class MythrilApple extends Item {
 	public MythrilApple() {
-		super(new Item.Properties().tab(CreativeTabs.TAB_HASI_MOD).stacksTo(64).fireResistant().rarity(Rarity.EPIC)
-				.food((new FoodProperties.Builder()).nutrition(20).saturationMod(10f).alwaysEat()
-
-						.build()));
+		super(new Item.Settings().maxCount(64).fireproof().rarity(Rarity.EPIC)
+				.food((new FoodComponent.Builder()).hunger(20).saturationModifier(10f).alwaysEdible().build()));
 	}
 
 	@Override
-	public int getUseDuration(ItemStack itemstack) {
+	public int getMaxUseTime(ItemStack itemstack) {
 		return 32;
 	}
 
 	@Override
-	public ItemStack finishUsingItem(ItemStack itemstack, Level world, LivingEntity entity) {
-		ItemStack retval = super.finishUsingItem(itemstack, world, entity);
+	public ItemStack finishUsing(ItemStack itemstack, World world, LivingEntity entity) {
+		ItemStack retval = super.finishUsing(itemstack, world, entity);
 		double x = entity.getX();
 		double y = entity.getY();
 		double z = entity.getZ();

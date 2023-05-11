@@ -1,12 +1,11 @@
 package io.hasibix.minecraft.hasimod.procedures;
 
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.core.BlockPos;
-
 import java.util.Map;
 
-import io.hasibix.minecraft.hasimod.init.Blocks;
 import io.hasibix.minecraft.hasimod.HasiMOD;
+import io.hasibix.minecraft.hasimod.init.Blocks;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 public class MythrilOreDestroyedByExplosion {
 
@@ -31,13 +30,13 @@ public class MythrilOreDestroyedByExplosion {
 				HasiMOD.LOGGER.warn("Failed to load dependency z for procedure MythrilOreDestroyedByExplosion!");
 			return;
 		}
-		LevelAccessor world = (LevelAccessor) dependencies.get("world");
+		World world = (World) dependencies.get("world");
 		double x = dependencies.get("x") instanceof Integer ? (int) dependencies.get("x")
 				: (double) dependencies.get("x");
 		double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y")
 				: (double) dependencies.get("y");
 		double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z")
 				: (double) dependencies.get("z");
-		world.setBlock(new BlockPos(x, y, z), Blocks.CRACKED_MYTHRIL_ORE.defaultBlockState(), 3);
+		world.setBlockState(new BlockPos(x, y, z), Blocks.CRACKED_MYTHRIL_ORE.getDefaultState(), 3);
 	}
 }

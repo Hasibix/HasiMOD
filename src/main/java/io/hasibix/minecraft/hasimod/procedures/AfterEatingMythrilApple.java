@@ -1,14 +1,13 @@
 package io.hasibix.minecraft.hasimod.procedures;
 
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.effect.MobEffectInstance;
-
 import java.util.Map;
 
-import io.hasibix.minecraft.hasimod.init.PotionEffects;
 import io.hasibix.minecraft.hasimod.HasiMOD;
+import io.hasibix.minecraft.hasimod.init.PotionEffects;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 
 public class AfterEatingMythrilApple {
 
@@ -20,20 +19,20 @@ public class AfterEatingMythrilApple {
 		}
 		Entity entity = (Entity) dependencies.get("entity");
 		if (entity instanceof LivingEntity _entity)
-			_entity.addEffect(new MobEffectInstance(MobEffects.HEALTH_BOOST, 24000, 20, (false), (false)));
+			_entity.addStatusEffect(new StatusEffectInstance(StatusEffects.HEALTH_BOOST, 24000, 20, (false), (false)));
 		if (entity instanceof LivingEntity _entity)
-			_entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 24000, 15, (false), (false)));
+			_entity.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 24000, 15, (false), (false)));
 		if (entity instanceof LivingEntity _entity)
-			_entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 24000, 5, (false), (false)));
+			_entity.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 24000, 5, (false), (false)));
 		if (entity instanceof LivingEntity _entity)
-			_entity.addEffect(new MobEffectInstance(MobEffects.JUMP, 24000, 5, (false), (false)));
+			_entity.addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST	, 24000, 5, (false), (false)));
 		if (entity instanceof LivingEntity _entity)
-			_entity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 24000, 20, (false), (false)));
+			_entity.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 24000, 20, (false), (false)));
 		if (entity instanceof LivingEntity _entity)
-			_entity.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 24000, 50, (false), (false)));
+			_entity.addStatusEffect(new StatusEffectInstance(StatusEffects.INVISIBILITY, 24000, 50, (false), (false)));
 		if (entity instanceof LivingEntity _entity)
-			_entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 24000, 15, (false), (false)));
+			_entity.addStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 24000, 15, (false), (false)));
 		if (entity instanceof LivingEntity _entity)
-			_entity.addEffect(new MobEffectInstance(PotionEffects.FLYABILITY, 24000, 1, (false), (false)));
+			_entity.addStatusEffect(new StatusEffectInstance(PotionEffects.FLYABILITY, 24000, 1, (false), (false)));
 	}
 }

@@ -1,19 +1,18 @@
 package io.hasibix.minecraft.hasimod;
 
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import net.fabricmc.api.ModInitializer;
-
+import io.hasibix.minecraft.hasimod.init.Blocks;
 import io.hasibix.minecraft.hasimod.init.CreativeTabs;
-import io.hasibix.minecraft.hasimod.init.PotionEffects;
-import io.hasibix.minecraft.hasimod.init.Procedures;
 import io.hasibix.minecraft.hasimod.init.Items;
 import io.hasibix.minecraft.hasimod.init.OreGenerations;
-import io.hasibix.minecraft.hasimod.init.Blocks;
+import io.hasibix.minecraft.hasimod.init.PotionEffects;
+import io.hasibix.minecraft.hasimod.init.Procedures;
+import net.fabricmc.api.ModInitializer;
 
 public class HasiMOD implements ModInitializer {
-	public static final Logger LOGGER = LogManager.getLogger();
+	public static final Logger LOGGER = LoggerFactory.getLogger(HasiMOD.class);
 	public static final String MOD_ID = "hasimod";
 
 	@Override

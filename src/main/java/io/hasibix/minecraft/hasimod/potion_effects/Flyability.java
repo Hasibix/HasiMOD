@@ -1,27 +1,29 @@
 package io.hasibix.minecraft.hasimod.potion_effects;
 
-import net.minecraft.world.level.Level;
-import net.minecraft.world.entity.ai.attributes.AttributeMap;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.effect.MobEffectCategory;
-import net.minecraft.world.effect.MobEffect;
-
-import io.hasibix.minecraft.hasimod.procedures.FlyabilityEffectStarted;
 import io.hasibix.minecraft.hasimod.procedures.FlyabilityEffectExpires;
+import io.hasibix.minecraft.hasimod.procedures.FlyabilityEffectStarted;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.AttributeContainer;
+import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffectCategory;
+import net.minecraft.world.World;
 
-public class Flyability extends MobEffect {
+public class Flyability extends StatusEffect {
 	public Flyability() {
-		super(MobEffectCategory.BENEFICIAL, -1);
+		super(
+				StatusEffectCategory.BENEFICIAL,
+				0x462E97
+		);
 	}
-
+	
 	@Override
-	public String getDescriptionId() {
-		return "effect.hasimod.flyability";
-	}
-
+	  public boolean canApplyUpdateEffect(int duration, int amplifier) {
+	    return true;
+	  }
+	
 	@Override
-	public void applyEffectTick(LivingEntity entity, int amplifier) {
-		Level world = entity.level;
+	public void applyUpdateEffect(LivingEntity entity, int amplifier) {
+		World world = entity.world;
 		double x = entity.getX();
 		double y = entity.getY();
 		double z = entity.getZ();
@@ -31,19 +33,14 @@ public class Flyability extends MobEffect {
 	}
 
 	@Override
-	public void removeAttributeModifiers(LivingEntity entity, AttributeMap attributeMap, int amplifier) {
-		super.removeAttributeModifiers(entity, attributeMap, amplifier);
-		Level world = entity.level;
+	public void onRemoved(LivingEntity entity, AttributeContainer attributeContainer, int amplifier) {
+		super.onRemoved(entity, attributeContainer, amplifier);
+		World world = entity.world;
 		double x = entity.getX();
 		double y = entity.getY();
 		double z = entity.getZ();
 
 		FlyabilityEffectExpires.execute(
 				com.google.common.collect.ImmutableMap.<String, Object>builder().put("entity", entity).build());
-	}
-
-	@Override
-	public boolean isDurationEffectTick(int duration, int amplifier) {
-		return true;
 	}
 }

@@ -1,9 +1,5 @@
 package io.hasibix.minecraft.hasimod.init;
 
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.core.Registry;
 import io.hasibix.minecraft.hasimod.HasiMOD;
 import io.hasibix.minecraft.hasimod.items.BlocksiCola;
 import io.hasibix.minecraft.hasimod.items.CarbonatedWater;
@@ -20,6 +16,12 @@ import io.hasibix.minecraft.hasimod.items.MythrilScythe;
 import io.hasibix.minecraft.hasimod.items.MythrilShovel;
 import io.hasibix.minecraft.hasimod.items.MythrilSword;
 import io.hasibix.minecraft.hasimod.items.SevenColaCola;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.util.Identifier;
 
 public class Items {
 	public static Item MYTHRIL_APPLE;
@@ -29,10 +31,10 @@ public class Items {
 	public static Item MYTHRIL_SHOVEL;
 	public static Item MYTHRIL_HOE;
 	public static Item MYTHRIL_SCYTHE;
-	public static Item MYTHRIL_ARMOR_HELMET;
-	public static Item MYTHRIL_ARMOR_CHESTPLATE;
-	public static Item MYTHRIL_ARMOR_LEGGINGS;
-	public static Item MYTHRIL_ARMOR_BOOTS;
+	public static Item MYTHRIL_HELMET;
+	public static Item MYTHRIL_CHESTPLATE;
+	public static Item MYTHRIL_LEGGINGS;
+	public static Item MYTHRIL_BOOTS;
 	public static Item MYTHRIL_DUST;
 	public static Item MYTHRIL_GEM;
 	public static Item CRACKED_MYTHRIL_ORE;
@@ -45,47 +47,70 @@ public class Items {
 	public static Item CARBONATED_WATER;
 
 	public static void load() {
-		MYTHRIL_APPLE = Registry.register(Registry.ITEM, new ResourceLocation(HasiMOD.MOD_ID, "mythril_apple"),
+		MYTHRIL_APPLE = Registry.register(Registries.ITEM, new Identifier(HasiMOD.MOD_ID, "mythril_apple"),
 				new MythrilApple());
-		MYTHRIL_AXE = Registry.register(Registry.ITEM, new ResourceLocation(HasiMOD.MOD_ID, "mythril_axe"),
+		MYTHRIL_AXE = Registry.register(Registries.ITEM, new Identifier(HasiMOD.MOD_ID, "mythril_axe"),
 				new MythrilAxe());
-		MYTHRIL_PICKAXE = Registry.register(Registry.ITEM, new ResourceLocation(HasiMOD.MOD_ID, "mythril_pickaxe"),
+		MYTHRIL_PICKAXE = Registry.register(Registries.ITEM, new Identifier(HasiMOD.MOD_ID, "mythril_pickaxe"),
 				new MythrilPickaxe());
-		MYTHRIL_SWORD = Registry.register(Registry.ITEM, new ResourceLocation(HasiMOD.MOD_ID, "mythril_sword"),
+		MYTHRIL_SWORD = Registry.register(Registries.ITEM, new Identifier(HasiMOD.MOD_ID, "mythril_sword"),
 				new MythrilSword());
-		MYTHRIL_SHOVEL = Registry.register(Registry.ITEM, new ResourceLocation(HasiMOD.MOD_ID, "mythril_shovel"),
+		MYTHRIL_SHOVEL = Registry.register(Registries.ITEM, new Identifier(HasiMOD.MOD_ID, "mythril_shovel"),
 				new MythrilShovel());
-		MYTHRIL_HOE = Registry.register(Registry.ITEM, new ResourceLocation(HasiMOD.MOD_ID, "mythril_hoe"),
+		MYTHRIL_HOE = Registry.register(Registries.ITEM, new Identifier(HasiMOD.MOD_ID, "mythril_hoe"),
 				new MythrilHoe());
-		MYTHRIL_SCYTHE = Registry.register(Registry.ITEM, new ResourceLocation(HasiMOD.MOD_ID, "mythril_scythe"),
+		MYTHRIL_SCYTHE = Registry.register(Registries.ITEM, new Identifier(HasiMOD.MOD_ID, "mythril_scythe"),
 				new MythrilScythe());
-		MYTHRIL_ARMOR_HELMET = Registry.register(Registry.ITEM,
-				new ResourceLocation(HasiMOD.MOD_ID, "mythril_armor_helmet"), new MythrilArmor.Helmet());
-		MYTHRIL_ARMOR_CHESTPLATE = Registry.register(Registry.ITEM,
-				new ResourceLocation(HasiMOD.MOD_ID, "mythril_armor_chestplate"), new MythrilArmor.Chestplate());
-		MYTHRIL_ARMOR_LEGGINGS = Registry.register(Registry.ITEM,
-				new ResourceLocation(HasiMOD.MOD_ID, "mythril_armor_leggings"), new MythrilArmor.Leggings());
-		MYTHRIL_ARMOR_BOOTS = Registry.register(Registry.ITEM,
-				new ResourceLocation(HasiMOD.MOD_ID, "mythril_armor_boots"), new MythrilArmor.Boots());
-		MYTHRIL_DUST = Registry.register(Registry.ITEM, new ResourceLocation(HasiMOD.MOD_ID, "mythril_dust"),
+		MYTHRIL_HELMET = Registry.register(Registries.ITEM,
+				new Identifier(HasiMOD.MOD_ID, "mythril_armor_helmet"), new MythrilArmor.Helmet());
+		MYTHRIL_CHESTPLATE = Registry.register(Registries.ITEM,
+				new Identifier(HasiMOD.MOD_ID, "mythril_armor_chestplate"), new MythrilArmor.Chestplate());
+		MYTHRIL_LEGGINGS = Registry.register(Registries.ITEM,
+				new Identifier(HasiMOD.MOD_ID, "mythril_armor_leggings"), new MythrilArmor.Leggings());
+		MYTHRIL_BOOTS = Registry.register(Registries.ITEM, new Identifier(HasiMOD.MOD_ID, "mythril_armor_boots"),
+				new MythrilArmor.Boots());
+		MYTHRIL_DUST = Registry.register(Registries.ITEM, new Identifier(HasiMOD.MOD_ID, "mythril_dust"),
 				new MythrilDust());
-		MYTHRIL_GEM = Registry.register(Registry.ITEM, new ResourceLocation(HasiMOD.MOD_ID, "mythril_gem"),
+		MYTHRIL_GEM = Registry.register(Registries.ITEM, new Identifier(HasiMOD.MOD_ID, "mythril_gem"),
 				new MythrilGem());
-		CRACKED_MYTHRIL_ORE = Registry.register(Registry.ITEM,
-				new ResourceLocation(HasiMOD.MOD_ID, "cracked_mythril_ore"),
-				new BlockItem(Blocks.CRACKED_MYTHRIL_ORE, new Item.Properties().tab(CreativeTabs.TAB_HASI_MOD)));
-		MYTHRIL_ORE = Registry.register(Registry.ITEM, new ResourceLocation(HasiMOD.MOD_ID, "mythril_ore"),
-				new BlockItem(Blocks.MYTHRIL_ORE, new Item.Properties().tab(CreativeTabs.TAB_HASI_MOD)));
-		MYTHRIL_BLOCK = Registry.register(Registry.ITEM, new ResourceLocation(HasiMOD.MOD_ID, "mythril_block"),
-				new BlockItem(Blocks.MYTHRIL_BLOCK, new Item.Properties().tab(CreativeTabs.TAB_HASI_MOD)));
-		EMPTY_CAN = Registry.register(Registry.ITEM, new ResourceLocation(HasiMOD.MOD_ID, "empty_can"), new EmptyCan());
-		SEVEN_COLA_COLA = Registry.register(Registry.ITEM, new ResourceLocation(HasiMOD.MOD_ID, "seven_cola_cola"),
+		CRACKED_MYTHRIL_ORE = Registry.register(Registries.ITEM, new Identifier(HasiMOD.MOD_ID, "cracked_mythril_ore"),
+				new BlockItem(Blocks.CRACKED_MYTHRIL_ORE, new Item.Settings()));
+		MYTHRIL_ORE = Registry.register(Registries.ITEM, new Identifier(HasiMOD.MOD_ID, "mythril_ore"),
+				new BlockItem(Blocks.MYTHRIL_ORE, new Item.Settings()));
+		MYTHRIL_BLOCK = Registry.register(Registries.ITEM, new Identifier(HasiMOD.MOD_ID, "mythril_block"),
+				new BlockItem(Blocks.MYTHRIL_BLOCK, new Item.Settings()));
+		EMPTY_CAN = Registry.register(Registries.ITEM, new Identifier(HasiMOD.MOD_ID, "empty_can"), new EmptyCan());
+		SEVEN_COLA_COLA = Registry.register(Registries.ITEM, new Identifier(HasiMOD.MOD_ID, "seven_cola_cola"),
 				new SevenColaCola());
-		BLOCKSI_COLA = Registry.register(Registry.ITEM, new ResourceLocation(HasiMOD.MOD_ID, "blocksi_cola"),
+		BLOCKSI_COLA = Registry.register(Registries.ITEM, new Identifier(HasiMOD.MOD_ID, "blocksi_cola"),
 				new BlocksiCola());
-		MANTA_COLA = Registry.register(Registry.ITEM, new ResourceLocation(HasiMOD.MOD_ID, "manta_cola"),
-				new MantaCola());
-		CARBONATED_WATER = Registry.register(Registry.ITEM, new ResourceLocation(HasiMOD.MOD_ID, "carbonated_water"),
+		MANTA_COLA = Registry.register(Registries.ITEM, new Identifier(HasiMOD.MOD_ID, "manta_cola"), new MantaCola());
+		CARBONATED_WATER = Registry.register(Registries.ITEM, new Identifier(HasiMOD.MOD_ID, "carbonated_water"),
 				new CarbonatedWater());
+		
+	    ItemGroupEvents.modifyEntriesEvent(CreativeTabs.TAB_HASI_MOD).register(contents -> {
+	    	contents.add(MYTHRIL_APPLE);
+	    	contents.add(MYTHRIL_AXE);
+	    	contents.add(MYTHRIL_PICKAXE);
+	    	contents.add(MYTHRIL_SWORD);
+	    	contents.add(MYTHRIL_SHOVEL);
+	    	contents.add(MYTHRIL_HOE);
+	    	contents.add(MYTHRIL_SCYTHE);
+	    	contents.add(MYTHRIL_HELMET);
+	    	contents.add(MYTHRIL_CHESTPLATE);
+	    	contents.add(MYTHRIL_LEGGINGS);
+	    	contents.add(MYTHRIL_BOOTS);
+	    	contents.add(MYTHRIL_DUST);
+	    	contents.add(MYTHRIL_GEM);
+	    	contents.add(CRACKED_MYTHRIL_ORE);
+	    	contents.add(MYTHRIL_ORE);
+	    	contents.add(MYTHRIL_BLOCK);
+	    	contents.add(EMPTY_CAN);
+	    	contents.add(SEVEN_COLA_COLA);
+	    	contents.add(BLOCKSI_COLA);
+	    	contents.add(MANTA_COLA);
+	    	contents.add(CARBONATED_WATER);
+	    });
 	}
+
 }

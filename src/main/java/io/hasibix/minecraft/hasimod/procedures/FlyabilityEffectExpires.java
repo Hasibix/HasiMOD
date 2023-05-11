@@ -1,11 +1,10 @@
 package io.hasibix.minecraft.hasimod.procedures;
 
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.Entity;
-
 import java.util.Map;
 
 import io.hasibix.minecraft.hasimod.HasiMOD;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 
 public class FlyabilityEffectExpires {
 
@@ -16,10 +15,12 @@ public class FlyabilityEffectExpires {
 			return;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if (!(entity instanceof Player _plr ? _plr.getAbilities().instabuild : false)) {
-			if (entity instanceof Player _player) {
-				_player.getAbilities().mayfly = (false == true);
-				_player.onUpdateAbilities();
+		if (!(entity instanceof PlayerEntity _plr ? _plr.getAbilities().creativeMode : false)) {
+			if (entity instanceof PlayerEntity _player) {
+				_player.getAbilities().allowFlying = false;
+				_player.sendAbilitiesUpdate();
+				_player.getAbilities().flying = false;
+				_player.sendAbilitiesUpdate();
 			}
 		}
 	}

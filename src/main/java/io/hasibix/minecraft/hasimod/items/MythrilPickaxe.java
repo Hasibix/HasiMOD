@@ -1,40 +1,44 @@
 package io.hasibix.minecraft.hasimod.items;
 
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.PickaxeItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Item;
-
-import io.hasibix.minecraft.hasimod.init.CreativeTabs;
 import io.hasibix.minecraft.hasimod.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.PickaxeItem;
+import net.minecraft.item.ToolMaterial;
+import net.minecraft.recipe.Ingredient;
 
 public class MythrilPickaxe extends PickaxeItem {
 	public MythrilPickaxe() {
-		super(new Tier() {
-			public int getUses() {
+		super(new ToolMaterial() {
+			@Override
+			public int getDurability() {
 				return 6280;
 			}
 
-			public float getSpeed() {
+			@Override
+			public float getMiningSpeedMultiplier() {
 				return 24f;
 			}
 
-			public float getAttackDamageBonus() {
+			@Override
+			public float getAttackDamage() {
 				return 18f;
 			}
 
-			public int getLevel() {
+			@Override
+			public int getMiningLevel() {
 				return 20;
 			}
 
-			public int getEnchantmentValue() {
+			@Override
+			public int getEnchantability() {
 				return 140;
 			}
 
+			@Override
 			public Ingredient getRepairIngredient() {
-				return Ingredient.of(new ItemStack(Items.MYTHRIL_GEM));
+				return Ingredient.ofStacks(new ItemStack(Items.MYTHRIL_GEM));
 			}
-		}, 1, -3f, new Item.Properties().tab(CreativeTabs.TAB_HASI_MOD).fireResistant());
+		}, 1, -3f, new Item.Settings().fireproof());
 	}
 }
