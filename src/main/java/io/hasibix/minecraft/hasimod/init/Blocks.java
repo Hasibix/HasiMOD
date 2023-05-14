@@ -1,9 +1,9 @@
 package io.hasibix.minecraft.hasimod.init;
 
 import io.hasibix.minecraft.hasimod.HasiMOD;
-import io.hasibix.minecraft.hasimod.block.CrackedMythrilOre;
-import io.hasibix.minecraft.hasimod.block.MythrilBlock;
-import io.hasibix.minecraft.hasimod.block.MythrilOre;
+import io.hasibix.minecraft.hasimod.blocks.CrackedMythrilOre;
+import io.hasibix.minecraft.hasimod.blocks.MythrilBlock;
+import io.hasibix.minecraft.hasimod.blocks.MythrilOre;
 import net.minecraft.block.Block;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;

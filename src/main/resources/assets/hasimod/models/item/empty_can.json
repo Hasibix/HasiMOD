@@ -1,7 +1,7 @@
 {
   "parent": "hasimod:item/coke",
   "textures": {
-    "0": "hasimod:items/empty_can",
-    "particle": "hasimod:items/empty_can"
+    "0": "hasimod:item/empty_can",
+    "particle": "hasimod:item/empty_can"
   }
 }

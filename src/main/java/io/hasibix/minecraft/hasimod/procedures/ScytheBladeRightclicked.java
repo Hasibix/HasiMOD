@@ -13,9 +13,9 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
-public class MythrilScytheRightclicked {
+public class ScytheBladeRightclicked {
 
-	public static TypedActionResult<ItemStack> execute(io.hasibix.minecraft.hasimod.items.MythrilScythe instance,
+	public static TypedActionResult<ItemStack> execute(io.hasibix.minecraft.hasimod.items.ScytheBlade instance,
 			Hand hand, Map<String, Object> dependencies) {
 		if (dependencies.get("entity") == null) {
 			if (!dependencies.containsKey("entity"))
@@ -51,7 +51,7 @@ public class MythrilScytheRightclicked {
 			PlayerEntity user = (PlayerEntity) entity;
 			ItemStack itemStack = user.getStackInHand(hand);
 			world.playSound(null, x, y, z, SoundEvents.BLOCK_RESPAWN_ANCHOR_CHARGE, SoundCategory.NEUTRAL, 0.5F, 1F);
-			user.getItemCooldownManager().set(instance, 20);
+			user.getItemCooldownManager().set(instance, 5);
 			if (!world.isClient) {
 				for (int i = 0; i < 5; i++) {
 					io.hasibix.minecraft.hasimod.projectiles.ScytheBlade scytheBlade = new io.hasibix.minecraft.hasimod.projectiles.ScytheBlade(
@@ -63,7 +63,7 @@ public class MythrilScytheRightclicked {
 
 			user.incrementStat(Stats.USED.getOrCreateStat(instance));
 			if (!user.getAbilities().creativeMode) {
-				itemStack.setDamage(itemStack.getDamage() - 10);;
+				itemStack.decrement(1);
 			}
 
 			return TypedActionResult.success(itemStack, world.isClient());

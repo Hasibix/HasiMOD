@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShovelItem;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.util.Rarity;
 
 public class MythrilShovel extends ShovelItem {
 	public MythrilShovel() {
@@ -39,6 +40,6 @@ public class MythrilShovel extends ShovelItem {
 			public Ingredient getRepairIngredient() {
 				return Ingredient.ofStacks(new ItemStack(Items.MYTHRIL_GEM));
 			}
-		}, 1, -3f, new Item.Settings().fireproof());
+		}, 1, -3f, new Item.Settings().fireproof().rarity(Rarity.EPIC));
 	}
 }

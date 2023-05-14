@@ -1,4 +1,4 @@
-package io.hasibix.minecraft.hasimod.block;
+package io.hasibix.minecraft.hasimod.blocks;
 
 import io.hasibix.minecraft.hasimod.init.Blocks;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;

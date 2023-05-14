@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "hasimod:items/mythril_dust"
+    "layer0": "hasimod:item/mythril_dust"
   }
 }

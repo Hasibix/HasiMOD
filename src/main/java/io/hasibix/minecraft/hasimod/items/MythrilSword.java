@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.util.Rarity;
 
 public class MythrilSword extends SwordItem {
 	public MythrilSword() {
@@ -39,6 +40,6 @@ public class MythrilSword extends SwordItem {
 			public Ingredient getRepairIngredient() {
 				return Ingredient.ofStacks(new ItemStack(Items.MYTHRIL_GEM));
 			}
-		}, 3, -3f, new Item.Settings().fireproof());
+		}, 3, -3f, new Item.Settings().fireproof().rarity(Rarity.EPIC));
 	}
 }

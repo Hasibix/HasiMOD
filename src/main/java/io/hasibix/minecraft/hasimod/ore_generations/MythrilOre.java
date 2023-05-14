@@ -10,11 +10,10 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.PlacedFeature;
 
 public class MythrilOre {
-	public static final RegistryKey<PlacedFeature> PLACED_FEATURE = RegistryKey.of(RegistryKeys.PLACED_FEATURE,
-			new Identifier(HasiMOD.MOD_ID, "mythril_ore_generation"));
-
+	public static final RegistryKey<PlacedFeature> PLACED_KEY = RegistryKey.of(RegistryKeys.PLACED_FEATURE,
+			new Identifier(HasiMOD.MOD_ID, "mythril_ore_generation_placed"));
+	
 	public static void load() {
-		BiomeModifications.addFeature(BiomeSelectors.foundInTheEnd(), GenerationStep.Feature.UNDERGROUND_ORES,
-				PLACED_FEATURE);
+		BiomeModifications.addFeature(BiomeSelectors.foundInTheEnd(), GenerationStep.Feature.UNDERGROUND_ORES, PLACED_KEY);
 	}
 }

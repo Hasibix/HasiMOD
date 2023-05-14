@@ -5,10 +5,12 @@ import org.slf4j.LoggerFactory;
 
 import io.hasibix.minecraft.hasimod.init.Blocks;
 import io.hasibix.minecraft.hasimod.init.CreativeTabs;
+import io.hasibix.minecraft.hasimod.init.DamageSources;
 import io.hasibix.minecraft.hasimod.init.Items;
 import io.hasibix.minecraft.hasimod.init.OreGenerations;
 import io.hasibix.minecraft.hasimod.init.PotionEffects;
 import io.hasibix.minecraft.hasimod.init.Procedures;
+import io.hasibix.minecraft.hasimod.init.Projectiles;
 import net.fabricmc.api.ModInitializer;
 
 public class HasiMOD implements ModInitializer {
@@ -17,12 +19,14 @@ public class HasiMOD implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		LOGGER.info("Initializing HasiMOD");
-		CreativeTabs.load();
+		LOGGER.info("[HasiMOD] Intializing HasiMOD...");
 		Blocks.load();
+		CreativeTabs.load();
+		DamageSources.load();
 		Items.load();
-		Procedures.load();
-		PotionEffects.load();
 		OreGenerations.load();
+		PotionEffects.load();
+		Procedures.load();
+		Projectiles.load();
 	}
 }

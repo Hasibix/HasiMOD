@@ -6,6 +6,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.util.Rarity;
 
 public class MythrilAxe extends AxeItem {
 	public MythrilAxe() {
@@ -39,6 +40,6 @@ public class MythrilAxe extends AxeItem {
 			public Ingredient getRepairIngredient() {
 				return Ingredient.ofStacks(new ItemStack(Items.MYTHRIL_GEM));
 			}
-		}, 1, -3f, new Item.Settings().fireproof());
+		}, 1, -3f, new Item.Settings().fireproof().rarity(Rarity.EPIC));
 	}
 }

@@ -1,7 +1,7 @@
 {
 	"textures": {
-		"0": "items/empty_can",
-		"particle": "items/empty_can"
+		"0": "item/empty_can",
+		"particle": "item/empty_can"
 	},
 	"elements": [
 		{

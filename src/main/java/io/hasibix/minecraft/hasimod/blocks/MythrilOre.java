@@ -1,4 +1,4 @@
-package io.hasibix.minecraft.hasimod.block;
+package io.hasibix.minecraft.hasimod.blocks;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,12 +23,12 @@ public class MythrilOre extends Block {
 	@Override
 	public void onDestroyedByExplosion(World world, BlockPos blockPos, Explosion explosion) {
 		Map<String, Object> dependencies = new HashMap<String, Object>();
-		dependencies.put("x", blockPos.getX());
-		dependencies.put("y", blockPos.getY());
-		dependencies.put("z", blockPos.getZ());
-		dependencies.put("world", world);
+		double x = blockPos.getX();
+		double y = blockPos.getY();
+		double z = blockPos.getZ();
 
-		MythrilOreDestroyedByExplosion.execute(dependencies);
+		MythrilOreDestroyedByExplosion.execute(com.google.common.collect.ImmutableMap.<String, Object>builder()
+				.put("x", x).put("y", y).put("z", z).put("world", world).build());
 	}
 
 	public static void clientInit() {

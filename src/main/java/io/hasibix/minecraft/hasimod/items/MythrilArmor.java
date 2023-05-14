@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Rarity;
 
 public abstract class MythrilArmor extends ArmorItem {
 	public MythrilArmor(EquipmentSlot slot, Item.Settings properties) {
@@ -61,7 +62,7 @@ public abstract class MythrilArmor extends ArmorItem {
 	public static class Helmet extends MythrilArmor {
 
 		public Helmet() {
-			super(EquipmentSlot.HEAD, new Item.Settings().fireproof());
+			super(EquipmentSlot.HEAD, new Item.Settings().fireproof().rarity(Rarity.EPIC));
 		}
 
 	}
@@ -69,7 +70,7 @@ public abstract class MythrilArmor extends ArmorItem {
 	public static class Chestplate extends MythrilArmor {
 
 		public Chestplate() {
-			super(EquipmentSlot.CHEST, new Item.Settings().fireproof());
+			super(EquipmentSlot.CHEST, new Item.Settings().fireproof().rarity(Rarity.EPIC));
 		}
 
 	}
@@ -77,7 +78,7 @@ public abstract class MythrilArmor extends ArmorItem {
 	public static class Leggings extends MythrilArmor {
 
 		public Leggings() {
-			super(EquipmentSlot.LEGS, new Item.Settings().fireproof());
+			super(EquipmentSlot.LEGS, new Item.Settings().fireproof().rarity(Rarity.EPIC));
 		}
 
 	}
@@ -85,7 +86,7 @@ public abstract class MythrilArmor extends ArmorItem {
 	public static class Boots extends MythrilArmor {
 
 		public Boots() {
-			super(EquipmentSlot.FEET, new Item.Settings().fireproof());
+			super(EquipmentSlot.FEET, new Item.Settings().fireproof().rarity(Rarity.EPIC));
 		}
 
 	}
