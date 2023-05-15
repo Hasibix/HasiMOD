@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 
 import io.hasibix.minecraft.hasimod.init.Blocks;
 import io.hasibix.minecraft.hasimod.init.CreativeTabs;
-import io.hasibix.minecraft.hasimod.init.DamageSources;
 import io.hasibix.minecraft.hasimod.init.Items;
 import io.hasibix.minecraft.hasimod.init.OreGenerations;
 import io.hasibix.minecraft.hasimod.init.PotionEffects;
@@ -22,7 +21,6 @@ public class HasiMOD implements ModInitializer {
 		LOGGER.info("[HasiMOD] Intializing HasiMOD...");
 		Blocks.load();
 		CreativeTabs.load();
-		DamageSources.load();
 		Items.load();
 		OreGenerations.load();
 		PotionEffects.load();

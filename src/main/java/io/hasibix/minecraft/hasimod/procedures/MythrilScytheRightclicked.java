@@ -53,10 +53,11 @@ public class MythrilScytheRightclicked {
 			world.playSound(null, x, y, z, SoundEvents.BLOCK_RESPAWN_ANCHOR_CHARGE, SoundCategory.NEUTRAL, 0.5F, 1F);
 			user.getItemCooldownManager().set(instance, 20);
 			if (!world.isClient) {
-				for (int i = 0; i < 5; i++) {
+				for (float i = -1F; i < 1F; i += 0.05F) {
 					io.hasibix.minecraft.hasimod.projectiles.ScytheBlade scytheBlade = new io.hasibix.minecraft.hasimod.projectiles.ScytheBlade(
-							world, user, 10);
-					scytheBlade.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 0F);
+							world, user);
+					scytheBlade.damageAmount = 48;
+					scytheBlade.setVelocity(user, user.getPitch(), (user.getYaw() * i), 0.0F, 1.5F, 0F);
 					world.spawnEntity(scytheBlade);
 				}
 			}

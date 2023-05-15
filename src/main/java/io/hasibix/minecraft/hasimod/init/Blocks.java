@@ -22,10 +22,4 @@ public class Blocks {
 		MYTHRIL_BLOCK = Registry.register(Registries.BLOCK, new Identifier(HasiMOD.MOD_ID, "mythril_block"),
 				new MythrilBlock());
 	}
-
-	public static void clientLoad() {
-		CrackedMythrilOre.clientInit();
-		MythrilOre.clientInit();
-		MythrilBlock.clientInit();
-	}
 }

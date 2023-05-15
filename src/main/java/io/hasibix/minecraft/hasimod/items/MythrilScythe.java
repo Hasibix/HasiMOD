@@ -64,8 +64,9 @@ public class MythrilScythe extends SwordItem {
 
 	@Override
 	public TypedActionResult<ItemStack> use(World world, PlayerEntity entity, Hand hand) {
-		return MythrilScytheRightclicked.execute(this, hand, com.google.common.collect.ImmutableMap.<String, Object>builder()
-				.put("x", entity.getX()).put("y", entity.getY()).put("z", entity.getZ()).put("world", world)
-				.put("entity", entity).build());
+		return MythrilScytheRightclicked.execute(this, hand,
+				com.google.common.collect.ImmutableMap.<String, Object>builder().put("x", entity.getX())
+						.put("y", entity.getY()).put("z", entity.getZ()).put("world", world).put("entity", entity)
+						.build());
 	}
 }

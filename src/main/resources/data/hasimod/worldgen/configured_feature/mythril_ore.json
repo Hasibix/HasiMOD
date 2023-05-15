@@ -5,12 +5,12 @@
 		"discard_chance_on_air_exposure": 0,
 		"targets": [
 			{
+				"state": {
+					"Name": "hasimod:mythril_ore"
+				},
 				"target": {
 					"predicate_type": "minecraft:block_match",
 					"block": "minecraft:end_stone"
-				},
-				"state": {
-					"Name": "hasimod:mythril_ore"
 				}
 			}
 		]

@@ -3,12 +3,9 @@ package io.hasibix.minecraft.hasimod.blocks;
 import java.util.HashMap;
 import java.util.Map;
 
-import io.hasibix.minecraft.hasimod.init.Blocks;
 import io.hasibix.minecraft.hasimod.procedures.MythrilOreDestroyedByExplosion;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -29,9 +26,5 @@ public class MythrilOre extends Block {
 
 		MythrilOreDestroyedByExplosion.execute(com.google.common.collect.ImmutableMap.<String, Object>builder()
 				.put("x", x).put("y", y).put("z", z).put("world", world).build());
-	}
-
-	public static void clientInit() {
-		BlockRenderLayerMap.INSTANCE.putBlock(Blocks.MYTHRIL_ORE, RenderLayer.getSolid());
 	}
 }

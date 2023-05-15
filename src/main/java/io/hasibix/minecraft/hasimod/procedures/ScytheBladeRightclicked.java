@@ -53,12 +53,11 @@ public class ScytheBladeRightclicked {
 			world.playSound(null, x, y, z, SoundEvents.BLOCK_RESPAWN_ANCHOR_CHARGE, SoundCategory.NEUTRAL, 0.5F, 1F);
 			user.getItemCooldownManager().set(instance, 5);
 			if (!world.isClient) {
-				for (int i = 0; i < 5; i++) {
-					io.hasibix.minecraft.hasimod.projectiles.ScytheBlade scytheBlade = new io.hasibix.minecraft.hasimod.projectiles.ScytheBlade(
-							world, user, 10);
-					scytheBlade.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 0F);
-					world.spawnEntity(scytheBlade);
-				}
+				io.hasibix.minecraft.hasimod.projectiles.ScytheBlade scytheBlade = new io.hasibix.minecraft.hasimod.projectiles.ScytheBlade(
+						world, user);
+				scytheBlade.damageAmount = 16;
+				scytheBlade.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 0F);
+				world.spawnEntity(scytheBlade);
 			}
 
 			user.incrementStat(Stats.USED.getOrCreateStat(instance));

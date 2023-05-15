@@ -7,33 +7,32 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 
 public class FlyabilityEffectUpdateTick {
-	public static Map<String, Boolean> execute(Map<String, Object> dependencies, boolean isAlreadyAllowedToFlyOld,
-			boolean creativeModeUpdatedOld) {
+	public static Map<String, Boolean> execute(Map<String, Object> dependencies, boolean expired,
+			boolean allowFlyingOld, boolean creativeModeOld) {
 		if (dependencies.get("entity") == null) {
 			if (!dependencies.containsKey("entity"))
 				HasiMOD.LOGGER.warn("Failed to load dependency entity for procedure FlyabilityEffectStartedapplied!");
 			return null;
 		}
-		boolean isAlreadyAllowedToFly = isAlreadyAllowedToFlyOld;
-		boolean creativeModeUpdated = creativeModeUpdatedOld;
 		Entity entity = (Entity) dependencies.get("entity");
-		if (!(entity instanceof PlayerEntity _plr ? _plr.getAbilities().creativeMode : false) && !creativeModeUpdated) {
-			creativeModeUpdated = true;
-		} else {
-			creativeModeUpdated = false;
-		}
-		if (creativeModeUpdated) {
-			if (entity instanceof PlayerEntity _player) {
-				if (_player.getAbilities().allowFlying == false && !isAlreadyAllowedToFly) {
-					_player.getAbilities().allowFlying = true;
-					_player.sendAbilitiesUpdate();
-					isAlreadyAllowedToFly = true;
-				}
+		PlayerEntity player = entity instanceof PlayerEntity ? (PlayerEntity) entity : null;
+		boolean allowFlying = player != null ? player.getAbilities().allowFlying : false;
+		boolean creativeMode = player != null ? player.getAbilities().creativeMode : false;
+
+		if (!expired) {
+			if (creativeModeOld != creativeMode && !creativeMode && !allowFlyingOld && !allowFlying) {
+				player.getAbilities().allowFlying = true;
+				player.sendAbilitiesUpdate();
+				allowFlying = true;
+			} else if (creativeModeOld != creativeMode && creativeMode && !allowFlyingOld && !allowFlying) {
+				player.getAbilities().allowFlying = false;
+				player.sendAbilitiesUpdate();
+				allowFlying = false;
 			}
 		}
+
 		Map<String, Boolean> map = com.google.common.collect.ImmutableMap.<String, Boolean>builder()
-				.put("isAlreadyAllowedToFly", isAlreadyAllowedToFly).put("creativeModeUpdated", creativeModeUpdated)
-				.build();
+				.put("allowFlying", allowFlying).put("creativeMode", creativeMode).build();
 		return map;
 	}
 }

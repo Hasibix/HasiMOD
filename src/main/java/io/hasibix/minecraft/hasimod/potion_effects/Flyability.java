@@ -11,8 +11,9 @@ import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.world.World;
 
 public class Flyability extends StatusEffect {
-	public boolean isAlreadyAllowedToFly = false;
-	public boolean creativeModeUpdated = false;
+	public boolean expired = false;
+	public boolean allowFlying = false;
+	public boolean creativeMode = false;
 
 	public Flyability() {
 		super(StatusEffectCategory.BENEFICIAL, 0x462E97);
@@ -32,9 +33,9 @@ public class Flyability extends StatusEffect {
 
 		Map<String, Boolean> newValues = FlyabilityEffectUpdateTick.execute(
 				com.google.common.collect.ImmutableMap.<String, Object>builder().put("entity", entity).build(),
-				this.isAlreadyAllowedToFly, this.creativeModeUpdated);
-		this.isAlreadyAllowedToFly = newValues.get("isAlreadyAllowedToFly");
-		this.creativeModeUpdated = newValues.get("creativeModeUpdated");
+				this.expired, this.allowFlying, this.creativeMode);
+		this.allowFlying = newValues.get("allowFlying");
+		this.creativeMode = newValues.get("creativeMode");
 	}
 
 	@Override
@@ -45,9 +46,10 @@ public class Flyability extends StatusEffect {
 		double y = entity.getY();
 		double z = entity.getZ();
 
-		Map<String, Boolean> newValues = FlyabilityEffectExpires.execute(
+		FlyabilityEffectExpires.execute(
 				com.google.common.collect.ImmutableMap.<String, Object>builder().put("entity", entity).build());
-		this.isAlreadyAllowedToFly = newValues.get("isAlreadyAllowedToFly");
-		this.creativeModeUpdated = newValues.get("creativeModeUpdated");
+		this.expired = true;
+		this.allowFlying = false;
+		this.creativeMode = false;
 	}
 }
