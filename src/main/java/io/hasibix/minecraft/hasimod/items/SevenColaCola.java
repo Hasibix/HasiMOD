@@ -33,9 +33,6 @@ public class SevenColaCola extends Item {
 	public ItemStack finishUsing(ItemStack itemstack, World world, LivingEntity entity) {
 		ItemStack retval = new ItemStack(Items.EMPTY_CAN);
 		super.finishUsing(itemstack, world, entity);
-		double x = entity.getX();
-		double y = entity.getY();
-		double z = entity.getZ();
 
 		AfterDrinkingSevenColaCola.execute(
 				com.google.common.collect.ImmutableMap.<String, Object>builder().put("entity", entity).build());

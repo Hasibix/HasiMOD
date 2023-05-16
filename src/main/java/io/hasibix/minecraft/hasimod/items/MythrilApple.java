@@ -22,9 +22,6 @@ public class MythrilApple extends Item {
 	@Override
 	public ItemStack finishUsing(ItemStack itemstack, World world, LivingEntity entity) {
 		ItemStack retval = super.finishUsing(itemstack, world, entity);
-		double x = entity.getX();
-		double y = entity.getY();
-		double z = entity.getZ();
 
 		AfterEatingMythrilApple.execute(
 				com.google.common.collect.ImmutableMap.<String, Object>builder().put("entity", entity).build());

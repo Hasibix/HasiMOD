@@ -2,9 +2,7 @@ package io.hasibix.minecraft.hasimod.init;
 
 import io.hasibix.minecraft.hasimod.HasiMOD;
 import io.hasibix.minecraft.hasimod.projectiles.ScytheBlade;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
-import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;

@@ -90,8 +90,8 @@ public class Items {
 		MANTA_COLA = Registry.register(Registries.ITEM, new Identifier(HasiMOD.MOD_ID, "manta_cola"), new MantaCola());
 		CARBONATED_WATER = Registry.register(Registries.ITEM, new Identifier(HasiMOD.MOD_ID, "carbonated_water"),
 				new CarbonatedWater());
-		SCYTHE_BLADE = Registry.register(Registries.ITEM,
-				new Identifier(HasiMOD.MOD_ID, "scythe_blade_item"), new ScytheBlade());
+		SCYTHE_BLADE = Registry.register(Registries.ITEM, new Identifier(HasiMOD.MOD_ID, "scythe_blade_item"),
+				new ScytheBlade());
 
 		ItemGroupEvents.modifyEntriesEvent(CreativeTabs.TAB_HASI_MOD).register(contents -> {
 			contents.add(MYTHRIL_APPLE);

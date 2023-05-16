@@ -3,6 +3,7 @@ package io.hasibix.minecraft.hasimod.procedures;
 import java.util.Map;
 
 import io.hasibix.minecraft.hasimod.HasiMOD;
+import io.hasibix.minecraft.hasimod.items.MythrilScythe;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -15,8 +16,8 @@ import net.minecraft.world.World;
 
 public class MythrilScytheRightclicked {
 
-	public static TypedActionResult<ItemStack> execute(io.hasibix.minecraft.hasimod.items.MythrilScythe instance,
-			Hand hand, Map<String, Object> dependencies) {
+	public static TypedActionResult<ItemStack> execute(MythrilScythe instance, Hand hand,
+			Map<String, Object> dependencies) {
 		if (dependencies.get("entity") == null) {
 			if (!dependencies.containsKey("entity"))
 				HasiMOD.LOGGER.warn("Failed to load dependency entity for procedure MythrilScytheRightclicked!");
@@ -57,6 +58,7 @@ public class MythrilScytheRightclicked {
 					io.hasibix.minecraft.hasimod.projectiles.ScytheBlade scytheBlade = new io.hasibix.minecraft.hasimod.projectiles.ScytheBlade(
 							world, user);
 					scytheBlade.damageAmount = 48;
+					scytheBlade.effects = instance.effects;
 					scytheBlade.setVelocity(user, user.getPitch(), (user.getYaw() * i), 0.0F, 1.5F, 0F);
 					world.spawnEntity(scytheBlade);
 				}
@@ -64,7 +66,7 @@ public class MythrilScytheRightclicked {
 
 			user.incrementStat(Stats.USED.getOrCreateStat(instance));
 			if (!user.getAbilities().creativeMode) {
-				itemStack.setDamage(itemStack.getDamage() - 10);;
+				itemStack.setDamage(itemStack.getDamage() + 16);
 			}
 
 			return TypedActionResult.success(itemStack, world.isClient());

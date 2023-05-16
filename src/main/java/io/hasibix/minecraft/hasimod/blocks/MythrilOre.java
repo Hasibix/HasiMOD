@@ -1,8 +1,5 @@
 package io.hasibix.minecraft.hasimod.blocks;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import io.hasibix.minecraft.hasimod.procedures.MythrilOreDestroyedByExplosion;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
@@ -19,11 +16,9 @@ public class MythrilOre extends Block {
 
 	@Override
 	public void onDestroyedByExplosion(World world, BlockPos blockPos, Explosion explosion) {
-		Map<String, Object> dependencies = new HashMap<String, Object>();
 		double x = blockPos.getX();
 		double y = blockPos.getY();
 		double z = blockPos.getZ();
-
 		MythrilOreDestroyedByExplosion.execute(com.google.common.collect.ImmutableMap.<String, Object>builder()
 				.put("x", x).put("y", y).put("z", z).put("world", world).build());
 	}

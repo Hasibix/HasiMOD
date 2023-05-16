@@ -55,6 +55,7 @@ public class ScytheBladeRightclicked {
 			if (!world.isClient) {
 				io.hasibix.minecraft.hasimod.projectiles.ScytheBlade scytheBlade = new io.hasibix.minecraft.hasimod.projectiles.ScytheBlade(
 						world, user);
+				scytheBlade.effects = instance.effects;
 				scytheBlade.damageAmount = 16;
 				scytheBlade.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 0F);
 				world.spawnEntity(scytheBlade);
