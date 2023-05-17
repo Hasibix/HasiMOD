@@ -1,8 +1,9 @@
 package io.hasibix.minecraft.hasimod.items;
 
 import io.hasibix.minecraft.hasimod.init.Items;
-import io.hasibix.minecraft.hasimod.procedures.AfterDrinkingSevenColaCola;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
@@ -14,9 +15,7 @@ import net.minecraft.world.World;
 public class SevenColaCola extends Item {
 	public SevenColaCola() {
 		super(new Item.Settings().maxCount(8).rarity(Rarity.EPIC)
-				.food((new FoodComponent.Builder()).hunger(6).saturationModifier(4f).alwaysEdible()
-
-						.build()));
+				.food((new FoodComponent.Builder()).hunger(6).saturationModifier(4f).alwaysEdible().build()));
 	}
 
 	@Override
@@ -34,8 +33,15 @@ public class SevenColaCola extends Item {
 		ItemStack retval = new ItemStack(Items.EMPTY_CAN);
 		super.finishUsing(itemstack, world, entity);
 
-		AfterDrinkingSevenColaCola.execute(
-				com.google.common.collect.ImmutableMap.<String, Object>builder().put("entity", entity).build());
+		if (entity instanceof LivingEntity _entity) {
+			_entity.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 80, 5, (false), (false)));
+			_entity.addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 24000, 20, (false), (false)));
+			_entity.addStatusEffect(new StatusEffectInstance(StatusEffects.SATURATION, 24000, 5, (false), (false)));
+			_entity.addStatusEffect(
+					new StatusEffectInstance(StatusEffects.WATER_BREATHING, 24000, 5, (false), (false)));
+			_entity.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 12000, 10, (false), (false)));
+		}
+
 		if (itemstack.isEmpty()) {
 			return retval;
 		} else {

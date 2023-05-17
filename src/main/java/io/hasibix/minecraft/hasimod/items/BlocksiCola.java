@@ -1,8 +1,9 @@
 package io.hasibix.minecraft.hasimod.items;
 
 import io.hasibix.minecraft.hasimod.init.Items;
-import io.hasibix.minecraft.hasimod.procedures.AfterDrinkingBlocksiCola;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
@@ -32,8 +33,13 @@ public class BlocksiCola extends Item {
 		ItemStack retval = new ItemStack(Items.EMPTY_CAN);
 		super.finishUsing(itemstack, world, entity);
 
-		AfterDrinkingBlocksiCola.execute(
-				com.google.common.collect.ImmutableMap.<String, Object>builder().put("entity", entity).build());
+		if (entity instanceof LivingEntity _entity) {
+			_entity.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 80, 5, (false), (false)));
+			_entity.addStatusEffect(
+					new StatusEffectInstance(StatusEffects.DOLPHINS_GRACE, 24000, 10, (false), (false)));
+			_entity.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 24000, 10, (false), (false)));
+		}
+
 		if (itemstack.isEmpty()) {
 			return retval;
 		} else {

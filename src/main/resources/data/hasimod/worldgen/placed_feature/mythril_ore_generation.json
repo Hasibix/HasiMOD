@@ -1,5 +1,5 @@
 {
-	"feature": "hasimod:mythril_ore",
+	"feature": "hasimod:mythril_ore_generation",
 	"placement": [
 		{
 			"type": "minecraft:count",

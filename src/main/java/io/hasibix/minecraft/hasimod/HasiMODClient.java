@@ -4,7 +4,7 @@ import io.hasibix.minecraft.hasimod.init.BlocksClient;
 import io.hasibix.minecraft.hasimod.init.ProjectilesClient;
 import net.fabricmc.api.ClientModInitializer;
 
-public class ClientInit implements ClientModInitializer {
+public class HasiMODClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		BlocksClient.load();

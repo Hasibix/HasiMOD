@@ -1,18 +1,14 @@
 package io.hasibix.minecraft.hasimod.potion_effects;
 
-import java.util.Map;
-
-import io.hasibix.minecraft.hasimod.procedures.FlyabilityEffectExpires;
-import io.hasibix.minecraft.hasimod.procedures.FlyabilityEffectUpdateTick;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
+import net.minecraft.entity.player.PlayerEntity;
 
 public class Flyability extends StatusEffect {
 	public boolean expired = false;
 	public boolean allowFlying = false;
-	public boolean creativeMode = false;
 
 	public Flyability() {
 		super(StatusEffectCategory.BENEFICIAL, 0x462E97);
@@ -25,21 +21,33 @@ public class Flyability extends StatusEffect {
 
 	@Override
 	public void applyUpdateEffect(LivingEntity entity, int amplifier) {
-		Map<String, Boolean> newValues = FlyabilityEffectUpdateTick.execute(
-				com.google.common.collect.ImmutableMap.<String, Object>builder().put("entity", entity).build(),
-				this.expired, this.allowFlying, this.creativeMode);
-		this.allowFlying = newValues.get("allowFlying");
-		this.creativeMode = newValues.get("creativeMode");
+		PlayerEntity player = entity instanceof PlayerEntity ? (PlayerEntity) entity : null;
+		boolean creativeMode = player != null ? player.getAbilities().creativeMode : false;
+
+		if (!this.expired) {
+			if (creativeMode && this.allowFlying) {
+				player.getAbilities().allowFlying = false;
+				player.sendAbilitiesUpdate();
+				this.allowFlying = false;
+			} else if (!creativeMode && !this.allowFlying) {
+				player.getAbilities().allowFlying = true;
+				player.sendAbilitiesUpdate();
+				this.allowFlying = true;
+			}
+		}
 	}
 
 	@Override
 	public void onRemoved(LivingEntity entity, AttributeContainer attributeContainer, int amplifier) {
 		super.onRemoved(entity, attributeContainer, amplifier);
 
-		FlyabilityEffectExpires.execute(
-				com.google.common.collect.ImmutableMap.<String, Object>builder().put("entity", entity).build());
+		if (!(entity instanceof PlayerEntity _plr ? _plr.getAbilities().creativeMode : false)) {
+			((PlayerEntity) entity).getAbilities().allowFlying = false;
+			((PlayerEntity) entity).sendAbilitiesUpdate();
+			((PlayerEntity) entity).getAbilities().flying = false;
+			((PlayerEntity) entity).sendAbilitiesUpdate();
+		}
 		this.expired = true;
 		this.allowFlying = false;
-		this.creativeMode = false;
 	}
 }
