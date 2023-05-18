@@ -13,6 +13,7 @@ More information about this project, docs and more credits coming soon.
 
 <big><pre>
 -----BEGIN LICENSE BLOCK-----
+
         Copyright © 2023 Hasibix Hasib. All Rights Reserved.
 
         This program is free software: you can redistribute it and/or modify
@@ -27,5 +28,6 @@ More information about this project, docs and more credits coming soon.
 
         You should have received a copy of the GNU General Public License
         along with this program.  If not, see https://www.gnu.org/licenses.
+        
 -----END LICENSE BLOCK-----
 </pre></big>
