@@ -3,6 +3,8 @@ package io.hasibix.minecraft.hasimod.projectiles;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jetbrains.annotations.NotNull;
+
 import io.hasibix.minecraft.hasimod.init.Items;
 import io.hasibix.minecraft.hasimod.init.Projectiles;
 import net.minecraft.entity.Entity;
@@ -20,8 +22,27 @@ import net.minecraft.util.hit.HitResult;
 import net.minecraft.world.World;
 
 public class ScytheBlade extends ThrownItemEntity {
-	public int damageAmount = 0;
-	public boolean createExplosion = true;
+	@NotNull
+	private int damageAmount = 0;
+	@NotNull
+	private boolean createExplosion = true;
+
+	public int getDamageAmount() {
+		return damageAmount;
+	}
+
+	public void setDamageAmount(int damageAmount) {
+		this.damageAmount = damageAmount;
+	}
+
+	public boolean isCreateExplosion() {
+		return createExplosion;
+	}
+
+	public void setCreateExplosion(boolean createExplosion) {
+		this.createExplosion = createExplosion;
+	}
+
 	private List<StatusEffectInstance> effects;
 
 	public ScytheBlade(EntityType<? extends ThrownItemEntity> entityType, World world) {
@@ -74,14 +95,50 @@ public class ScytheBlade extends ThrownItemEntity {
 		this.effects = effects;
 	}
 
+	@Override
+	public NbtCompound writeNbt(NbtCompound nbt) {
+		NbtList effectsTag = new NbtList();
+		for (StatusEffectInstance effect : this.effects) {
+			NbtCompound effectTag = new NbtCompound();
+			effectTag.putString("Id", Registries.STATUS_EFFECT.getId(effect.getEffectType()).toString());
+			effectTag.putInt("Duration", effect.getDuration());
+			effectTag.putInt("Amplifier", effect.getAmplifier());
+			effectTag.putBoolean("Ambient", effect.isAmbient());
+			effectTag.putBoolean("ShowParticles", effect.shouldShowParticles());
+			effectTag.putBoolean("ShowIcon", effect.shouldShowIcon());
+			effectsTag.add(effectTag);
+		}
+
+		if (!effectsTag.isEmpty()) {
+			nbt.put("CustomPotionEffects", effectsTag);
+		}
+
+		return super.writeNbt(nbt);
+	}
+
+	public void readNbtFromEffectList(List<StatusEffectInstance> list) {
+		NbtCompound nbt = new NbtCompound();
+		NbtList effectsTag = new NbtList();
+		for (StatusEffectInstance effect : list) {
+			NbtCompound effectTag = new NbtCompound();
+			effectTag.putString("Id", Registries.STATUS_EFFECT.getId(effect.getEffectType()).toString());
+			effectTag.putInt("Duration", effect.getDuration());
+			effectTag.putInt("Amplifier", effect.getAmplifier());
+			effectTag.putBoolean("Ambient", effect.isAmbient());
+			effectTag.putBoolean("ShowParticles", effect.shouldShowParticles());
+			effectTag.putBoolean("ShowIcon", effect.shouldShowIcon());
+			effectsTag.add(effectTag);
+		}
+
+		if (!effectsTag.isEmpty()) {
+			nbt.put("CustomPotionEffects", effectsTag);
+		}
+		this.readNbt(nbt);
+	}
+
 	public List<StatusEffectInstance> getEffects() {
 		return this.effects;
 	}
-	
-	@Override
-    public NbtCompound writeNbt(NbtCompound nbt) {
-       return  super.writeNbt(nbt);
-    }
 
 	@Override
 	protected void onEntityHit(EntityHitResult entityHitResult) {

@@ -2,8 +2,12 @@ package io.hasibix.minecraft.hasimod.items;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.jetbrains.annotations.Nullable;
+
+import com.google.common.collect.Lists;
+import com.mojang.datafixers.util.Pair;
 
 import io.hasibix.minecraft.hasimod.init.Items;
 import net.minecraft.client.item.TooltipContext;
@@ -11,7 +15,11 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MovementType;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffectUtil;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -19,14 +27,16 @@ import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
-import net.minecraft.potion.PotionUtil;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.Registries;
+import net.minecraft.screen.ScreenTexts;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
@@ -36,7 +46,11 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class MythrilScythe extends SwordItem {
-	public List<StatusEffectInstance> effects = new ArrayList<>();
+	private List<StatusEffectInstance> effects = new ArrayList<>();
+
+	public List<StatusEffectInstance> getEffects() {
+		return effects;
+	}
 
 	public MythrilScythe() {
 		super(new ToolMaterial() {
@@ -70,17 +84,14 @@ public class MythrilScythe extends SwordItem {
 				return Ingredient.ofStacks(new ItemStack(Items.MYTHRIL_GEM));
 			}
 		}, 3, 96f, new Item.Settings().fireproof().rarity(Rarity.EPIC));
-		this.effects = getEffectsFromNbt(this.getDefaultStack()) != null ? getEffectsFromNbt(this.getDefaultStack())
-				: this.effects;
 	}
 
-	public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-		PotionUtil.buildTooltip(stack, tooltip, 0.125f);
+	@Override
+	public void postProcessNbt(NbtCompound nbt) {
+		this.effects = getEffectsFromNbt(nbt);
 	}
 
-	@Nullable
-	public static List<StatusEffectInstance> getEffectsFromNbt(ItemStack itemStack) {
-		NbtCompound tag = itemStack.getNbt();
+	private static List<StatusEffectInstance> getEffectsFromNbt(NbtCompound tag) {
 		List<StatusEffectInstance> effects = new ArrayList<>();
 		if (tag != null && tag.contains("CustomPotionEffects")) {
 			NbtList effectsTag = tag.getList("CustomPotionEffects", 10);
@@ -108,6 +119,73 @@ public class MythrilScythe extends SwordItem {
 			}
 		}
 		return effects;
+	}
+
+	@Override
+	public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+		buildTooltip(this.effects, tooltip, Text.translatable("effect.none").formatted(Formatting.GRAY));
+	}
+
+	@SuppressWarnings("rawtypes")
+	private static void buildTooltip(List<StatusEffectInstance> statusEffects, List<Text> list, Text NONE_TEXT) {
+		ArrayList<Pair<EntityAttribute, EntityAttributeModifier>> list2 = Lists.newArrayList();
+		if (statusEffects.isEmpty()) {
+			list.add(NONE_TEXT);
+		} else {
+			for (StatusEffectInstance statusEffectInstance : statusEffects) {
+				MutableText mutableText = Text.translatable(statusEffectInstance.getTranslationKey());
+				StatusEffect statusEffect = statusEffectInstance.getEffectType();
+				Map<EntityAttribute, EntityAttributeModifier> map = statusEffect.getAttributeModifiers();
+				if (!map.isEmpty()) {
+					for (Map.Entry<EntityAttribute, EntityAttributeModifier> entry : map.entrySet()) {
+						EntityAttributeModifier entityAttributeModifier = entry.getValue();
+						EntityAttributeModifier entityAttributeModifier2 = new EntityAttributeModifier(
+								entityAttributeModifier.getName(),
+								statusEffect.adjustModifierAmount(statusEffectInstance.getAmplifier(),
+										entityAttributeModifier),
+								entityAttributeModifier.getOperation());
+						list2.add(new Pair<EntityAttribute, EntityAttributeModifier>(entry.getKey(),
+								entityAttributeModifier2));
+					}
+				}
+				if (statusEffectInstance.getAmplifier() > 0) {
+					mutableText = Text.translatable("potion.withAmplifier", mutableText,
+							Text.translatable("potion.potency." + statusEffectInstance.getAmplifier()));
+				}
+				if (statusEffectInstance.getDuration() > 20) {
+					mutableText = Text.translatable("potion.withDuration", mutableText, StatusEffectUtil
+							.durationToString(statusEffectInstance, statusEffectInstance.getDuration() / 20));
+				}
+				list.add(mutableText.formatted(statusEffect.getCategory().getFormatting()));
+			}
+		}
+		if (!list2.isEmpty()) {
+			list.add(ScreenTexts.EMPTY);
+			list.add(Text.translatable("potion.whenDrank").formatted(Formatting.DARK_PURPLE));
+			for (Pair pair : list2) {
+				EntityAttributeModifier entityAttributeModifier3 = (EntityAttributeModifier) pair.getSecond();
+				double d = entityAttributeModifier3.getValue();
+				double e = entityAttributeModifier3.getOperation() == EntityAttributeModifier.Operation.MULTIPLY_BASE
+						|| entityAttributeModifier3.getOperation() == EntityAttributeModifier.Operation.MULTIPLY_TOTAL
+								? entityAttributeModifier3.getValue() * 100.0
+								: entityAttributeModifier3.getValue();
+				if (d > 0.0) {
+					list.add(Text
+							.translatable("attribute.modifier.plus." + entityAttributeModifier3.getOperation().getId(),
+									ItemStack.MODIFIER_FORMAT.format(e),
+									Text.translatable(((EntityAttribute) pair.getFirst()).getTranslationKey()))
+							.formatted(Formatting.BLUE));
+					continue;
+				}
+				if (!(d < 0.0))
+					continue;
+				list.add(Text
+						.translatable("attribute.modifier.take." + entityAttributeModifier3.getOperation().getId(),
+								ItemStack.MODIFIER_FORMAT.format(e *= -1.0),
+								Text.translatable(((EntityAttribute) pair.getFirst()).getTranslationKey()))
+						.formatted(Formatting.RED));
+			}
+		}
 	}
 
 	@Override
@@ -139,8 +217,8 @@ public class MythrilScythe extends SwordItem {
 				for (float i = -1F; i < 1F; i += 0.05F) {
 					io.hasibix.minecraft.hasimod.projectiles.ScytheBlade scytheBlade = new io.hasibix.minecraft.hasimod.projectiles.ScytheBlade(
 							world, user);
-					scytheBlade.damageAmount = 48;
-					scytheBlade.effects = this.effects;
+					scytheBlade.readNbtFromEffectList(this.effects);
+					scytheBlade.setDamageAmount(16);
 					scytheBlade.setVelocity(user, user.getPitch(), (user.getYaw() * i), 0.0F, 1.5F, 0F);
 					world.spawnEntity(scytheBlade);
 				}
