@@ -1,4 +1,4 @@
-package io.hasibix.minecraft.hasimod.potion_effects;
+package io.hasibix.minecraft.hasimod.status_effects;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.AttributeContainer;
@@ -9,6 +9,7 @@ import net.minecraft.entity.player.PlayerEntity;
 public class Flyability extends StatusEffect {
 	public boolean expired = false;
 	public boolean allowFlying = false;
+	public boolean creativeMode = false;
 
 	public Flyability() {
 		super(StatusEffectCategory.BENEFICIAL, 0x462E97);
@@ -25,14 +26,17 @@ public class Flyability extends StatusEffect {
 		boolean creativeMode = player != null ? player.getAbilities().creativeMode : false;
 
 		if (!this.expired) {
-			if (creativeMode && this.allowFlying) {
-				player.getAbilities().allowFlying = false;
-				player.sendAbilitiesUpdate();
-				this.allowFlying = false;
-			} else if (!creativeMode && !this.allowFlying) {
+			if (!this.allowFlying) {
 				player.getAbilities().allowFlying = true;
 				player.sendAbilitiesUpdate();
 				this.allowFlying = true;
+			}
+			if (creativeMode && !this.creativeMode) {
+				this.allowFlying = false;
+				this.creativeMode = true;
+			} else if (creativeMode && !this.creativeMode) {
+				this.allowFlying = false;
+				this.creativeMode = false;
 			}
 		}
 	}
@@ -49,5 +53,6 @@ public class Flyability extends StatusEffect {
 		}
 		this.expired = true;
 		this.allowFlying = false;
+		this.creativeMode = false;
 	}
 }

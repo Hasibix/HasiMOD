@@ -4,11 +4,11 @@
 		{
 			"rolls": 1,
 			"entries": [
-	        	{
+				{
 					"type": "minecraft:item",
 					"name": "hasimod:mythril_block"
-	        	}
-	        ]
+				}
+			]
 		}
 	]
 }

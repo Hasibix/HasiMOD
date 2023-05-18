@@ -15,27 +15,27 @@ public class MythrilAxe extends AxeItem {
 			public int getDurability() {
 				return 6280;
 			}
-			
+
 			@Override
 			public float getMiningSpeedMultiplier() {
 				return 24f;
 			}
-			
+
 			@Override
 			public float getAttackDamage() {
 				return 88f;
 			}
-			
+
 			@Override
 			public int getMiningLevel() {
 				return 20;
 			}
-			
+
 			@Override
 			public int getEnchantability() {
 				return 140;
 			}
-			
+
 			@Override
 			public Ingredient getRepairIngredient() {
 				return Ingredient.ofStacks(new ItemStack(Items.MYTHRIL_GEM));

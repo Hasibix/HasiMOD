@@ -34,7 +34,7 @@ public class SevenColaCola extends Item {
 		super.finishUsing(itemstack, world, entity);
 
 		entity.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 80, 5, (false), (false)));
-		entity.addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 24000, 20, (false), (false)));
+		entity.addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 24000, 10, (false), (false)));
 		entity.addStatusEffect(new StatusEffectInstance(StatusEffects.SATURATION, 24000, 5, (false), (false)));
 		entity.addStatusEffect(new StatusEffectInstance(StatusEffects.WATER_BREATHING, 24000, 5, (false), (false)));
 

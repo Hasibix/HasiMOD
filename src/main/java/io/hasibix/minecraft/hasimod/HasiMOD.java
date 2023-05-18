@@ -7,8 +7,8 @@ import io.hasibix.minecraft.hasimod.init.Blocks;
 import io.hasibix.minecraft.hasimod.init.CreativeTabs;
 import io.hasibix.minecraft.hasimod.init.Items;
 import io.hasibix.minecraft.hasimod.init.OreGenerations;
-import io.hasibix.minecraft.hasimod.init.PotionEffects;
 import io.hasibix.minecraft.hasimod.init.Projectiles;
+import io.hasibix.minecraft.hasimod.init.StatusEffects;
 import net.fabricmc.api.ModInitializer;
 
 public class HasiMOD implements ModInitializer {
@@ -22,7 +22,7 @@ public class HasiMOD implements ModInitializer {
 		CreativeTabs.load();
 		Items.load();
 		OreGenerations.load();
-		PotionEffects.load();
 		Projectiles.load();
+		StatusEffects.load();
 	}
 }

@@ -1,55 +1,55 @@
 {
-  "display": {
-    "background": "minecraft:textures/block/stone.png",
-    "icon": {
-      "item": "hasimod:mythril_gem"
-    },
-    "title": {
-      "translate": "advancements.gem_of_the_gods.title"
-    },
-    "description": {
-      "translate": "advancements.gem_of_the_gods.descr"
-    },
-    "frame": "goal",
-    "show_toast": true,
-    "announce_to_chat": true,
-    "hidden": false
-  },
-  "criteria": {
-    "gem_of_the_gods": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "hasimod:mythril_gem"
-            ],
-            "count": {
-              "min": 1,
-              "max": 1728
-            }
-          }
-        ]
-      }
-    }
-  },
-  "rewards": {
-    "experience": 128,
-    "recipes": [
-      "hasimod:mythril_pickaxe_recipe",
-      "hasimod:mythril_axe_recipe",
-      "hasimod:mythril_sword_recipe",
-      "hasimod:mythril_shovel_recipe",
-      "hasimod:mythril_hoe_recipe",
-      "hasimod:mythril_armor_helmet_recipe",
-      "hasimod:mythril_armor_body_recipe",
-      "hasimod:mythril_armor_leggings_recipe",
-      "hasimod:mythril_armor_boots_recipe",
-      "hasimod:mythril_gem_recipe",
-      "hasimod:mythril_scythe_recipe",
-      "hasimod:mythril_apple_recipe",
-      "hasimod:mythril_block_recipe",
-      "hasimod:mythril_gem_block_recipe"
-    ]
-  }
+	"display": {
+		"background": "minecraft:textures/block/stone.png",
+		"icon": {
+			"item": "hasimod:mythril_gem"
+		},
+		"title": {
+			"translate": "advancements.gem_of_the_gods.title"
+		},
+		"description": {
+			"translate": "advancements.gem_of_the_gods.descr"
+		},
+		"frame": "challange",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"criteria": {
+		"gem_of_the_gods": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"items": [
+							"hasimod:mythril_gem"
+						],
+						"count": {
+							"min": 1,
+							"max": 1728
+						}
+					}
+				]
+			}
+		}
+	},
+	"rewards": {
+		"experience": 128,
+		"recipes": [
+			"hasimod:mythril_pickaxe_recipe",
+			"hasimod:mythril_axe_recipe",
+			"hasimod:mythril_sword_recipe",
+			"hasimod:mythril_shovel_recipe",
+			"hasimod:mythril_hoe_recipe",
+			"hasimod:mythril_armor_helmet_recipe",
+			"hasimod:mythril_armor_body_recipe",
+			"hasimod:mythril_armor_leggings_recipe",
+			"hasimod:mythril_armor_boots_recipe",
+			"hasimod:mythril_gem_recipe",
+			"hasimod:mythril_scythe_recipe",
+			"hasimod:mythril_apple_recipe",
+			"hasimod:mythril_block_recipe",
+			"hasimod:mythril_gem_block_recipe"
+		]
+	}
 }

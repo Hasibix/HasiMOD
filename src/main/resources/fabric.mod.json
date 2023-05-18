@@ -3,14 +3,14 @@
 	"id": "hasimod",
 	"version": "${version}",
 	"name": "HasiMOD",
-	"description": "A mod made by Hasibix",
+	"description": "A simple Minecraft mod made by me using the Fabric API.",
 	"authors": [
 		"Hasibix Hasib"
 	],
 	"contact": {
 		"sources": "https://github.com/Hasibix/HasiMOD"
 	},
-	"license": "GNU General Public License version 3 (GPLv3)",
+	"license": "GPLv3",
 	"icon": "assets/hasimod/icon.png",
 	"environment": "*",
 	"entrypoints": {

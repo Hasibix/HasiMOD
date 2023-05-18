@@ -1,7 +1,7 @@
 {
-  "parent": "hasimod:item/coke",
-  "textures": {
-    "0": "hasimod:item/seven_cola",
-    "particle": "hasimod:item/seven_cola"
-  }
+	"parent": "hasimod:item/coke",
+	"textures": {
+		"0": "hasimod:item/seven_cola",
+		"particle": "hasimod:item/seven_cola"
+	}
 }

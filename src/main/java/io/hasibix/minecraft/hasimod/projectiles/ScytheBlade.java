@@ -13,8 +13,11 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
+import net.minecraft.nbt.NbtByte;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtInt;
 import net.minecraft.nbt.NbtList;
+import net.minecraft.nbt.NbtString;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.EntityHitResult;
@@ -23,9 +26,17 @@ import net.minecraft.world.World;
 
 public class ScytheBlade extends ThrownItemEntity {
 	@NotNull
-	private int damageAmount = 0;
+	private int damageAmount = 10;
 	@NotNull
-	private boolean createExplosion = true;
+	private float createExplosion = 2F;
+
+	public float getCreateExplosion() {
+		return createExplosion;
+	}
+
+	public void setCreateExplosion(float createExplosion) {
+		this.createExplosion = createExplosion;
+	}
 
 	public int getDamageAmount() {
 		return damageAmount;
@@ -33,14 +44,6 @@ public class ScytheBlade extends ThrownItemEntity {
 
 	public void setDamageAmount(int damageAmount) {
 		this.damageAmount = damageAmount;
-	}
-
-	public boolean isCreateExplosion() {
-		return createExplosion;
-	}
-
-	public void setCreateExplosion(boolean createExplosion) {
-		this.createExplosion = createExplosion;
 	}
 
 	private List<StatusEffectInstance> effects;
@@ -71,16 +74,43 @@ public class ScytheBlade extends ThrownItemEntity {
 			NbtList effectsTag = nbt.getList("CustomPotionEffects", 10);
 			for (int i = 0; i < effectsTag.size(); i++) {
 				NbtCompound effectTag = effectsTag.getCompound(i);
-				if (effectTag.contains("Id") && effectTag.contains("Amplifier") && effectTag.contains("Duration")
-						&& effectTag.contains("Ambient") && effectTag.contains("ShowParticles")
-						&& effectTag.contains("ShowIcon")) {
-					Identifier effectId = Identifier.tryParse(effectTag.getString("Id"));
-					int duration = effectTag.getInt("Duration");
-					int amplifier = effectTag.getInt("Amplifier");
-					boolean ambient = effectTag.getBoolean("Ambient");
-					boolean showParticles = effectTag.getBoolean("ShowParticles");
-					boolean showIcon = effectTag.getBoolean("ShowIcon");
-
+				if (effectTag.contains("Id")) {
+					Identifier effectId = null;
+					int amplifier = 0;
+					int duration = 20;
+					boolean ambient = false;
+					boolean showParticles = true;
+					boolean showIcon = true;
+					if (effectTag.contains("Id")) {
+						if (effectTag.get("Id") instanceof NbtString) {
+							effectId = Identifier.tryParse(effectTag.getString("Id"));
+						}
+					}
+					if (effectTag.contains("Amplifier")) {
+						if (effectTag.get("Amplifier") instanceof NbtInt) {
+							amplifier = effectTag.getInt("Amplifier");
+						}
+					}
+					if (effectTag.contains("Duration")) {
+						if (effectTag.get("Duration") instanceof NbtInt) {
+							duration = effectTag.getInt("Duration");
+						}
+					}
+					if (effectTag.contains("Ambient")) {
+						if (effectTag.get("Ambient") instanceof NbtByte) {
+							ambient = effectTag.getBoolean("Ambient");
+						}
+					}
+					if (effectTag.contains("ShowParticles")) {
+						if (effectTag.get("ShowParticles") instanceof NbtByte) {
+							showParticles = effectTag.getBoolean("ShowParticles");
+						}
+					}
+					if (effectTag.contains("ShowIcon")) {
+						if (effectTag.get("ShowIcon") instanceof NbtByte) {
+							showIcon = effectTag.getBoolean("ShowIcon");
+						}
+					}
 					if (effectId != null) {
 						StatusEffectInstance effectInstance = new StatusEffectInstance(
 								Registries.STATUS_EFFECT.get(effectId), duration, amplifier, ambient, showParticles,
@@ -116,7 +146,7 @@ public class ScytheBlade extends ThrownItemEntity {
 		return super.writeNbt(nbt);
 	}
 
-	public void readNbtFromEffectList(List<StatusEffectInstance> list) {
+	public void setEffects(List<StatusEffectInstance> list) {
 		NbtCompound nbt = new NbtCompound();
 		NbtList effectsTag = new NbtList();
 		for (StatusEffectInstance effect : list) {
@@ -158,10 +188,8 @@ public class ScytheBlade extends ThrownItemEntity {
 		super.onCollision(hitResult);
 		if (!this.world.isClient) {
 			this.world.sendEntityStatus(this, (byte) 3);
-			if (this.createExplosion) {
-				this.world.createExplosion(this, this.getX(), this.getBodyY(0.0625), this.getZ(), 2.0f,
-						World.ExplosionSourceType.MOB);
-			}
+			this.world.createExplosion(this, this.getX(), this.getY(), this.getZ(), 2.0f,
+					World.ExplosionSourceType.MOB);
 			this.kill();
 		}
 	}

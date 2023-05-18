@@ -15,8 +15,8 @@ public class Blocks {
 	public static Block MYTHRIL_BLOCK;
 
 	public static void load() {
-		CRACKED_MYTHRIL_ORE = Registry.register(Registries.BLOCK,
-				new Identifier(HasiMOD.MOD_ID, "cracked_mythril_ore"), new CrackedMythrilOre());
+		CRACKED_MYTHRIL_ORE = Registry.register(Registries.BLOCK, new Identifier(HasiMOD.MOD_ID, "cracked_mythril_ore"),
+				new CrackedMythrilOre());
 		MYTHRIL_ORE = Registry.register(Registries.BLOCK, new Identifier(HasiMOD.MOD_ID, "mythril_ore"),
 				new MythrilOre());
 		MYTHRIL_BLOCK = Registry.register(Registries.BLOCK, new Identifier(HasiMOD.MOD_ID, "mythril_block"),

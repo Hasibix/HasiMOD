@@ -15,12 +15,12 @@ public class MythrilHoe extends HoeItem {
 			public int getDurability() {
 				return 6280;
 			}
-			
+
 			@Override
 			public float getMiningSpeedMultiplier() {
 				return 24f;
 			}
-			
+
 			@Override
 			public float getAttackDamage() {
 				return 18f;

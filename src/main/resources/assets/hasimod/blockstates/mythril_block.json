@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "": { "model": "hasimod:block/mythril_block" }
-    }
+	"variants": {
+		"": {
+			"model": "hasimod:block/mythril_block"
+		}
+	}
 }

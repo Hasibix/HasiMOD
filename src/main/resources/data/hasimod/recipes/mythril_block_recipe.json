@@ -1,41 +1,41 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "012",
-    "345",
-    "678"
-  ],
-  "key": {
-    "0": {
-      "item": "hasimod:mythril_gem"
-    },
-    "1": {
-      "item": "hasimod:mythril_gem"
-    },
-    "2": {
-      "item": "hasimod:mythril_gem"
-    },
-    "3": {
-      "item": "hasimod:mythril_gem"
-    },
-    "4": {
-      "item": "hasimod:mythril_gem"
-    },
-    "5": {
-      "item": "hasimod:mythril_gem"
-    },
-    "6": {
-      "item": "hasimod:mythril_gem"
-    },
-    "7": {
-      "item": "hasimod:mythril_gem"
-    },
-    "8": {
-      "item": "hasimod:mythril_gem"
-    }
-  },
-  "result": {
-    "item": "hasimod:mythril_block",
-    "count": 1
-  }
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"012",
+		"345",
+		"678"
+	],
+	"key": {
+		"0": {
+			"item": "hasimod:mythril_gem"
+		},
+		"1": {
+			"item": "hasimod:mythril_gem"
+		},
+		"2": {
+			"item": "hasimod:mythril_gem"
+		},
+		"3": {
+			"item": "hasimod:mythril_gem"
+		},
+		"4": {
+			"item": "hasimod:mythril_gem"
+		},
+		"5": {
+			"item": "hasimod:mythril_gem"
+		},
+		"6": {
+			"item": "hasimod:mythril_gem"
+		},
+		"7": {
+			"item": "hasimod:mythril_gem"
+		},
+		"8": {
+			"item": "hasimod:mythril_gem"
+		}
+	},
+	"result": {
+		"item": "hasimod:mythril_block",
+		"count": 1
+	}
 }

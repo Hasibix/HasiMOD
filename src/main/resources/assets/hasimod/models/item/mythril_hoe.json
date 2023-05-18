@@ -1,6 +1,6 @@
 {
-  "parent": "item/handheld",
-  "textures": {
-    "layer0": "hasimod:item/mythril_hoe"
-  }
+	"parent": "item/handheld",
+	"textures": {
+		"layer0": "hasimod:item/mythril_hoe"
+	}
 }

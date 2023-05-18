@@ -1,7 +1,7 @@
 {
-  "parent": "hasimod:item/coke",
-  "textures": {
-    "0": "hasimod:item/blocksi",
-    "particle": "hasimod:item/blocksi"
-  }
+	"parent": "hasimod:item/coke",
+	"textures": {
+		"0": "hasimod:item/blocksi",
+		"particle": "hasimod:item/blocksi"
+	}
 }

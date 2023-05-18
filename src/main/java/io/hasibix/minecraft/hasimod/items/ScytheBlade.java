@@ -18,8 +18,11 @@ import net.minecraft.entity.effect.StatusEffectUtil;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtByte;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtInt;
 import net.minecraft.nbt.NbtList;
+import net.minecraft.nbt.NbtString;
 import net.minecraft.registry.Registries;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.sound.SoundCategory;
@@ -56,16 +59,43 @@ public class ScytheBlade extends Item {
 			NbtList effectsTag = tag.getList("CustomPotionEffects", 10);
 			for (int i = 0; i < effectsTag.size(); i++) {
 				NbtCompound effectTag = effectsTag.getCompound(i);
-				if (effectTag.contains("Id") && effectTag.contains("Amplifier") && effectTag.contains("Duration")
-						&& effectTag.contains("Ambient") && effectTag.contains("ShowParticles")
-						&& effectTag.contains("ShowIcon")) {
-					Identifier effectId = Identifier.tryParse(effectTag.getString("Id"));
-					int duration = effectTag.getInt("Duration");
-					int amplifier = effectTag.getInt("Amplifier");
-					boolean ambient = effectTag.getBoolean("Ambient");
-					boolean showParticles = effectTag.getBoolean("ShowParticles");
-					boolean showIcon = effectTag.getBoolean("ShowIcon");
-
+				if (effectTag.contains("Id")) {
+					Identifier effectId = null;
+					int amplifier = 0;
+					int duration = 20;
+					boolean ambient = false;
+					boolean showParticles = true;
+					boolean showIcon = true;
+					if (effectTag.contains("Id")) {
+						if (effectTag.get("Id") instanceof NbtString) {
+							effectId = Identifier.tryParse(effectTag.getString("Id"));
+						}
+					}
+					if (effectTag.contains("Amplifier")) {
+						if (effectTag.get("Amplifier") instanceof NbtInt) {
+							amplifier = effectTag.getInt("Amplifier");
+						}
+					}
+					if (effectTag.contains("Duration")) {
+						if (effectTag.get("Duration") instanceof NbtInt) {
+							duration = effectTag.getInt("Duration");
+						}
+					}
+					if (effectTag.contains("Ambient")) {
+						if (effectTag.get("Ambient") instanceof NbtByte) {
+							ambient = effectTag.getBoolean("Ambient");
+						}
+					}
+					if (effectTag.contains("ShowParticles")) {
+						if (effectTag.get("ShowParticles") instanceof NbtByte) {
+							showParticles = effectTag.getBoolean("ShowParticles");
+						}
+					}
+					if (effectTag.contains("ShowIcon")) {
+						if (effectTag.get("ShowIcon") instanceof NbtByte) {
+							showIcon = effectTag.getBoolean("ShowIcon");
+						}
+					}
 					if (effectId != null) {
 						StatusEffectInstance effectInstance = new StatusEffectInstance(
 								Registries.STATUS_EFFECT.get(effectId), duration, amplifier, ambient, showParticles,
@@ -109,7 +139,7 @@ public class ScytheBlade extends Item {
 				}
 				if (statusEffectInstance.getAmplifier() > 0) {
 					mutableText = Text.translatable("potion.withAmplifier", mutableText,
-							Text.translatable("potion.potency." + statusEffectInstance.getAmplifier()));
+							Text.translatable("potion.potency." + (statusEffectInstance.getAmplifier() + 1)));
 				}
 				if (statusEffectInstance.getDuration() > 20) {
 					mutableText = Text.translatable("potion.withDuration", mutableText, StatusEffectUtil
@@ -158,9 +188,9 @@ public class ScytheBlade extends Item {
 			if (!world.isClient) {
 				io.hasibix.minecraft.hasimod.projectiles.ScytheBlade scytheBlade = new io.hasibix.minecraft.hasimod.projectiles.ScytheBlade(
 						world, user);
-				scytheBlade.readNbtFromEffectList(this.effects);
+				scytheBlade.setEffects(this.effects);
 				scytheBlade.setDamageAmount(16);
-				scytheBlade.setCreateExplosion(false);
+				scytheBlade.setCreateExplosion(1);
 				scytheBlade.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 0F);
 				world.spawnEntity(scytheBlade);
 			}

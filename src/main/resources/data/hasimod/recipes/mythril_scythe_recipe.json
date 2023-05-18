@@ -1,29 +1,29 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "01",
-    "23",
-    " 5"
-  ],
-  "key": {
-    "0": {
-      "item": "hasimod:mythril_gem"
-    },
-    "1": {
-      "item": "hasimod:mythril_gem"
-    },
-    "2": {
-      "item": "hasimod:mythril_gem"
-    },
-    "3": {
-      "item": "minecraft:netherite_ingot"
-    },
-    "5": {
-      "item": "minecraft:netherite_ingot"
-    }
-  },
-  "result": {
-    "item": "hasimod:mythril_scythe",
-    "count": 1
-  }
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"01",
+		"23",
+		" 5"
+	],
+	"key": {
+		"0": {
+			"item": "hasimod:mythril_gem"
+		},
+		"1": {
+			"item": "hasimod:mythril_gem"
+		},
+		"2": {
+			"item": "hasimod:mythril_gem"
+		},
+		"3": {
+			"item": "minecraft:netherite_ingot"
+		},
+		"5": {
+			"item": "minecraft:netherite_ingot"
+		}
+	},
+	"result": {
+		"item": "hasimod:mythril_scythe",
+		"count": 1
+	}
 }

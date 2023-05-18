@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "": { "model": "hasimod:block/cracked_mythril_ore" }
-    }
+	"variants": {
+		"": {
+			"model": "hasimod:block/cracked_mythril_ore"
+		}
+	}
 }

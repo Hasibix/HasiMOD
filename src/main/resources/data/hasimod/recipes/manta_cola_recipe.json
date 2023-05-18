@@ -1,36 +1,36 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
-    {
-      "item": "hasimod:empty_can"
-    },
-    {
-      "item": "minecraft:sugar"
-    },
-    {
-      "item": "minecraft:apple"
-    },
-    {
-      "item": "minecraft:orange_dye"
-    },
-    {
-      "item": "minecraft:sugar"
-    },
-    {
-      "item": "hasimod:carbonated_water"
-    },
-    {
-      "item": "minecraft:yellow_dye"
-    },
-    {
-      "item": "minecraft:sugar"
-    },
-    {
-      "item": "minecraft:flint_and_steel"
-    }
-  ],
-  "result": {
-    "item": "hasimod:manta_cola",
-    "count": 1
-  }
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "hasimod:empty_can"
+		},
+		{
+			"item": "minecraft:sugar"
+		},
+		{
+			"item": "minecraft:apple"
+		},
+		{
+			"item": "minecraft:orange_dye"
+		},
+		{
+			"item": "minecraft:sugar"
+		},
+		{
+			"item": "hasimod:carbonated_water"
+		},
+		{
+			"item": "minecraft:yellow_dye"
+		},
+		{
+			"item": "minecraft:sugar"
+		},
+		{
+			"item": "minecraft:flint_and_steel"
+		}
+	],
+	"result": {
+		"item": "hasimod:manta_cola",
+		"count": 1
+	}
 }
