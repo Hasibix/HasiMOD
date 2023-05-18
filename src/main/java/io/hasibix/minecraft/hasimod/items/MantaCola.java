@@ -33,12 +33,9 @@ public class MantaCola extends Item {
 		ItemStack retval = new ItemStack(Items.EMPTY_CAN);
 		super.finishUsing(itemstack, world, entity);
 
-		if (entity instanceof LivingEntity _entity) {
-			_entity.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 80, 5, (false), (false)));
-			_entity.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 24000, 10, (false), (false)));
-			_entity.addStatusEffect(
-					new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 24000, 10, (false), (false)));
-		}
+		entity.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 80, 5, (false), (false)));
+		entity.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 24000, 10, (false), (false)));
+		entity.addStatusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 24000, 10, (false), (false)));
 
 		if (itemstack.isEmpty()) {
 			return retval;

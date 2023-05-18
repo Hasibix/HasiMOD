@@ -33,14 +33,10 @@ public class SevenColaCola extends Item {
 		ItemStack retval = new ItemStack(Items.EMPTY_CAN);
 		super.finishUsing(itemstack, world, entity);
 
-		if (entity instanceof LivingEntity _entity) {
-			_entity.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 80, 5, (false), (false)));
-			_entity.addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 24000, 20, (false), (false)));
-			_entity.addStatusEffect(new StatusEffectInstance(StatusEffects.SATURATION, 24000, 5, (false), (false)));
-			_entity.addStatusEffect(
-					new StatusEffectInstance(StatusEffects.WATER_BREATHING, 24000, 5, (false), (false)));
-			_entity.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 12000, 10, (false), (false)));
-		}
+		entity.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 80, 5, (false), (false)));
+		entity.addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 24000, 20, (false), (false)));
+		entity.addStatusEffect(new StatusEffectInstance(StatusEffects.SATURATION, 24000, 5, (false), (false)));
+		entity.addStatusEffect(new StatusEffectInstance(StatusEffects.WATER_BREATHING, 24000, 5, (false), (false)));
 
 		if (itemstack.isEmpty()) {
 			return retval;
