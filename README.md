@@ -14,7 +14,7 @@ More information about this project, docs and more credits coming soon.
 <big><pre>
 -----BEGIN LICENSE BLOCK-----
 
-	Copyright © 2023 Hasibix Hasib. All Rights Reserved.
+        Copyright © 2023 Hasibix Hasib. All Rights Reserved.
 
         This program is free software: you can redistribute it and/or modify
         it under the terms of the GNU General Public License as published by
