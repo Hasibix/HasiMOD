@@ -18,7 +18,7 @@
 			"io.hasibix.minecraft.hasimod.HasiMOD"
 		],
 		"client": [
-			"io.hasibix.minecraft.hasimod.ClientInit"
+			"io.hasibix.minecraft.hasimod.HasiMODClient"
 		]
 	},
 	"depends": {
