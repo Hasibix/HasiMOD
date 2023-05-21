@@ -27,5 +27,6 @@
 	"item.hasimod.scythe_blade_item": "Scythe Blade",
 	"entity.hasimod.scythe_blade": "Scythe Blade",
 	"death.attack.scythe_blade": "%1$s was sliced by %2$s",
-	"death.attack.scythe_blade.item": "%1$s was sliced by %2$s using %3$s"
+	"death.attack.scythe_blade.item": "%1$s was sliced by %2$s using %3$s",
+	"death.attack.scythe": "%1$s though they were god"
 }

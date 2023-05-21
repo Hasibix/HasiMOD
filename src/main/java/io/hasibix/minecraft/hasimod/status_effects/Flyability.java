@@ -34,7 +34,7 @@ public class Flyability extends StatusEffect {
 			if (creativeMode && !this.creativeMode) {
 				this.allowFlying = false;
 				this.creativeMode = true;
-			} else if (creativeMode && !this.creativeMode) {
+			} else if (!creativeMode && this.creativeMode) {
 				this.allowFlying = false;
 				this.creativeMode = false;
 			}

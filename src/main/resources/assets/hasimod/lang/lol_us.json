@@ -27,5 +27,6 @@
 	"item.hasimod.scythe_blade_item": "SLICER BULLETZ",
 	"entity.hasimod.scythe_blade": "SLICER BULLETZ",
 	"death.attack.scythe_blade": " %1$s wer SlICD baii %2$s",
-	"death.attack.scythe_blade.item": "%1$s wer SlICD baii %2$zswiht %3$s"
+	"death.attack.scythe_blade.item": "%1$s wer SlICD baii %2$zswiht %3$s",
+	"death.attack.scythe": "%1$s was usin hax. Got caught in 4K"
 }
