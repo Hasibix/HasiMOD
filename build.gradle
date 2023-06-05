@@ -3,9 +3,8 @@ plugins {
 	id 'maven-publish'
 }
 
-version = project.mod_version
+version = project.version
 group = project.maven_group
-
 
 dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
