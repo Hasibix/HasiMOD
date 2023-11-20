@@ -14,8 +14,8 @@ Coming soon!
 
 ---------------------------------------------------
 
-<pre>
+<big><pre>
 Copyright (c) 2023 Hasibix Hasib.
 
 See https://www.gnu.org/licenses/gpl-3.0
-</pre>
+</pre></big>
