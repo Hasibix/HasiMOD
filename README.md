@@ -14,8 +14,11 @@ Coming soon!
 
 ---------------------------------------------------
 
-<big><pre>
+<pre>
 Copyright (c) 2023 Hasibix Hasib.
 
+This project is licensed under version 3 of
+GNU General Public License
+</pre>
+
 See https://www.gnu.org/licenses/gpl-3.0
-</pre></big>
