@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "lonsdaleite_gem",
+  "ingredients": [
+    {
+      "item": "hasimod:lonsdaleite_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "hasimod:lonsdaleite_gem"
+  }
+}

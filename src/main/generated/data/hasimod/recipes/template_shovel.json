@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "L",
+    "S",
+    "S"
+  ],
+  "result": {
+    "item": "hasimod:template_shovel"
+  },
+  "show_notification": true
+}

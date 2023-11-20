@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_lonsdaleite_gem": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hasimod:lonsdaleite_gem"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:lonsdaleite_pickaxe_smithing"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_lonsdaleite_gem",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:lonsdaleite_pickaxe_smithing"
+    ]
+  },
+  "sends_telemetry_event": false
+}

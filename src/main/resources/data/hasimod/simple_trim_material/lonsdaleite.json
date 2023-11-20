@@ -1,0 +1,18 @@
+{
+  "encoded_palette": true,
+  "asset_name": "lonsdaleite",
+  "description": {
+    "color": "#7958AC",
+    "translations": [
+      {
+        "lang": "en_us",
+        "string": "Lonsdaleite Material"
+      },
+      {
+        "lang": "lol_us",
+        "string": "HOLY metereal"
+      }
+    ]
+  },
+  "ingredient": "hasimod:lonsdaleite_gem"
+}

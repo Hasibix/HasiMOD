@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:gift",
+  "pools": [
+    {
+      "rolls": 1,
+      "bonus_rolls": 0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "hasimod:template_helmet"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hasimod:template_chestplate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hasimod:template_leggings"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hasimod:template_boots"
+        }
+      ]
+    }
+  ],
+  "random_sequence": "minecraft:gameplay/hero_of_the_village/armorer_gift"
+}

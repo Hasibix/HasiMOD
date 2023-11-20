@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:apple"
+    },
+    "M": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "pattern": [
+    "MMM",
+    "MAM",
+    "MMM"
+  ],
+  "result": {
+    "item": "hasimod:diamond_apple"
+  },
+  "show_notification": true
+}

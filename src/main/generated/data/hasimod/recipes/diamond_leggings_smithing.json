@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:diamond"
+  },
+  "base": {
+    "item": "hasimod:template_leggings"
+  },
+  "result": {
+    "item": "minecraft:diamond_leggings"
+  },
+  "template": {
+    "item": "hasimod:diamond_upgrade_smithing_template"
+  }
+}

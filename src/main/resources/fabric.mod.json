@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "hasimod",
+  "version": "${version}",
+  "name": "HasiMOD",
+  "description": "An regular Minecraft mod that enhances multiple mods while maintaining a vanilla-friendly experience and departing from vanilla Minecraft.",
+  "authors": [
+    "Hasibix"
+  ],
+  "contact": {
+    "sources": "https://github.com/Hasibix/HasiMOD"
+  },
+  "license": "GPL-3.0",
+  "icon": "assets/hasimod/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "io.hasibix.hasimod.HasiMOD"
+    ],
+    "fabric-datagen": [
+      "io.hasibix.hasimod.datagen.HasiMOD"
+    ]
+  },
+  "mixins": [
+    "hasimod.mixins.json",
+    {
+      "config": "hasimod.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.24",
+    "minecraft": "~1.20.1",
+    "java": ">=17",
+    "fabric-api": "*"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "replace": false,
+  "values": [
+    "hasimod:lonsdaleite_block",
+    "hasimod:lonsdaleite_ore",
+    "hasimod:lonsdaleite_dust",
+    "hasimod:lonsdaleite_gem",
+    "hasimod:lonsdaleite_apple",
+    "hasimod:lonsdaleite_upgrade_smithing_template",
+    "hasimod:lonsdaleite_helmet",
+    "hasimod:lonsdaleite_chestplate",
+    "hasimod:lonsdaleite_leggings",
+    "hasimod:lonsdaleite_boots",
+    "hasimod:lonsdaleite_axe",
+    "hasimod:lonsdaleite_hoe",
+    "hasimod:lonsdaleite_pickaxe",
+    "hasimod:lonsdaleite_shovel",
+    "hasimod:lonsdaleite_sword"
+  ]
+}

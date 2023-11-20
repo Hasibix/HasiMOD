@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "lonsdaleite_gem",
+  "ingredients": [
+    {
+      "item": "hasimod:lonsdaleite_dust"
+    },
+    {
+      "item": "hasimod:lonsdaleite_dust"
+    },
+    {
+      "item": "hasimod:lonsdaleite_dust"
+    },
+    {
+      "item": "minecraft:netherite_ingot"
+    },
+    {
+      "item": "minecraft:end_crystal"
+    },
+    {
+      "item": "minecraft:netherite_ingot"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:diamond"
+    }
+  ],
+  "result": {
+    "item": "hasimod:lonsdaleite_gem"
+  }
+}

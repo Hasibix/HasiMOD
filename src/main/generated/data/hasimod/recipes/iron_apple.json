@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:apple"
+    },
+    "M": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "MMM",
+    "MAM",
+    "MMM"
+  ],
+  "result": {
+    "item": "hasimod:iron_apple"
+  },
+  "show_notification": true
+}

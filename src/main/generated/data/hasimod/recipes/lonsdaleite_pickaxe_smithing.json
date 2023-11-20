@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "hasimod:lonsdaleite_gem"
+  },
+  "base": {
+    "item": "hasimod:template_pickaxe"
+  },
+  "result": {
+    "item": "hasimod:lonsdaleite_pickaxe"
+  },
+  "template": {
+    "item": "hasimod:lonsdaleite_upgrade_smithing_template"
+  }
+}

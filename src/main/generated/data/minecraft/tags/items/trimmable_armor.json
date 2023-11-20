@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "hasimod:lonsdaleite_helmet",
+    "hasimod:lonsdaleite_chestplate",
+    "hasimod:lonsdaleite_leggings",
+    "hasimod:lonsdaleite_boots"
+  ]
+}

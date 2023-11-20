@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "hasimod:lonsdaleite_gem"
+  },
+  "base": {
+    "item": "hasimod:template_helmet"
+  },
+  "result": {
+    "item": "hasimod:lonsdaleite_helmet"
+  },
+  "template": {
+    "item": "hasimod:lonsdaleite_upgrade_smithing_template"
+  }
+}

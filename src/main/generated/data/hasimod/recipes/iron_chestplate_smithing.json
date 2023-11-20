@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:iron_ingot"
+  },
+  "base": {
+    "item": "hasimod:template_chestplate"
+  },
+  "result": {
+    "item": "minecraft:iron_chestplate"
+  },
+  "template": {
+    "item": "hasimod:iron_upgrade_smithing_template"
+  }
+}
