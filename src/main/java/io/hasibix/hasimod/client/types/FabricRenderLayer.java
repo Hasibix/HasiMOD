@@ -36,18 +36,12 @@ public enum FabricRenderLayer {
 	public abstract RenderLayer getRenderLayer();
 
 	public static FabricRenderLayer from(Block.FabricRenderLayer renderLayer) {
-		switch (renderLayer) {
-		case SOLID:
-			return SOLID;
-		case TRANSLUCENT:
-			return TRANSLUCENT;
-		case CUTOUT:
-			return CUTOUT;
-		case CUTOUT_MIPPED:
-			return CUTOUT_MIPPED;
-		default:
-			return SOLID;
-		}
+		return switch (renderLayer) {
+		case SOLID -> SOLID;
+		case TRANSLUCENT -> TRANSLUCENT;
+		case CUTOUT -> CUTOUT;
+		case CUTOUT_MIPPED -> CUTOUT_MIPPED;
+		};
 	}
 
 	public static void addBlockToLayer(Block block) {

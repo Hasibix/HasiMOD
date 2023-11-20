@@ -8,7 +8,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 
 public class BlockLootTableProvider extends FabricBlockLootTableProvider {
-	private static List<Consumer<BlockLootTableProvider>> lootTables = new ArrayList<>();
+	private static final List<Consumer<BlockLootTableProvider>> lootTables = new ArrayList<>();
 
 	public BlockLootTableProvider(FabricDataOutput dataOutput) {
 		super(dataOutput);

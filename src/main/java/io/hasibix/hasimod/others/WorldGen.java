@@ -1,4 +1,4 @@
-package io.hasibix.hasimod.utils;
+package io.hasibix.hasimod.others;
 
 import java.util.function.Predicate;
 

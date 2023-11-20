@@ -2,6 +2,7 @@ package io.hasibix.hasimod.init;
 
 import io.hasibix.hasimod.HasiMOD;
 import io.hasibix.hasimod.registrars.ores.Lonsdaleite;
+import io.hasibix.hasimod.types.Registrar;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.ItemConvertible;
@@ -29,9 +30,7 @@ public class Tabs {
 		TAB_HASIMOD_ALL = RegistryKey.of(RegistryKeys.ITEM_GROUP, Identifier.of(HasiMOD.MOD_ID, "hasimod_all"));
 		TAB_HASIMOD_ORES = RegistryKey.of(RegistryKeys.ITEM_GROUP, Identifier.of(HasiMOD.MOD_ID, "hasimod_ores"));
 
-		Registrars.registrars.forEach(i -> {
-			i.registerTabs();
-		});
+		Registrars.registrars.forEach(Registrar::registerTabs);
 	}
 
 	public static void addContentsTo(RegistryKey<ItemGroup> tab, ItemConvertible... content) {

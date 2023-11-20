@@ -2,17 +2,19 @@ package io.hasibix.hasimod.registrars.ores;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import io.hasibix.hasimod.HasiMOD;
 import io.hasibix.hasimod.datagen.providers.*;
 import io.hasibix.hasimod.init.Tabs;
+import io.hasibix.hasimod.others.Tags;
+import io.hasibix.hasimod.others.WorldGen;
 import io.hasibix.hasimod.subregistrars.Items;
 import io.hasibix.hasimod.types.*;
 import io.hasibix.hasimod.types.ArmorMaterial;
 import io.hasibix.hasimod.types.Block.FabricRenderLayer;
 import io.hasibix.hasimod.types.Item;
 import io.hasibix.hasimod.types.ToolMaterial;
-import io.hasibix.hasimod.utils.WorldGen;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.AbstractBlock.Settings;
@@ -42,21 +44,6 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.PlacedFeature;
 
 public class Lonsdaleite implements Registrar {
-	/*
-	 * private static final class FlyabilityStatusEffect extends StatusEffect {
-	 * public FlyabilityStatusEffect() { super(StatusEffectCategory.BENEFICIAL,
-	 * 0x7958AC); }
-	 *
-	 * @Override public void applyUpdateEffect(LivingEntity entity, int amplifier) {
-	 * if (entity instanceof PlayerEntity player) { player.canTakeDamage();
-	 * player.getAbilities().allowFlying = true; player.sendAbilitiesUpdate(); } }
-	 *
-	 * @Override public void onRemoved(LivingEntity entity, AttributeContainer
-	 * attributes, int amplifier) { if (entity instanceof PlayerEntity player) {
-	 * player.getAbilities().allowFlying = false; player.getAbilities().flying =
-	 * false; player.sendAbilitiesUpdate(); } } }
-	 */
-
 	private static final Identifier EMPTY_ARMOR_SLOT_HELMET_TEXTURE = new Identifier("item/empty_armor_slot_helmet");
 	private static final Identifier EMPTY_ARMOR_SLOT_CHESTPLATE_TEXTURE = new Identifier(
 			"item/empty_armor_slot_chestplate");
@@ -81,24 +68,28 @@ public class Lonsdaleite implements Registrar {
 	}
 
 	// Blocks
-	public static final Block LONSDALEITE_BLOCK = new Block(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_block"),
-			FabricRenderLayer.SOLID, Settings.copy(Blocks.AMETHYST_BLOCK).strength(100, 2400),
+	public static final Block LONSDALEITE_BLOCK = new Block(
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_block")), FabricRenderLayer.SOLID,
+			Settings.copy(Blocks.AMETHYST_BLOCK).strength(100, 2400),
 			new FabricItemSettings().fireproof().rarity(Rarity.EPIC));
-	public static final Block LONSDALEITE_ORE = new Block(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_ore"),
-			FabricRenderLayer.SOLID, Settings.copy(Blocks.AMETHYST_BLOCK).strength(-1, 5),
-			new FabricItemSettings().rarity(Rarity.EPIC));
+	public static final Block LONSDALEITE_ORE = new Block(
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_ore")), FabricRenderLayer.SOLID,
+			Settings.copy(Blocks.AMETHYST_BLOCK).strength(-1, 5), new FabricItemSettings().rarity(Rarity.EPIC));
 
 	public static final RegistryKey<PlacedFeature> LONSDALEITE_ORE_PLACED_KEY = RegistryKey
 			.of(RegistryKeys.PLACED_FEATURE, Identifier.of(HasiMOD.MOD_ID, "ore_lonsdaleite"));
 
 	// Items
 	// Ingredients
-	public static final Item LONSDALEITE_DUST = new Item(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_dust"),
+	public static final Item LONSDALEITE_DUST = new Item(
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_dust")),
 			new net.minecraft.item.Item(new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
-	public static final Item LONSDALEITE_GEM = new Item(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_gem"),
+	public static final Item LONSDALEITE_GEM = new Item(
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_gem")),
 			new net.minecraft.item.Item(new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
 
-	public static final Item LONSDALEITE_APPLE = new Item(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_apple"),
+	public static final Item LONSDALEITE_APPLE = new Item(
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_apple")),
 			new net.minecraft.item.Item(new FabricItemSettings().fireproof()
 					.food(new FoodComponent.Builder().alwaysEdible().hunger(12).saturationModifier(15)
 							.statusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 6000, 3), 1.0F)
@@ -108,7 +99,7 @@ public class Lonsdaleite implements Registrar {
 					.rarity(Rarity.EPIC)));
 
 	public static final Item LONSDALEITE_UPGRADE = new Item(
-			Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_upgrade_smithing_template"),
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_upgrade_smithing_template")),
 			new SmithingTemplateItem(
 					Text.translatable(Util.createTranslationKey("item",
 							Identifier.of(HasiMOD.MOD_ID, "smithing_template.lonsdaleite_upgrade.applies_to")))
@@ -136,32 +127,37 @@ public class Lonsdaleite implements Registrar {
 
 	// Items
 	// Armors
-	public static final Item LONSDALEITE_HELMET = new Item(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_helmet"),
-			new ArmorItem(LONSDALEITE_ARMOR_MATERIAL, Type.HELMET,
-					new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
-	public static final Item LONSDALEITE_CHESTPLATE = new Item(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_chestplate"),
+	public static final Item LONSDALEITE_HELMET = new Item(
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_helmet")), new ArmorItem(
+					LONSDALEITE_ARMOR_MATERIAL, Type.HELMET, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+	public static final Item LONSDALEITE_CHESTPLATE = new Item(
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_chestplate")),
 			new ArmorItem(LONSDALEITE_ARMOR_MATERIAL, Type.CHESTPLATE,
 					new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
-	public static final Item LONSDALEITE_LEGGINGS = new Item(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_leggings"),
+	public static final Item LONSDALEITE_LEGGINGS = new Item(
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_leggings")),
 			new ArmorItem(LONSDALEITE_ARMOR_MATERIAL, Type.LEGGINGS,
 					new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
-	public static final Item LONSDALEITE_BOOTS = new Item(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_boots"),
-			new ArmorItem(LONSDALEITE_ARMOR_MATERIAL, Type.BOOTS,
-					new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+	public static final Item LONSDALEITE_BOOTS = new Item(
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_boots")), new ArmorItem(
+					LONSDALEITE_ARMOR_MATERIAL, Type.BOOTS, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
 
 	// Tools
-	public static final Item LONSDALEITE_AXE = new Item(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_axe"),
+	public static final Item LONSDALEITE_AXE = new Item(
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_axe")),
 			new AxeItem(LONSDALEITE_TOOL_MATERIAL, 18, 2, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
-	public static final Item LONSDALEITE_HOE = new Item(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_hoe"),
+	public static final Item LONSDALEITE_HOE = new Item(
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_hoe")),
 			new HoeItem(LONSDALEITE_TOOL_MATERIAL, 4, 8.0F, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
-	public static final Item LONSDALEITE_PICKAXE = new Item(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_pickaxe"),
-			new PickaxeItem(LONSDALEITE_TOOL_MATERIAL, 12, 2.4F,
-					new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
-	public static final Item LONSDALEITE_SHOVEL = new Item(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_shovel"),
+	public static final Item LONSDALEITE_PICKAXE = new Item(
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_pickaxe")), new PickaxeItem(
+					LONSDALEITE_TOOL_MATERIAL, 12, 2.4F, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+	public static final Item LONSDALEITE_SHOVEL = new Item(
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_shovel")),
 			new ShovelItem(LONSDALEITE_TOOL_MATERIAL, 12, 2, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
-	public static final Item LONSDALEITE_SWORD = new Item(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_sword"),
-			new SwordItem(LONSDALEITE_TOOL_MATERIAL, 14, 3.2F,
-					new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+	public static final Item LONSDALEITE_SWORD = new Item(
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_sword")), new SwordItem(
+					LONSDALEITE_TOOL_MATERIAL, 14, 3.2F, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
 
 	public static List<Block> LONSDALEITE_BLOCKS = List.of(LONSDALEITE_BLOCK, LONSDALEITE_ORE);
 	public static List<Item> LONSDALEITE_ITEMS = List.of(LONSDALEITE_DUST, LONSDALEITE_GEM, LONSDALEITE_APPLE,
@@ -181,7 +177,7 @@ public class Lonsdaleite implements Registrar {
 		});
 
 		for (Block i : LONSDALEITE_BLOCKS) {
-			ItemTagProvider.addTo(FloatingItems.FLOATING_ITEMS_TAG, i.blockItem.get());
+			ItemTagProvider.addTo(Tags.FLOATING_ITEMS_TAG, i.blockItem.get());
 		}
 
 		BlockTagProvider.addTo(BlockTags.PICKAXE_MINEABLE, LONSDALEITE_BLOCK.raw.get());
@@ -219,13 +215,13 @@ public class Lonsdaleite implements Registrar {
 		});
 
 		for (Item i : LONSDALEITE_ITEMS) {
-			ItemTagProvider.addTo(FloatingItems.FLOATING_ITEMS_TAG, i.raw.get());
+			ItemTagProvider.addTo(Tags.FLOATING_ITEMS_TAG, i.raw.get());
 		}
 		for (Item i : LONSDALEITE_ARMORS) {
-			ItemTagProvider.addTo(FloatingItems.FLOATING_ITEMS_TAG, i.raw.get());
+			ItemTagProvider.addTo(Tags.FLOATING_ITEMS_TAG, i.raw.get());
 		}
 		for (Item i : LONSDALEITE_TOOLS) {
-			ItemTagProvider.addTo(FloatingItems.FLOATING_ITEMS_TAG, i.raw.get());
+			ItemTagProvider.addTo(Tags.FLOATING_ITEMS_TAG, i.raw.get());
 		}
 
 		ItemTagProvider.addTo(ItemTags.BEACON_PAYMENT_ITEMS, LONSDALEITE_GEM.raw.get());
@@ -256,16 +252,14 @@ public class Lonsdaleite implements Registrar {
 					.group(LONSDALEITE_GEM.identifier.getPath()).offerTo(t);
 
 			ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, LONSDALEITE_UPGRADE.raw.get(), 2)
-					.input(Character.valueOf('#'), net.minecraft.item.Items.NETHERITE_INGOT)
-					.input(Character.valueOf('C'), net.minecraft.item.Items.END_STONE)
-					.input(Character.valueOf('S'), LONSDALEITE_UPGRADE.raw.get()).pattern("#S#").pattern("#C#")
-					.pattern("###").criterion(RecipeProvider.hasItem(LONSDALEITE_UPGRADE.raw.get()),
+					.input('#', net.minecraft.item.Items.NETHERITE_INGOT).input('C', net.minecraft.item.Items.END_STONE)
+					.input('S', LONSDALEITE_UPGRADE.raw.get()).pattern("#S#").pattern("#C#").pattern("###")
+					.criterion(RecipeProvider.hasItem(LONSDALEITE_UPGRADE.raw.get()),
 							RecipeProvider.conditionsFromItem(LONSDALEITE_UPGRADE.raw.get()))
 					.offerTo(t);
 
 			RecipeProvider.offerReversibleCompactingRecipesWithReverseRecipeGroup(t, RecipeCategory.MISC,
-					() -> LONSDALEITE_GEM.raw.get(), RecipeCategory.DECORATIONS,
-					() -> LONSDALEITE_BLOCK.blockItem.get(),
+					LONSDALEITE_GEM.raw::get, RecipeCategory.DECORATIONS, LONSDALEITE_BLOCK.blockItem::get,
 					LONSDALEITE_GEM.identifier.getPath() + "_from_" + LONSDALEITE_BLOCK.identifier.getPath(),
 					LONSDALEITE_GEM.identifier.getPath());
 
@@ -348,8 +342,7 @@ public class Lonsdaleite implements Registrar {
 			lonsdaleite_all.add(i.raw.get());
 		}
 
-		net.minecraft.item.Item[] lonsdaleite_all_array = lonsdaleite_all
-				.toArray(new net.minecraft.item.Item[lonsdaleite_all.size()]);
+		net.minecraft.item.Item[] lonsdaleite_all_array = lonsdaleite_all.toArray(new net.minecraft.item.Item[0]);
 
 		Tabs.addContentsTo(Tabs.TAB_HASIMOD_ALL, lonsdaleite_all_array);
 		Tabs.addContentsTo(Tabs.TAB_HASIMOD_ORES, lonsdaleite_all_array);

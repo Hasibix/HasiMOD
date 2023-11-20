@@ -21,8 +21,6 @@ public final class Block {
 		SOLID, TRANSLUCENT, CUTOUT, CUTOUT_MIPPED
 	}
 
-	;
-
 	@NotNull
 	public final Identifier identifier;
 	@NotNull

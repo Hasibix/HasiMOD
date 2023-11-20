@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import io.hasibix.hasimod.types.FloatingItems;
+import io.hasibix.hasimod.others.Tags;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
@@ -24,7 +24,7 @@ public abstract class FloatingItemsMixin extends Entity {
 
 	@Inject(at = @At("TAIL"), method = "tick()V")
 	private void dropItem(CallbackInfo info) {
-		if (getStack().isIn(FloatingItems.FLOATING_ITEMS_TAG)) {
+		if (getStack().isIn(Tags.FLOATING_ITEMS_TAG)) {
 			if (!hasNoGravity() && !getWorld().isClient && !getStack().isEmpty()) {
 				setNoGravity(true);
 			}

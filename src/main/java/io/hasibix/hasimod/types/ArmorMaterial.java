@@ -20,7 +20,7 @@ public final class ArmorMaterial implements net.minecraft.item.ArmorMaterial {
 	private final float toughness;
 
 	public ArmorMaterial(int durability, int enchantability, @NotNull SoundEvent equipSound, float knockbackResistance,
-			@NotNull String name, int protection, Ingredient repairIngredient, float toughness) {
+			@NotNull String name, int protection, @NotNull Ingredient repairIngredient, float toughness) {
 		this.durability = durability;
 		this.enchantability = enchantability;
 		this.equipSound = equipSound;
@@ -33,18 +33,11 @@ public final class ArmorMaterial implements net.minecraft.item.ArmorMaterial {
 
 	@Override
 	public int getDurability(Type type) {
-		switch (type) {
-		case HELMET:
-			return this.durability * 1;
-		case CHESTPLATE:
-			return this.durability * 3;
-		case LEGGINGS:
-			return this.durability * 2;
-		case BOOTS:
-			return this.durability * 1;
-		default:
-			return this.durability;
-		}
+		return switch (type) {
+		case HELMET, BOOTS -> this.durability;
+		case CHESTPLATE -> this.durability * 3;
+		case LEGGINGS -> this.durability * 2;
+		};
 	}
 
 	@Override
@@ -53,7 +46,7 @@ public final class ArmorMaterial implements net.minecraft.item.ArmorMaterial {
 	}
 
 	@Override
-	public SoundEvent getEquipSound() {
+	public @NotNull SoundEvent getEquipSound() {
 		return this.equipSound;
 	}
 
@@ -63,28 +56,21 @@ public final class ArmorMaterial implements net.minecraft.item.ArmorMaterial {
 	}
 
 	@Override
-	public String getName() {
+	public @NotNull String getName() {
 		return this.name;
 	}
 
 	@Override
 	public int getProtection(Type type) {
-		switch (type) {
-		case HELMET:
-			return this.protection * 1;
-		case CHESTPLATE:
-			return this.protection * 3;
-		case LEGGINGS:
-			return this.protection * 2;
-		case BOOTS:
-			return this.protection * 1;
-		default:
-			return this.protection;
-		}
+		return switch (type) {
+		case HELMET, BOOTS -> this.protection;
+		case CHESTPLATE -> this.protection * 3;
+		case LEGGINGS -> this.protection * 2;
+		};
 	}
 
 	@Override
-	public Ingredient getRepairIngredient() {
+	public @NotNull Ingredient getRepairIngredient() {
 		return this.repairIngredient;
 	}
 

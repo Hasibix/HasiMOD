@@ -12,7 +12,7 @@ import net.minecraft.registry.RegistryWrapper.WrapperLookup;
 import net.minecraft.registry.tag.TagKey;
 
 public class ItemTagProvider extends FabricTagProvider.ItemTagProvider {
-	private static List<Pair<TagKey<Item>, Item>> items = new ArrayList<>();
+	private static final List<Pair<TagKey<Item>, Item>> items = new ArrayList<>();
 
 	public ItemTagProvider(FabricDataOutput output, CompletableFuture<WrapperLookup> completableFuture) {
 		super(output, completableFuture);
