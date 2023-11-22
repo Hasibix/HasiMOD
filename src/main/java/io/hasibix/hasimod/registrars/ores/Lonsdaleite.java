@@ -211,7 +211,6 @@ public class Lonsdaleite implements Registrar {
 			for (Item i : LONSDALEITE_TOOLS) {
 				t.register(i.raw.get(), Models.HANDHELD);
 			}
-			t.suffixTrim(EMPTY_ARMOR_SLOT_BOOTS_TEXTURE, null);
 		});
 
 		for (Item i : LONSDALEITE_ITEMS) {
@@ -252,7 +251,7 @@ public class Lonsdaleite implements Registrar {
 					.group(LONSDALEITE_GEM.identifier.getPath()).offerTo(t);
 
 			ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, LONSDALEITE_UPGRADE.raw.get(), 2)
-					.input('#', net.minecraft.item.Items.NETHERITE_INGOT).input('C', net.minecraft.item.Items.END_STONE)
+					.input('#', LONSDALEITE_GEM.raw.get()).input('C', net.minecraft.item.Items.END_STONE)
 					.input('S', LONSDALEITE_UPGRADE.raw.get()).pattern("#S#").pattern("#C#").pattern("###")
 					.criterion(RecipeProvider.hasItem(LONSDALEITE_UPGRADE.raw.get()),
 							RecipeProvider.conditionsFromItem(LONSDALEITE_UPGRADE.raw.get()))

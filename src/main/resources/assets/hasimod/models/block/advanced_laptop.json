@@ -5,7 +5,8 @@
     32
   ],
   "textures": {
-    "1": "block/basic_laptop"
+    "1": "block/advanced_laptop",
+    "particle": "block/advanced_laptop"
   },
   "elements": [
     {
