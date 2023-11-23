@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:copper_ingot"
+  },
+  "base": {
+    "item": "hasimod:template_leggings"
+  },
+  "result": {
+    "item": "hasimod:copper_leggings"
+  },
+  "template": {
+    "item": "hasimod:copper_upgrade_smithing_template"
+  }
+}

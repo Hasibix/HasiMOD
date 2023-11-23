@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:redstone"
+  },
+  "base": {
+    "item": "hasimod:template_leggings"
+  },
+  "result": {
+    "item": "hasimod:redstone_leggings"
+  },
+  "template": {
+    "item": "hasimod:redstone_upgrade_smithing_template"
+  }
+}

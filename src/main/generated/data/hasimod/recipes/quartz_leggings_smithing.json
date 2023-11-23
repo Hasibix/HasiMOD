@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:quartz"
+  },
+  "base": {
+    "item": "hasimod:template_leggings"
+  },
+  "result": {
+    "item": "hasimod:quartz_leggings"
+  },
+  "template": {
+    "item": "hasimod:quartz_upgrade_smithing_template"
+  }
+}

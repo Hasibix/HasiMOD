@@ -18,6 +18,7 @@ import io.hasibix.hasimod.types.Item;
 import io.hasibix.hasimod.types.Registrar;
 import io.hasibix.hasimod.types.ToolMaterial;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.yarn.constants.MiningLevels;
 import net.minecraft.data.client.Models;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.SmithingTransformRecipeJsonBuilder;
@@ -50,13 +51,12 @@ public class Redstone implements Registrar {
 	// Ingredients
 	public static final Item REDSTONE_APPLE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "redstone_apple")),
-			new net.minecraft.item.Item(new FabricItemSettings().fireproof()
-					.food(new FoodComponent.Builder().alwaysEdible().hunger(12).saturationModifier(15)
-							.statusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 6000, 3), 1.0F)
-							.statusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 1200, 4), 1.0F)
-							.statusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 6000, 0), 1.0F)
-							.build())
-					.rarity(Rarity.EPIC)));
+			new net.minecraft.item.Item(new FabricItemSettings()
+					.food(new FoodComponent.Builder().alwaysEdible().hunger(2).saturationModifier(9.6F)
+							.statusEffect(new StatusEffectInstance(StatusEffects.SPEED, 4800, 2), 1.0F)
+							.statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 100, 0), 1.0F)
+							.statusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, 4800, 2), 1.0F).build())
+					.rarity(Rarity.COMMON)));
 
 	public static final Item REDSTONE_UPGRADE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "redstone_upgrade_smithing_template")),
@@ -78,44 +78,42 @@ public class Redstone implements Registrar {
 					getRedstoneUpgradeEmptyBaseSlotTextures(), getRedstoneUpgradeEmptyAdditionsSlotTextures()));
 
 	// Materials
-	public static final ArmorMaterial REDSTONE_ARMOR_MATERIAL = new ArmorMaterial(4096, 50,
-			SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0.2F, HasiMOD.MOD_ID + ":redstone", 12, Ingredient.ofItems(REDSTONE),
-			6.0F);
-	public static final ToolMaterial REDSTONE_TOOL_MATERIAL = new ToolMaterial(1.0F, 4096, 50, 4, 18.0F,
+	public static final ArmorMaterial REDSTONE_ARMOR_MATERIAL = new ArmorMaterial(33, 9,
+			SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0, HasiMOD.MOD_ID + ":redstone", 2, Ingredient.ofItems(REDSTONE), 0);
+	public static final ToolMaterial REDSTONE_TOOL_MATERIAL = new ToolMaterial(2, 363, 9, MiningLevels.IRON, 4,
 			Ingredient.ofItems(REDSTONE));
 
 	// Items
 	// Armors
 	public static final Item REDSTONE_HELMET = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "redstone_helmet")), new ArmorItem(
-					REDSTONE_ARMOR_MATERIAL, Type.HELMET, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "redstone_helmet")),
+			new ArmorItem(REDSTONE_ARMOR_MATERIAL, Type.HELMET, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item REDSTONE_CHESTPLATE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "redstone_chestplate")),
-			new ArmorItem(REDSTONE_ARMOR_MATERIAL, Type.CHESTPLATE,
-					new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new ArmorItem(REDSTONE_ARMOR_MATERIAL, Type.CHESTPLATE, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item REDSTONE_LEGGINGS = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "redstone_leggings")), new ArmorItem(
-					REDSTONE_ARMOR_MATERIAL, Type.LEGGINGS, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "redstone_leggings")),
+			new ArmorItem(REDSTONE_ARMOR_MATERIAL, Type.LEGGINGS, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item REDSTONE_BOOTS = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "redstone_boots")), new ArmorItem(
-					REDSTONE_ARMOR_MATERIAL, Type.BOOTS, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "redstone_boots")),
+			new ArmorItem(REDSTONE_ARMOR_MATERIAL, Type.BOOTS, new FabricItemSettings().rarity(Rarity.COMMON)));
 
 	// Tools
 	public static final Item REDSTONE_AXE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "redstone_axe")),
-			new AxeItem(REDSTONE_TOOL_MATERIAL, 18, 2, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new AxeItem(REDSTONE_TOOL_MATERIAL, 4, -3.1F, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item REDSTONE_HOE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "redstone_hoe")),
-			new HoeItem(REDSTONE_TOOL_MATERIAL, 4, 8.0F, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new HoeItem(REDSTONE_TOOL_MATERIAL, 1, -1.0F, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item REDSTONE_PICKAXE = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "redstone_pickaxe")), new PickaxeItem(
-					REDSTONE_TOOL_MATERIAL, 12, 2.4F, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "redstone_pickaxe")),
+			new PickaxeItem(REDSTONE_TOOL_MATERIAL, 2, -2.8F, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item REDSTONE_SHOVEL = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "redstone_shovel")),
-			new ShovelItem(REDSTONE_TOOL_MATERIAL, 12, 2, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new ShovelItem(REDSTONE_TOOL_MATERIAL, 2, -3.0F, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item REDSTONE_SWORD = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "redstone_sword")),
-			new SwordItem(REDSTONE_TOOL_MATERIAL, 14, 3.2F, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new SwordItem(REDSTONE_TOOL_MATERIAL, 3, -2.4F, new FabricItemSettings().rarity(Rarity.COMMON)));
 
 	public static List<Item> REDSTONE_ITEMS = List.of(REDSTONE_APPLE, REDSTONE_UPGRADE);
 	public static List<Item> REDSTONE_ARMORS = List.of(REDSTONE_HELMET, REDSTONE_CHESTPLATE, REDSTONE_LEGGINGS,

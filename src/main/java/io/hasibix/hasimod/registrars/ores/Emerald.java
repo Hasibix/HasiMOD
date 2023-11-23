@@ -18,6 +18,7 @@ import io.hasibix.hasimod.types.Item;
 import io.hasibix.hasimod.types.Registrar;
 import io.hasibix.hasimod.types.ToolMaterial;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.yarn.constants.MiningLevels;
 import net.minecraft.data.client.Models;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.SmithingTransformRecipeJsonBuilder;
@@ -50,13 +51,12 @@ public class Emerald implements Registrar {
 	// Ingredients
 	public static final Item EMERALD_APPLE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "emerald_apple")),
-			new net.minecraft.item.Item(new FabricItemSettings().fireproof()
-					.food(new FoodComponent.Builder().alwaysEdible().hunger(12).saturationModifier(15)
-							.statusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 6000, 3), 1.0F)
-							.statusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 1200, 4), 1.0F)
-							.statusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 6000, 0), 1.0F)
-							.build())
-					.rarity(Rarity.EPIC)));
+			new net.minecraft.item.Item(new FabricItemSettings().food(new FoodComponent.Builder().alwaysEdible()
+					.hunger(2).saturationModifier(9.6F)
+					.statusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 2400, 3), 1.0F)
+					.statusEffect(new StatusEffectInstance(StatusEffects.LUCK, 3600, 2), 1.0F)
+					.statusEffect(new StatusEffectInstance(StatusEffects.WATER_BREATHING, 9600, 0), 1.0F).build())
+					.rarity(Rarity.COMMON)));
 
 	public static final Item EMERALD_UPGRADE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "emerald_upgrade_smithing_template")),
@@ -78,43 +78,42 @@ public class Emerald implements Registrar {
 					getEmeraldUpgradeEmptyBaseSlotTextures(), getEmeraldUpgradeEmptyAdditionsSlotTextures()));
 
 	// Materials
-	public static final ArmorMaterial EMERALD_ARMOR_MATERIAL = new ArmorMaterial(4096, 50,
-			SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0.2F, HasiMOD.MOD_ID + ":emerald", 12, Ingredient.ofItems(EMERALD),
-			6.0F);
-	public static final ToolMaterial EMERALD_TOOL_MATERIAL = new ToolMaterial(1.0F, 4096, 50, 4, 18.0F,
+	public static final ArmorMaterial EMERALD_ARMOR_MATERIAL = new ArmorMaterial(33, 15,
+			SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0, HasiMOD.MOD_ID + ":emerald", 2, Ingredient.ofItems(EMERALD), 0);
+	public static final ToolMaterial EMERALD_TOOL_MATERIAL = new ToolMaterial(2, 363, 15, MiningLevels.IRON, 4,
 			Ingredient.ofItems(EMERALD));
 
 	// Items
 	// Armors
 	public static final Item EMERALD_HELMET = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "emerald_helmet")), new ArmorItem(
-					EMERALD_ARMOR_MATERIAL, Type.HELMET, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "emerald_helmet")),
+			new ArmorItem(EMERALD_ARMOR_MATERIAL, Type.HELMET, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item EMERALD_CHESTPLATE = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "emerald_chestplate")), new ArmorItem(
-					EMERALD_ARMOR_MATERIAL, Type.CHESTPLATE, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "emerald_chestplate")),
+			new ArmorItem(EMERALD_ARMOR_MATERIAL, Type.CHESTPLATE, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item EMERALD_LEGGINGS = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "emerald_leggings")), new ArmorItem(
-					EMERALD_ARMOR_MATERIAL, Type.LEGGINGS, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "emerald_leggings")),
+			new ArmorItem(EMERALD_ARMOR_MATERIAL, Type.LEGGINGS, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item EMERALD_BOOTS = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "emerald_boots")), new ArmorItem(
-					EMERALD_ARMOR_MATERIAL, Type.BOOTS, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "emerald_boots")),
+			new ArmorItem(EMERALD_ARMOR_MATERIAL, Type.BOOTS, new FabricItemSettings().rarity(Rarity.COMMON)));
 
 	// Tools
 	public static final Item EMERALD_AXE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "emerald_axe")),
-			new AxeItem(EMERALD_TOOL_MATERIAL, 18, 2, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new AxeItem(EMERALD_TOOL_MATERIAL, 4, -3.1F, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item EMERALD_HOE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "emerald_hoe")),
-			new HoeItem(EMERALD_TOOL_MATERIAL, 4, 8.0F, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new HoeItem(EMERALD_TOOL_MATERIAL, 1, -1.0F, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item EMERALD_PICKAXE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "emerald_pickaxe")),
-			new PickaxeItem(EMERALD_TOOL_MATERIAL, 12, 2.4F, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new PickaxeItem(EMERALD_TOOL_MATERIAL, 2, -2.8F, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item EMERALD_SHOVEL = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "emerald_shovel")),
-			new ShovelItem(EMERALD_TOOL_MATERIAL, 12, 2, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new ShovelItem(EMERALD_TOOL_MATERIAL, 2, -3.0F, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item EMERALD_SWORD = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "emerald_sword")),
-			new SwordItem(EMERALD_TOOL_MATERIAL, 14, 3.2F, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new SwordItem(EMERALD_TOOL_MATERIAL, 3, -2.4F, new FabricItemSettings().rarity(Rarity.COMMON)));
 
 	public static List<Item> EMERALD_ITEMS = List.of(EMERALD_APPLE, EMERALD_UPGRADE);
 	public static List<Item> EMERALD_ARMORS = List.of(EMERALD_HELMET, EMERALD_CHESTPLATE, EMERALD_LEGGINGS,

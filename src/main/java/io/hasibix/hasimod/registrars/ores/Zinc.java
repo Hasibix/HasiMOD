@@ -19,6 +19,7 @@ import io.hasibix.hasimod.types.Item;
 import io.hasibix.hasimod.types.Registrar;
 import io.hasibix.hasimod.types.ToolMaterial;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.yarn.constants.MiningLevels;
 import net.minecraft.data.client.Models;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.SmithingTransformRecipeJsonBuilder;
@@ -41,7 +42,7 @@ import net.minecraft.util.Util;
 
 public class Zinc implements Registrar {
 	@Nullable
-	private static final net.minecraft.item.Item ZINC_INGOT = Registries.ITEM
+	public static final net.minecraft.item.Item ZINC_INGOT = Registries.ITEM
 			.get(RegistryKey.of(RegistryKeys.ITEM, Identifier.of("create", "zinc_ingot")));
 
 	private static List<Identifier> getZincUpgradeEmptyBaseSlotTextures() {
@@ -57,13 +58,12 @@ public class Zinc implements Registrar {
 	// Items
 	// Ingredients
 	public static final Item ZINC_APPLE = new Item(Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "zinc_apple")),
-			new net.minecraft.item.Item(new FabricItemSettings().fireproof()
-					.food(new FoodComponent.Builder().alwaysEdible().hunger(12).saturationModifier(15)
-							.statusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 6000, 3), 1.0F)
-							.statusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 1200, 4), 1.0F)
-							.statusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 6000, 0), 1.0F)
-							.build())
-					.rarity(Rarity.EPIC)));
+			new net.minecraft.item.Item(new FabricItemSettings()
+					.food(new FoodComponent.Builder().alwaysEdible().hunger(2).saturationModifier(9.6F)
+							.statusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 4800, 2), 1.0F)
+							.statusEffect(new StatusEffectInstance(StatusEffects.HASTE, 4800, 2), 1.0F)
+							.statusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, 4800, 2), 1.0F).build())
+					.rarity(Rarity.COMMON)));
 
 	public static final Item ZINC_UPGRADE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "zinc_upgrade_smithing_template")),
@@ -85,39 +85,38 @@ public class Zinc implements Registrar {
 					getZincUpgradeEmptyBaseSlotTextures(), getZincUpgradeEmptyAdditionsSlotTextures()));
 
 	// Materials
-	public static final ArmorMaterial ZINC_ARMOR_MATERIAL = new ArmorMaterial(4096, 50,
-			SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0.2F, HasiMOD.MOD_ID + ":zinc", 12, Ingredient.ofItems(ZINC_INGOT),
-			6.0F);
-	public static final ToolMaterial ZINC_TOOL_MATERIAL = new ToolMaterial(1.0F, 4096, 50, 4, 18.0F,
+	public static final ArmorMaterial ZINC_ARMOR_MATERIAL = new ArmorMaterial(33, 10,
+			SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0, HasiMOD.MOD_ID + ":zinc", 2, Ingredient.ofItems(ZINC_INGOT), 0);
+	public static final ToolMaterial ZINC_TOOL_MATERIAL = new ToolMaterial(2, 363, 10, MiningLevels.IRON, 4,
 			Ingredient.ofItems(ZINC_INGOT));
 
 	// Items
 	// Armors
 	public static final Item ZINC_HELMET = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "zinc_helmet")),
-			new ArmorItem(ZINC_ARMOR_MATERIAL, Type.HELMET, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new ArmorItem(ZINC_ARMOR_MATERIAL, Type.HELMET, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item ZINC_CHESTPLATE = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "zinc_chestplate")), new ArmorItem(ZINC_ARMOR_MATERIAL,
-					Type.CHESTPLATE, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "zinc_chestplate")),
+			new ArmorItem(ZINC_ARMOR_MATERIAL, Type.CHESTPLATE, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item ZINC_LEGGINGS = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "zinc_leggings")), new ArmorItem(ZINC_ARMOR_MATERIAL,
-					Type.LEGGINGS, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "zinc_leggings")),
+			new ArmorItem(ZINC_ARMOR_MATERIAL, Type.LEGGINGS, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item ZINC_BOOTS = new Item(Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "zinc_boots")),
-			new ArmorItem(ZINC_ARMOR_MATERIAL, Type.BOOTS, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new ArmorItem(ZINC_ARMOR_MATERIAL, Type.BOOTS, new FabricItemSettings().rarity(Rarity.COMMON)));
 
 	// Tools
 	public static final Item ZINC_AXE = new Item(Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "zinc_axe")),
-			new AxeItem(ZINC_TOOL_MATERIAL, 18, 2, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new AxeItem(ZINC_TOOL_MATERIAL, 4, -3.1F, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item ZINC_HOE = new Item(Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "zinc_hoe")),
-			new HoeItem(ZINC_TOOL_MATERIAL, 4, 8.0F, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new HoeItem(ZINC_TOOL_MATERIAL, 1, -1.0F, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item ZINC_PICKAXE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "zinc_pickaxe")),
-			new PickaxeItem(ZINC_TOOL_MATERIAL, 12, 2.4F, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new PickaxeItem(ZINC_TOOL_MATERIAL, 2, -2.8F, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item ZINC_SHOVEL = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "zinc_shovel")),
-			new ShovelItem(ZINC_TOOL_MATERIAL, 12, 2, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new ShovelItem(ZINC_TOOL_MATERIAL, 2, -3.0F, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item ZINC_SWORD = new Item(Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "zinc_sword")),
-			new SwordItem(ZINC_TOOL_MATERIAL, 14, 3.2F, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new SwordItem(ZINC_TOOL_MATERIAL, 3, -2.4F, new FabricItemSettings().rarity(Rarity.COMMON)));
 
 	public static List<Item> ZINC_ITEMS = List.of(ZINC_APPLE, ZINC_UPGRADE);
 	public static List<Item> ZINC_ARMORS = List.of(ZINC_HELMET, ZINC_CHESTPLATE, ZINC_LEGGINGS, ZINC_BOOTS);

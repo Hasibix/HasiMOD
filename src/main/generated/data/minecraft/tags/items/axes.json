@@ -1,6 +1,12 @@
 {
   "replace": false,
   "values": [
-    "hasimod:lonsdaleite_axe"
+    "hasimod:amethyst_axe",
+    "hasimod:copper_axe",
+    "hasimod:emerald_axe",
+    "hasimod:lapis_lazuli_axe",
+    "hasimod:lonsdaleite_axe",
+    "hasimod:quartz_axe",
+    "hasimod:redstone_axe"
   ]
 }

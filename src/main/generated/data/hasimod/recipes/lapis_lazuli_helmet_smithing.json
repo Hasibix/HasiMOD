@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:lapis_lazuli"
+  },
+  "base": {
+    "item": "hasimod:template_helmet"
+  },
+  "result": {
+    "item": "hasimod:lapis_lazuli_helmet"
+  },
+  "template": {
+    "item": "hasimod:lapis_lazuli_upgrade_smithing_template"
+  }
+}

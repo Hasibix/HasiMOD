@@ -19,6 +19,7 @@ import io.hasibix.hasimod.types.Item;
 import io.hasibix.hasimod.types.Registrar;
 import io.hasibix.hasimod.types.ToolMaterial;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.yarn.constants.MiningLevels;
 import net.minecraft.data.client.Models;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.SmithingTransformRecipeJsonBuilder;
@@ -41,7 +42,7 @@ import net.minecraft.util.Util;
 
 public class RoseQuartz implements Registrar {
 	@Nullable
-	private static final net.minecraft.item.Item ROSE_QUARTZ = Registries.ITEM
+	public static final net.minecraft.item.Item ROSE_QUARTZ = Registries.ITEM
 			.get(RegistryKey.of(RegistryKeys.ITEM, Identifier.of("create", "rose_quartz")));
 
 	private static List<Identifier> getRoseQuartzUpgradeEmptyBaseSlotTextures() {
@@ -58,13 +59,12 @@ public class RoseQuartz implements Registrar {
 	// Ingredients
 	public static final Item ROSE_QUARTZ_APPLE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "rose_quartz_apple")),
-			new net.minecraft.item.Item(new FabricItemSettings().fireproof()
-					.food(new FoodComponent.Builder().alwaysEdible().hunger(12).saturationModifier(15)
-							.statusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 6000, 3), 1.0F)
-							.statusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 1200, 4), 1.0F)
-							.statusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 6000, 0), 1.0F)
-							.build())
-					.rarity(Rarity.EPIC)));
+			new net.minecraft.item.Item(new FabricItemSettings()
+					.food(new FoodComponent.Builder().alwaysEdible().hunger(2).saturationModifier(9.6F)
+							.statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 1200, 2), 1.0F)
+							.statusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 2400, 2), 1.0F)
+							.statusEffect(new StatusEffectInstance(StatusEffects.LUCK, 3600, 0), 1.0F).build())
+					.rarity(Rarity.COMMON)));
 
 	public static final Item ROSE_QUARTZ_UPGRADE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "rose_quartz_upgrade_smithing_template")),
@@ -87,45 +87,43 @@ public class RoseQuartz implements Registrar {
 					getRoseQuartzUpgradeEmptyBaseSlotTextures(), getRoseQuartzUpgradeEmptyAdditionsSlotTextures()));
 
 	// Materials
-	public static final ArmorMaterial ROSE_QUARTZ_ARMOR_MATERIAL = new ArmorMaterial(4096, 50,
-			SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0.2F, HasiMOD.MOD_ID + ":rose_quartz", 12,
-			Ingredient.ofItems(ROSE_QUARTZ), 6.0F);
-	public static final ToolMaterial ROSE_QUARTZ_TOOL_MATERIAL = new ToolMaterial(1.0F, 4096, 50, 4, 18.0F,
+	public static final ArmorMaterial ROSE_QUARTZ_ARMOR_MATERIAL = new ArmorMaterial(33, 11,
+			SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0, HasiMOD.MOD_ID + ":rose_quartz", 2,
+			Ingredient.ofItems(ROSE_QUARTZ), 0);
+	public static final ToolMaterial ROSE_QUARTZ_TOOL_MATERIAL = new ToolMaterial(2, 363, 11, MiningLevels.IRON, 4,
 			Ingredient.ofItems(ROSE_QUARTZ));
 
 	// Items
 	// Armors
 	public static final Item ROSE_QUARTZ_HELMET = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "rose_quartz_helmet")), new ArmorItem(
-					ROSE_QUARTZ_ARMOR_MATERIAL, Type.HELMET, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "rose_quartz_helmet")),
+			new ArmorItem(ROSE_QUARTZ_ARMOR_MATERIAL, Type.HELMET, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item ROSE_QUARTZ_CHESTPLATE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "rose_quartz_chestplate")),
-			new ArmorItem(ROSE_QUARTZ_ARMOR_MATERIAL, Type.CHESTPLATE,
-					new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new ArmorItem(ROSE_QUARTZ_ARMOR_MATERIAL, Type.CHESTPLATE, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item ROSE_QUARTZ_LEGGINGS = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "rose_quartz_leggings")),
-			new ArmorItem(ROSE_QUARTZ_ARMOR_MATERIAL, Type.LEGGINGS,
-					new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new ArmorItem(ROSE_QUARTZ_ARMOR_MATERIAL, Type.LEGGINGS, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item ROSE_QUARTZ_BOOTS = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "rose_quartz_boots")), new ArmorItem(
-					ROSE_QUARTZ_ARMOR_MATERIAL, Type.BOOTS, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "rose_quartz_boots")),
+			new ArmorItem(ROSE_QUARTZ_ARMOR_MATERIAL, Type.BOOTS, new FabricItemSettings().rarity(Rarity.COMMON)));
 
 	// Tools
 	public static final Item ROSE_QUARTZ_AXE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "rose_quartz_axe")),
-			new AxeItem(ROSE_QUARTZ_TOOL_MATERIAL, 18, 2, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new AxeItem(ROSE_QUARTZ_TOOL_MATERIAL, 4, -3.1F, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item ROSE_QUARTZ_HOE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "rose_quartz_hoe")),
-			new HoeItem(ROSE_QUARTZ_TOOL_MATERIAL, 4, 8.0F, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new HoeItem(ROSE_QUARTZ_TOOL_MATERIAL, 1, -1.0F, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item ROSE_QUARTZ_PICKAXE = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "rose_quartz_pickaxe")), new PickaxeItem(
-					ROSE_QUARTZ_TOOL_MATERIAL, 12, 2.4F, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "rose_quartz_pickaxe")),
+			new PickaxeItem(ROSE_QUARTZ_TOOL_MATERIAL, 2, -2.8F, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item ROSE_QUARTZ_SHOVEL = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "rose_quartz_shovel")),
-			new ShovelItem(ROSE_QUARTZ_TOOL_MATERIAL, 12, 2, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new ShovelItem(ROSE_QUARTZ_TOOL_MATERIAL, 2, -3.0F, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item ROSE_QUARTZ_SWORD = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "rose_quartz_sword")), new SwordItem(
-					ROSE_QUARTZ_TOOL_MATERIAL, 14, 3.2F, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "rose_quartz_sword")),
+			new SwordItem(ROSE_QUARTZ_TOOL_MATERIAL, 3, -2.4F, new FabricItemSettings().rarity(Rarity.COMMON)));
 
 	public static List<Item> ROSE_QUARTZ_ITEMS = List.of(ROSE_QUARTZ_APPLE, ROSE_QUARTZ_UPGRADE);
 	public static List<Item> ROSE_QUARTZ_ARMORS = List.of(ROSE_QUARTZ_HELMET, ROSE_QUARTZ_CHESTPLATE,

@@ -1,6 +1,12 @@
 {
   "replace": false,
   "values": [
-    "hasimod:lonsdaleite_hoe"
+    "hasimod:amethyst_hoe",
+    "hasimod:copper_hoe",
+    "hasimod:emerald_hoe",
+    "hasimod:lapis_lazuli_hoe",
+    "hasimod:lonsdaleite_hoe",
+    "hasimod:quartz_hoe",
+    "hasimod:redstone_hoe"
   ]
 }

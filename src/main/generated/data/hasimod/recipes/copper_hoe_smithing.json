@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:copper_ingot"
+  },
+  "base": {
+    "item": "hasimod:template_hoe"
+  },
+  "result": {
+    "item": "hasimod:copper_hoe"
+  },
+  "template": {
+    "item": "hasimod:copper_upgrade_smithing_template"
+  }
+}

@@ -1,6 +1,12 @@
 {
   "replace": false,
   "values": [
-    "hasimod:lonsdaleite_shovel"
+    "hasimod:amethyst_shovel",
+    "hasimod:copper_shovel",
+    "hasimod:emerald_shovel",
+    "hasimod:lapis_lazuli_shovel",
+    "hasimod:lonsdaleite_shovel",
+    "hasimod:quartz_shovel",
+    "hasimod:redstone_shovel"
   ]
 }

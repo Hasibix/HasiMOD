@@ -19,6 +19,7 @@ import io.hasibix.hasimod.types.Item;
 import io.hasibix.hasimod.types.Registrar;
 import io.hasibix.hasimod.types.ToolMaterial;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.yarn.constants.MiningLevels;
 import net.minecraft.data.client.Models;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.SmithingTransformRecipeJsonBuilder;
@@ -51,13 +52,12 @@ public class Amethyst implements Registrar {
 	// Ingredients
 	public static final Item AMETHYST_APPLE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "amethyst_apple")),
-			new net.minecraft.item.Item(new FabricItemSettings().fireproof()
-					.food(new FoodComponent.Builder().alwaysEdible().hunger(12).saturationModifier(15)
-							.statusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 6000, 3), 1.0F)
-							.statusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 1200, 4), 1.0F)
-							.statusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 6000, 0), 1.0F)
-							.build())
-					.rarity(Rarity.EPIC)));
+			new net.minecraft.item.Item(new FabricItemSettings()
+					.food(new FoodComponent.Builder().alwaysEdible().hunger(2).saturationModifier(9.6F)
+							.statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 1200, 2), 1.0F)
+							.statusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 3600, 2), 1.0F)
+							.statusEffect(new StatusEffectInstance(StatusEffects.LUCK, 3600, 0), 1.0F).build())
+					.rarity(Rarity.COMMON)));
 
 	public static final Item AMETHYST_UPGRADE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "amethyst_upgrade_smithing_template")),
@@ -79,43 +79,43 @@ public class Amethyst implements Registrar {
 					getAmethystUpgradeEmptyBaseSlotTextures(), getAmethystUpgradeEmptyAdditionsSlotTextures()));
 
 	// Materials
-	public static final ArmorMaterial AMETHYST_ARMOR_MATERIAL = new ArmorMaterial(4096, 50,
-			SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0.2F, HasiMOD.MOD_ID + ":amethyst", 12, Ingredient.ofItems(AMETHYST_SHARD),
-			6.0F);
-	public static final ToolMaterial AMETHYST_TOOL_MATERIAL = new ToolMaterial(1.0F, 4096, 50, 4, 18.0F,
+	public static final ArmorMaterial AMETHYST_ARMOR_MATERIAL = new ArmorMaterial(33, 12,
+			SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0, HasiMOD.MOD_ID + ":amethyst", 2,
+			Ingredient.ofItems(AMETHYST_SHARD), 0);
+	public static final ToolMaterial AMETHYST_TOOL_MATERIAL = new ToolMaterial(2, 363, 12, MiningLevels.IRON, 4,
 			Ingredient.ofItems(AMETHYST_SHARD));
 
 	// Items
 	// Armors
 	public static final Item AMETHYST_HELMET = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "amethyst_helmet")), new ArmorItem(
-					AMETHYST_ARMOR_MATERIAL, Type.HELMET, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "amethyst_helmet")),
+			new ArmorItem(AMETHYST_ARMOR_MATERIAL, Type.HELMET, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item AMETHYST_CHESTPLATE = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "amethyst_chestplate")), new ArmorItem(
-					AMETHYST_ARMOR_MATERIAL, Type.CHESTPLATE, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "amethyst_chestplate")),
+			new ArmorItem(AMETHYST_ARMOR_MATERIAL, Type.CHESTPLATE, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item AMETHYST_LEGGINGS = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "amethyst_leggings")), new ArmorItem(
-					AMETHYST_ARMOR_MATERIAL, Type.LEGGINGS, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "amethyst_leggings")),
+			new ArmorItem(AMETHYST_ARMOR_MATERIAL, Type.LEGGINGS, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item AMETHYST_BOOTS = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "amethyst_boots")), new ArmorItem(
-					AMETHYST_ARMOR_MATERIAL, Type.BOOTS, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "amethyst_boots")),
+			new ArmorItem(AMETHYST_ARMOR_MATERIAL, Type.BOOTS, new FabricItemSettings().rarity(Rarity.COMMON)));
 
 	// Tools
 	public static final Item AMETHYST_AXE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "amethyst_axe")),
-			new AxeItem(AMETHYST_TOOL_MATERIAL, 18, 2, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new AxeItem(AMETHYST_TOOL_MATERIAL, 4, -3.1F, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item AMETHYST_HOE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "amethyst_hoe")),
-			new HoeItem(AMETHYST_TOOL_MATERIAL, 4, 8.0F, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new HoeItem(AMETHYST_TOOL_MATERIAL, 1, -1.0F, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item AMETHYST_PICKAXE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "amethyst_pickaxe")),
-			new PickaxeItem(AMETHYST_TOOL_MATERIAL, 12, 2.4F, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new PickaxeItem(AMETHYST_TOOL_MATERIAL, 2, -2.8F, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item AMETHYST_SHOVEL = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "amethyst_shovel")),
-			new ShovelItem(AMETHYST_TOOL_MATERIAL, 12, 2, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new ShovelItem(AMETHYST_TOOL_MATERIAL, 2, -3.0F, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item AMETHYST_SWORD = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "amethyst_sword")),
-			new SwordItem(AMETHYST_TOOL_MATERIAL, 14, 3.2F, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new SwordItem(AMETHYST_TOOL_MATERIAL, 3, -2.4F, new FabricItemSettings().rarity(Rarity.COMMON)));
 
 	public static List<Item> AMETHYST_ITEMS = List.of(AMETHYST_APPLE, AMETHYST_UPGRADE);
 	public static List<Item> AMETHYST_ARMORS = List.of(AMETHYST_HELMET, AMETHYST_CHESTPLATE, AMETHYST_LEGGINGS,
@@ -153,9 +153,10 @@ public class Amethyst implements Registrar {
 		ItemTagProvider.addTo(ItemTags.SWORDS, AMETHYST_SWORD.raw.get());
 
 		RecipeProvider.addRecipes(t -> {
-			ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, AMETHYST_UPGRADE.raw.get(), 2).input('#', AMETHYST_SHARD)
-					.input('C', net.minecraft.item.Items.END_STONE).input('S', AMETHYST_UPGRADE.raw.get()).pattern("#S#")
-					.pattern("#C#").pattern("###").criterion(RecipeProvider.hasItem(AMETHYST_UPGRADE.raw.get()),
+			ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, AMETHYST_UPGRADE.raw.get(), 2)
+					.input('#', AMETHYST_SHARD).input('C', net.minecraft.item.Items.END_STONE)
+					.input('S', AMETHYST_UPGRADE.raw.get()).pattern("#S#").pattern("#C#").pattern("###")
+					.criterion(RecipeProvider.hasItem(AMETHYST_UPGRADE.raw.get()),
 							RecipeProvider.conditionsFromItem(AMETHYST_UPGRADE.raw.get()))
 					.offerTo(t);
 
@@ -163,56 +164,65 @@ public class Amethyst implements Registrar {
 					.create(Ingredient.ofItems(AMETHYST_UPGRADE.raw.get()),
 							Ingredient.ofItems(Items.TEMPLATE_HELMET.raw.get()), Ingredient.ofItems(AMETHYST_SHARD),
 							RecipeCategory.COMBAT, AMETHYST_HELMET.raw.get())
-					.criterion(RecipeProvider.hasItem(AMETHYST_SHARD), RecipeProvider.conditionsFromItem(AMETHYST_SHARD))
+					.criterion(RecipeProvider.hasItem(AMETHYST_SHARD),
+							RecipeProvider.conditionsFromItem(AMETHYST_SHARD))
 					.offerTo(t, AMETHYST_HELMET.identifier.getPath() + "_smithing");
 			SmithingTransformRecipeJsonBuilder
 					.create(Ingredient.ofItems(AMETHYST_UPGRADE.raw.get()),
 							Ingredient.ofItems(Items.TEMPLATE_CHESTPLATE.raw.get()), Ingredient.ofItems(AMETHYST_SHARD),
 							RecipeCategory.COMBAT, AMETHYST_CHESTPLATE.raw.get())
-					.criterion(RecipeProvider.hasItem(AMETHYST_SHARD), RecipeProvider.conditionsFromItem(AMETHYST_SHARD))
+					.criterion(RecipeProvider.hasItem(AMETHYST_SHARD),
+							RecipeProvider.conditionsFromItem(AMETHYST_SHARD))
 					.offerTo(t, AMETHYST_CHESTPLATE.identifier.getPath() + "_smithing");
 			SmithingTransformRecipeJsonBuilder
 					.create(Ingredient.ofItems(AMETHYST_UPGRADE.raw.get()),
 							Ingredient.ofItems(Items.TEMPLATE_LEGGINGS.raw.get()), Ingredient.ofItems(AMETHYST_SHARD),
 							RecipeCategory.COMBAT, AMETHYST_LEGGINGS.raw.get())
-					.criterion(RecipeProvider.hasItem(AMETHYST_SHARD), RecipeProvider.conditionsFromItem(AMETHYST_SHARD))
+					.criterion(RecipeProvider.hasItem(AMETHYST_SHARD),
+							RecipeProvider.conditionsFromItem(AMETHYST_SHARD))
 					.offerTo(t, AMETHYST_LEGGINGS.identifier.getPath() + "_smithing");
 			SmithingTransformRecipeJsonBuilder
 					.create(Ingredient.ofItems(AMETHYST_UPGRADE.raw.get()),
 							Ingredient.ofItems(Items.TEMPLATE_BOOTS.raw.get()), Ingredient.ofItems(AMETHYST_SHARD),
 							RecipeCategory.COMBAT, AMETHYST_BOOTS.raw.get())
-					.criterion(RecipeProvider.hasItem(AMETHYST_SHARD), RecipeProvider.conditionsFromItem(AMETHYST_SHARD))
+					.criterion(RecipeProvider.hasItem(AMETHYST_SHARD),
+							RecipeProvider.conditionsFromItem(AMETHYST_SHARD))
 					.offerTo(t, AMETHYST_BOOTS.identifier.getPath() + "_smithing");
 
 			SmithingTransformRecipeJsonBuilder
 					.create(Ingredient.ofItems(AMETHYST_UPGRADE.raw.get()),
 							Ingredient.ofItems(Items.TEMPLATE_AXE.raw.get()), Ingredient.ofItems(AMETHYST_SHARD),
 							RecipeCategory.TOOLS, AMETHYST_AXE.raw.get())
-					.criterion(RecipeProvider.hasItem(AMETHYST_SHARD), RecipeProvider.conditionsFromItem(AMETHYST_SHARD))
+					.criterion(RecipeProvider.hasItem(AMETHYST_SHARD),
+							RecipeProvider.conditionsFromItem(AMETHYST_SHARD))
 					.offerTo(t, AMETHYST_AXE.identifier.getPath() + "_smithing");
 			SmithingTransformRecipeJsonBuilder
 					.create(Ingredient.ofItems(AMETHYST_UPGRADE.raw.get()),
 							Ingredient.ofItems(Items.TEMPLATE_HOE.raw.get()), Ingredient.ofItems(AMETHYST_SHARD),
 							RecipeCategory.TOOLS, AMETHYST_HOE.raw.get())
-					.criterion(RecipeProvider.hasItem(AMETHYST_SHARD), RecipeProvider.conditionsFromItem(AMETHYST_SHARD))
+					.criterion(RecipeProvider.hasItem(AMETHYST_SHARD),
+							RecipeProvider.conditionsFromItem(AMETHYST_SHARD))
 					.offerTo(t, AMETHYST_HOE.identifier.getPath() + "_smithing");
 			SmithingTransformRecipeJsonBuilder
 					.create(Ingredient.ofItems(AMETHYST_UPGRADE.raw.get()),
 							Ingredient.ofItems(Items.TEMPLATE_PICKAXE.raw.get()), Ingredient.ofItems(AMETHYST_SHARD),
 							RecipeCategory.TOOLS, AMETHYST_PICKAXE.raw.get())
-					.criterion(RecipeProvider.hasItem(AMETHYST_SHARD), RecipeProvider.conditionsFromItem(AMETHYST_SHARD))
+					.criterion(RecipeProvider.hasItem(AMETHYST_SHARD),
+							RecipeProvider.conditionsFromItem(AMETHYST_SHARD))
 					.offerTo(t, AMETHYST_PICKAXE.identifier.getPath() + "_smithing");
 			SmithingTransformRecipeJsonBuilder
 					.create(Ingredient.ofItems(AMETHYST_UPGRADE.raw.get()),
 							Ingredient.ofItems(Items.TEMPLATE_SHOVEL.raw.get()), Ingredient.ofItems(AMETHYST_SHARD),
 							RecipeCategory.TOOLS, AMETHYST_SHOVEL.raw.get())
-					.criterion(RecipeProvider.hasItem(AMETHYST_SHARD), RecipeProvider.conditionsFromItem(AMETHYST_SHARD))
+					.criterion(RecipeProvider.hasItem(AMETHYST_SHARD),
+							RecipeProvider.conditionsFromItem(AMETHYST_SHARD))
 					.offerTo(t, AMETHYST_SHOVEL.identifier.getPath() + "_smithing");
 			SmithingTransformRecipeJsonBuilder
 					.create(Ingredient.ofItems(AMETHYST_UPGRADE.raw.get()),
 							Ingredient.ofItems(Items.TEMPLATE_SWORD.raw.get()), Ingredient.ofItems(AMETHYST_SHARD),
 							RecipeCategory.TOOLS, AMETHYST_SWORD.raw.get())
-					.criterion(RecipeProvider.hasItem(AMETHYST_SHARD), RecipeProvider.conditionsFromItem(AMETHYST_SHARD))
+					.criterion(RecipeProvider.hasItem(AMETHYST_SHARD),
+							RecipeProvider.conditionsFromItem(AMETHYST_SHARD))
 					.offerTo(t, AMETHYST_SWORD.identifier.getPath() + "_smithing");
 		});
 	}

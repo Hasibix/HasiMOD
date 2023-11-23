@@ -1,5 +1,7 @@
 package io.hasibix.hasimod.subregistrars;
 
+import static io.hasibix.hasimod.others.EmptySlotTextures.*;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -8,7 +10,6 @@ import io.hasibix.hasimod.datagen.providers.ModelProvider;
 import io.hasibix.hasimod.datagen.providers.RecipeProvider;
 import io.hasibix.hasimod.init.Tabs;
 import io.hasibix.hasimod.types.Item;
-import io.hasibix.hasimod.types.OverriderItem;
 import io.hasibix.hasimod.types.Registrar;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.data.client.Models;
@@ -28,20 +29,6 @@ import net.minecraft.util.Rarity;
 import net.minecraft.util.Util;
 
 public class Items implements Registrar {
-	private static final Identifier EMPTY_ARMOR_SLOT_HELMET_TEXTURE = new Identifier("item/empty_armor_slot_helmet");
-	private static final Identifier EMPTY_ARMOR_SLOT_CHESTPLATE_TEXTURE = new Identifier(
-			"item/empty_armor_slot_chestplate");
-	private static final Identifier EMPTY_ARMOR_SLOT_LEGGINGS_TEXTURE = new Identifier(
-			"item/empty_armor_slot_leggings");
-	private static final Identifier EMPTY_ARMOR_SLOT_BOOTS_TEXTURE = new Identifier("item/empty_armor_slot_boots");
-	private static final Identifier EMPTY_SLOT_HOE_TEXTURE = new Identifier("item/empty_slot_hoe");
-	private static final Identifier EMPTY_SLOT_AXE_TEXTURE = new Identifier("item/empty_slot_axe");
-	private static final Identifier EMPTY_SLOT_SWORD_TEXTURE = new Identifier("item/empty_slot_sword");
-	private static final Identifier EMPTY_SLOT_SHOVEL_TEXTURE = new Identifier("item/empty_slot_shovel");
-	private static final Identifier EMPTY_SLOT_PICKAXE_TEXTURE = new Identifier("item/empty_slot_pickaxe");
-	private static final Identifier EMPTY_SLOT_DIAMOND_TEXTURE = new Identifier("item/empty_slot_diamond");
-	private static final Identifier EMPTY_SLOT_INGOT_TEXTURE = new Identifier("item/empty_slot_ingot");
-
 	private static List<Identifier> getUpgradeEmptyBaseSlotTextures() {
 		return List.of(EMPTY_ARMOR_SLOT_HELMET_TEXTURE, EMPTY_SLOT_SWORD_TEXTURE, EMPTY_ARMOR_SLOT_CHESTPLATE_TEXTURE,
 				EMPTY_SLOT_PICKAXE_TEXTURE, EMPTY_ARMOR_SLOT_LEGGINGS_TEXTURE, EMPTY_SLOT_AXE_TEXTURE,
@@ -136,42 +123,30 @@ public class Items implements Registrar {
 	// Vanilla Ore Apples
 	public static final Item IRON_APPLE = new Item(Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "iron_apple")),
 			new net.minecraft.item.Item(new FabricItemSettings().fireproof()
-					.food(new FoodComponent.Builder().hunger(4).saturationModifier(1.2f)
-							.statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 400, 1), 1.0f)
-							.statusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 6000, 0), 1.0f)
-							.statusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 6000, 0), 1.0f)
-							.statusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 2400, 3), 1.0f)
-							.alwaysEdible().build())
-					.rarity(Rarity.EPIC)));
-	public static final OverriderItem GOLDEN_APPLE = new OverriderItem(
-			net.minecraft.item.Item.getRawId(net.minecraft.item.Items.GOLDEN_APPLE), "minecraft:golden_apple",
-			new net.minecraft.item.Item(new FabricItemSettings().fireproof()
-					.food(new FoodComponent.Builder().hunger(8).saturationModifier(2.4f)
-							.statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 800, 2), 1.0f)
-							.statusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 12000, 1), 1.0f)
-							.statusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 12000, 1), 1.0f)
-							.statusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 4800, 6), 1.0f)
+					.food(new FoodComponent.Builder().hunger(2).saturationModifier(9.6F)
+							.statusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 3600, 2), 1.0f)
+							.statusEffect(new StatusEffectInstance(StatusEffects.HASTE, 4800, 2), 1.0f)
+							.statusEffect(new StatusEffectInstance(StatusEffects.SATURATION, 9600, 2), 1.0f)
 							.alwaysEdible().build())
 					.rarity(Rarity.EPIC)));
 	public static final Item DIAMOND_APPLE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "diamond_apple")),
 			new net.minecraft.item.Item(new FabricItemSettings().fireproof()
-					.food(new FoodComponent.Builder().hunger(16).saturationModifier(4.8f)
-							.statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 1600, 4), 1.0f)
-							.statusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 24000, 2), 1.0f)
-							.statusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 24000, 2), 1.0f)
-							.statusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 9600, 12), 1.0f)
+					.food(new FoodComponent.Builder().hunger(2).saturationModifier(9.6F)
+							.statusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 2400, 2), 1.0f)
+							.statusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 4800, 2), 1.0f)
+							.statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 100, 0), 1.0f)
 							.alwaysEdible().build())
 					.rarity(Rarity.EPIC)));
 	public static final Item NETHERITE_APPLE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "netherite_apple")),
 			new net.minecraft.item.Item(new FabricItemSettings().fireproof()
-					.food(new FoodComponent.Builder().hunger(32).saturationModifier(9.6f)
-							.statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 3200, 8), 1.0f)
-							.statusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 48000, 4), 1.0f)
-							.statusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 48000, 4), 1.0f)
-							.statusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 19200, 24), 1.0f)
-							.alwaysEdible().build())
+					.food(new FoodComponent.Builder().hunger(3).saturationModifier(12.8F)
+							.statusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 2400, 4), 1.0f)
+							.statusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 9600, 0), 1.0f)
+							.statusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 4800, 2), 1.0f)
+							.statusEffect(new StatusEffectInstance(StatusEffects.HASTE, 4800, 2), 1.0f).alwaysEdible()
+							.build())
 					.rarity(Rarity.EPIC)));
 
 	@Override
@@ -193,7 +168,6 @@ public class Items implements Registrar {
 			t.register(DIAMOND_UPGRADE.raw.get(), Models.GENERATED);
 
 			t.register(IRON_APPLE.raw.get(), Models.GENERATED);
-			t.register(GOLDEN_APPLE.raw.get(), Models.GENERATED);
 			t.register(DIAMOND_APPLE.raw.get(), Models.GENERATED);
 			t.register(NETHERITE_APPLE.raw.get(), Models.GENERATED);
 		});
@@ -612,8 +586,8 @@ public class Items implements Registrar {
 
 	@Override
 	public void registerTabs() {
-		Tabs.addContentsTo(ItemGroups.FOOD_AND_DRINK, IRON_APPLE.raw.get(), GOLDEN_APPLE.raw.get(),
-				DIAMOND_APPLE.raw.get(), NETHERITE_APPLE.raw.get());
+		Tabs.addContentsTo(ItemGroups.FOOD_AND_DRINK, IRON_APPLE.raw.get(), DIAMOND_APPLE.raw.get(),
+				NETHERITE_APPLE.raw.get());
 		Tabs.addContentsTo(ItemGroups.COMBAT, TEMPLATE_HELMET.raw.get(), TEMPLATE_CHESTPLATE.raw.get(),
 				TEMPLATE_LEGGINGS.raw.get(), TEMPLATE_BOOTS.raw.get(), TEMPLATE_SWORD.raw.get());
 		Tabs.addContentsTo(ItemGroups.TOOLS, TEMPLATE_AXE.raw.get(), TEMPLATE_HOE.raw.get(), TEMPLATE_PICKAXE.raw.get(),

@@ -42,10 +42,17 @@ dependencies {
 }
 
 processResources {
-    inputs.property "version", project.version
+    Map<String, String> properties = new HashMap<>()
+    properties.put("version", "${project.version}")
+    properties.put("fabric_loader_version", "${loader_version}")
+    properties.put("fabric_api_version", "${fabric_version}")
+    properties.put("minecraft_version", "${minecraft_version}")
+    properties.put("simple_trims_version", "${simple_trims_version}")
+
+    properties.forEach((k, v) -> inputs.property(k, v))
 
     filesMatching("fabric.mod.json") {
-        expand "version": project.version
+        expand properties
     }
 }
 

@@ -19,6 +19,7 @@ import io.hasibix.hasimod.types.Item;
 import io.hasibix.hasimod.types.Registrar;
 import io.hasibix.hasimod.types.ToolMaterial;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.yarn.constants.MiningLevels;
 import net.minecraft.data.client.Models;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.SmithingTransformRecipeJsonBuilder;
@@ -41,7 +42,7 @@ import net.minecraft.util.Util;
 
 public class Andesite implements Registrar {
 	@Nullable
-	private static final net.minecraft.item.Item ANDESITE_ALLOY = Registries.ITEM
+	public static final net.minecraft.item.Item ANDESITE_ALLOY = Registries.ITEM
 			.get(RegistryKey.of(RegistryKeys.ITEM, Identifier.of("create", "andesite_alloy")));
 
 	private static List<Identifier> getAndesiteUpgradeEmptyBaseSlotTextures() {
@@ -58,13 +59,14 @@ public class Andesite implements Registrar {
 	// Ingredients
 	public static final Item ANDESITE_APPLE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "andesite_apple")),
-			new net.minecraft.item.Item(new FabricItemSettings().fireproof()
-					.food(new FoodComponent.Builder().alwaysEdible().hunger(12).saturationModifier(15)
-							.statusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 6000, 3), 1.0F)
-							.statusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 1200, 4), 1.0F)
-							.statusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 6000, 0), 1.0F)
-							.build())
-					.rarity(Rarity.EPIC)));
+			new net.minecraft.item.Item(
+					new FabricItemSettings()
+							.food(new FoodComponent.Builder().alwaysEdible().hunger(2).saturationModifier(9.6F)
+									.statusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 4800, 2), 1.0F)
+									.statusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 9600, 0),
+											1.0F)
+									.statusEffect(new StatusEffectInstance(StatusEffects.SPEED, 4800, 2), 1.0F).build())
+							.rarity(Rarity.COMMON)));
 
 	public static final Item ANDESITE_UPGRADE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "andesite_upgrade_smithing_template")),
@@ -86,44 +88,43 @@ public class Andesite implements Registrar {
 					getAndesiteUpgradeEmptyBaseSlotTextures(), getAndesiteUpgradeEmptyAdditionsSlotTextures()));
 
 	// Materials
-	public static final ArmorMaterial ANDESITE_ARMOR_MATERIAL = new ArmorMaterial(4096, 50,
-			SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0.2F, HasiMOD.MOD_ID + ":andesite", 12,
-			Ingredient.ofItems(ANDESITE_ALLOY), 6.0F);
-	public static final ToolMaterial ANDESITE_TOOL_MATERIAL = new ToolMaterial(1.0F, 4096, 50, 4, 18.0F,
+	public static final ArmorMaterial ANDESITE_ARMOR_MATERIAL = new ArmorMaterial(48, 8,
+			SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0, HasiMOD.MOD_ID + ":andesite", 2, Ingredient.ofItems(ANDESITE_ALLOY),
+			0);
+	public static final ToolMaterial ANDESITE_TOOL_MATERIAL = new ToolMaterial(3, 528, 8, MiningLevels.IRON, 6,
 			Ingredient.ofItems(ANDESITE_ALLOY));
 
 	// Items
 	// Armors
 	public static final Item ANDESITE_HELMET = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "andesite_helmet")), new ArmorItem(
-					ANDESITE_ARMOR_MATERIAL, Type.HELMET, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "andesite_helmet")),
+			new ArmorItem(ANDESITE_ARMOR_MATERIAL, Type.HELMET, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item ANDESITE_CHESTPLATE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "andesite_chestplate")),
-			new ArmorItem(ANDESITE_ARMOR_MATERIAL, Type.CHESTPLATE,
-					new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new ArmorItem(ANDESITE_ARMOR_MATERIAL, Type.CHESTPLATE, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item ANDESITE_LEGGINGS = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "andesite_leggings")), new ArmorItem(
-					ANDESITE_ARMOR_MATERIAL, Type.LEGGINGS, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "andesite_leggings")),
+			new ArmorItem(ANDESITE_ARMOR_MATERIAL, Type.LEGGINGS, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item ANDESITE_BOOTS = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "andesite_boots")), new ArmorItem(
-					ANDESITE_ARMOR_MATERIAL, Type.BOOTS, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "andesite_boots")),
+			new ArmorItem(ANDESITE_ARMOR_MATERIAL, Type.BOOTS, new FabricItemSettings().rarity(Rarity.COMMON)));
 
 	// Tools
 	public static final Item ANDESITE_AXE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "andesite_axe")),
-			new AxeItem(ANDESITE_TOOL_MATERIAL, 18, 2, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new AxeItem(ANDESITE_TOOL_MATERIAL, 4, -3.1F, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item ANDESITE_HOE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "andesite_hoe")),
-			new HoeItem(ANDESITE_TOOL_MATERIAL, 4, 8.0F, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new HoeItem(ANDESITE_TOOL_MATERIAL, 1, -1.0F, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item ANDESITE_PICKAXE = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "andesite_pickaxe")), new PickaxeItem(
-					ANDESITE_TOOL_MATERIAL, 12, 2.4F, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "andesite_pickaxe")),
+			new PickaxeItem(ANDESITE_TOOL_MATERIAL, 2, -2.8F, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item ANDESITE_SHOVEL = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "andesite_shovel")),
-			new ShovelItem(ANDESITE_TOOL_MATERIAL, 12, 2, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new ShovelItem(ANDESITE_TOOL_MATERIAL, 2, -3.0F, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item ANDESITE_SWORD = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "andesite_sword")),
-			new SwordItem(ANDESITE_TOOL_MATERIAL, 14, 3.2F, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new SwordItem(ANDESITE_TOOL_MATERIAL, 3, -2.4F, new FabricItemSettings().rarity(Rarity.COMMON)));
 
 	public static List<Item> ANDESITE_ITEMS = List.of(ANDESITE_APPLE, ANDESITE_UPGRADE);
 	public static List<Item> ANDESITE_ARMORS = List.of(ANDESITE_HELMET, ANDESITE_CHESTPLATE, ANDESITE_LEGGINGS,

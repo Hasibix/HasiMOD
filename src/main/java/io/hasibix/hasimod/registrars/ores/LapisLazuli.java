@@ -18,6 +18,7 @@ import io.hasibix.hasimod.types.Item;
 import io.hasibix.hasimod.types.Registrar;
 import io.hasibix.hasimod.types.ToolMaterial;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.yarn.constants.MiningLevels;
 import net.minecraft.data.client.Models;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.SmithingTransformRecipeJsonBuilder;
@@ -50,13 +51,12 @@ public class LapisLazuli implements Registrar {
 	// Ingredients
 	public static final Item LAPIS_LAZULI_APPLE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lapis_lazuli_apple")),
-			new net.minecraft.item.Item(new FabricItemSettings().fireproof()
-					.food(new FoodComponent.Builder().alwaysEdible().hunger(12).saturationModifier(15)
-							.statusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 6000, 3), 1.0F)
-							.statusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 1200, 4), 1.0F)
-							.statusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 6000, 0), 1.0F)
-							.build())
-					.rarity(Rarity.EPIC)));
+			new net.minecraft.item.Item(new FabricItemSettings()
+					.food(new FoodComponent.Builder().alwaysEdible().hunger(2).saturationModifier(9.6F)
+							.statusEffect(new StatusEffectInstance(StatusEffects.WATER_BREATHING, 9600, 2), 1.0F)
+							.statusEffect(new StatusEffectInstance(StatusEffects.HASTE, 4800, 2), 1.0F)
+							.statusEffect(new StatusEffectInstance(StatusEffects.SATURATION, 9600, 2), 1.0F).build())
+					.rarity(Rarity.COMMON)));
 
 	public static final Item LAPIS_LAZULI_UPGRADE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lapis_lazuli_upgrade_smithing_template")),
@@ -79,46 +79,43 @@ public class LapisLazuli implements Registrar {
 					getLapisLazuliUpgradeEmptyBaseSlotTextures(), getLapisLazuliUpgradeEmptyAdditionsSlotTextures()));
 
 	// Materials
-	public static final ArmorMaterial LAPIS_LAZULI_ARMOR_MATERIAL = new ArmorMaterial(4096, 50,
-			SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0.2F, HasiMOD.MOD_ID + ":lapis_lazuli", 12,
-			Ingredient.ofItems(LAPIS_LAZULI), 6.0F);
-	public static final ToolMaterial LAPIS_LAZULI_TOOL_MATERIAL = new ToolMaterial(1.0F, 4096, 50, 4, 18.0F,
+	public static final ArmorMaterial LAPIS_LAZULI_ARMOR_MATERIAL = new ArmorMaterial(33, 25,
+			SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0, HasiMOD.MOD_ID + ":lapis_lazuli", 2,
+			Ingredient.ofItems(LAPIS_LAZULI), 0);
+	public static final ToolMaterial LAPIS_LAZULI_TOOL_MATERIAL = new ToolMaterial(2, 363, 25, MiningLevels.IRON, 4,
 			Ingredient.ofItems(LAPIS_LAZULI));
 
 	// Items
 	// Armors
 	public static final Item LAPIS_LAZULI_HELMET = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lapis_lazuli_helmet")),
-			new ArmorItem(LAPIS_LAZULI_ARMOR_MATERIAL, Type.HELMET,
-					new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new ArmorItem(LAPIS_LAZULI_ARMOR_MATERIAL, Type.HELMET, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item LAPIS_LAZULI_CHESTPLATE = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lapis_lazuli_chestplate")),
-			new ArmorItem(LAPIS_LAZULI_ARMOR_MATERIAL, Type.CHESTPLATE,
-					new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lapis_lazuli_chestplate")), new ArmorItem(
+					LAPIS_LAZULI_ARMOR_MATERIAL, Type.CHESTPLATE, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item LAPIS_LAZULI_LEGGINGS = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lapis_lazuli_leggings")),
-			new ArmorItem(LAPIS_LAZULI_ARMOR_MATERIAL, Type.LEGGINGS,
-					new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new ArmorItem(LAPIS_LAZULI_ARMOR_MATERIAL, Type.LEGGINGS, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item LAPIS_LAZULI_BOOTS = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lapis_lazuli_boots")), new ArmorItem(
-					LAPIS_LAZULI_ARMOR_MATERIAL, Type.BOOTS, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lapis_lazuli_boots")),
+			new ArmorItem(LAPIS_LAZULI_ARMOR_MATERIAL, Type.BOOTS, new FabricItemSettings().rarity(Rarity.COMMON)));
 
 	// Tools
 	public static final Item LAPIS_LAZULI_AXE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lapis_lazuli_axe")),
-			new AxeItem(LAPIS_LAZULI_TOOL_MATERIAL, 18, 2, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new AxeItem(LAPIS_LAZULI_TOOL_MATERIAL, 4, -3.1F, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item LAPIS_LAZULI_HOE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lapis_lazuli_hoe")),
-			new HoeItem(LAPIS_LAZULI_TOOL_MATERIAL, 4, 8.0F, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new HoeItem(LAPIS_LAZULI_TOOL_MATERIAL, 1, -1.0F, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item LAPIS_LAZULI_PICKAXE = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lapis_lazuli_pickaxe")), new PickaxeItem(
-					LAPIS_LAZULI_TOOL_MATERIAL, 12, 2.4F, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lapis_lazuli_pickaxe")),
+			new PickaxeItem(LAPIS_LAZULI_TOOL_MATERIAL, 2, -2.8F, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item LAPIS_LAZULI_SHOVEL = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lapis_lazuli_shovel")), new ShovelItem(
-					LAPIS_LAZULI_TOOL_MATERIAL, 12, 2, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lapis_lazuli_shovel")),
+			new ShovelItem(LAPIS_LAZULI_TOOL_MATERIAL, 2, -3.0F, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item LAPIS_LAZULI_SWORD = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lapis_lazuli_sword")), new SwordItem(
-					LAPIS_LAZULI_TOOL_MATERIAL, 14, 3.2F, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lapis_lazuli_sword")),
+			new SwordItem(LAPIS_LAZULI_TOOL_MATERIAL, 3, -2.4F, new FabricItemSettings().rarity(Rarity.COMMON)));
 
 	public static List<Item> LAPIS_LAZULI_ITEMS = List.of(LAPIS_LAZULI_APPLE, LAPIS_LAZULI_UPGRADE);
 	public static List<Item> LAPIS_LAZULI_ARMORS = List.of(LAPIS_LAZULI_HELMET, LAPIS_LAZULI_CHESTPLATE,
@@ -157,9 +154,9 @@ public class LapisLazuli implements Registrar {
 		ItemTagProvider.addTo(ItemTags.SWORDS, LAPIS_LAZULI_SWORD.raw.get());
 
 		RecipeProvider.addRecipes(t -> {
-			ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, LAPIS_LAZULI_UPGRADE.raw.get(), 2).input('#', LAPIS_LAZULI)
-					.input('C', net.minecraft.item.Items.END_STONE).input('S', LAPIS_LAZULI_UPGRADE.raw.get())
-					.pattern("#S#").pattern("#C#").pattern("###")
+			ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, LAPIS_LAZULI_UPGRADE.raw.get(), 2)
+					.input('#', LAPIS_LAZULI).input('C', net.minecraft.item.Items.END_STONE)
+					.input('S', LAPIS_LAZULI_UPGRADE.raw.get()).pattern("#S#").pattern("#C#").pattern("###")
 					.criterion(RecipeProvider.hasItem(LAPIS_LAZULI_UPGRADE.raw.get()),
 							RecipeProvider.conditionsFromItem(LAPIS_LAZULI_UPGRADE.raw.get()))
 					.offerTo(t);

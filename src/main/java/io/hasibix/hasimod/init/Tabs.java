@@ -8,7 +8,6 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
@@ -19,7 +18,6 @@ import net.minecraft.util.Identifier;
 public class Tabs {
 	public static RegistryKey<ItemGroup> TAB_HASIMOD_ALL;
 	public static RegistryKey<ItemGroup> TAB_HASIMOD_ORES;
-	public static RegistryKey<ItemGroup> TAB_HASIMOD_TECHNOLOGIES;
 
 	public static void init() {
 		Registry.register(Registries.ITEM_GROUP, Identifier.of(HasiMOD.MOD_ID, "hasimod_all"),
@@ -28,18 +26,11 @@ public class Tabs {
 		Registry.register(Registries.ITEM_GROUP, Identifier.of(HasiMOD.MOD_ID, "hasimod_ores"),
 				FabricItemGroup.builder().icon(() -> new ItemStack(Lonsdaleite.LONSDALEITE_GEM.raw.get()))
 						.displayName(Text.translatable("itemGroup." + HasiMOD.MOD_ID + ".hasimod_ores")).build());
-		Registry.register(Registries.ITEM_GROUP, Identifier.of(HasiMOD.MOD_ID, "hasimod_technologies"),
-				FabricItemGroup.builder().icon(() -> new ItemStack(Items.REDSTONE))
-						.displayName(Text.translatable("itemGroup." + HasiMOD.MOD_ID + ".hasimod_technologies"))
-						.build());
 
 		TAB_HASIMOD_ALL = RegistryKey.of(RegistryKeys.ITEM_GROUP, Identifier.of(HasiMOD.MOD_ID, "hasimod_all"));
 		TAB_HASIMOD_ORES = RegistryKey.of(RegistryKeys.ITEM_GROUP, Identifier.of(HasiMOD.MOD_ID, "hasimod_ores"));
-		TAB_HASIMOD_ORES = RegistryKey.of(RegistryKeys.ITEM_GROUP,
-				Identifier.of(HasiMOD.MOD_ID, "hasimod_technologies"));
 
 		Registrars.subregistrars.forEach(Registrar::registerTabs);
-		// Registrars
 		Registrars.ores.forEach(Registrar::registerTabs);
 	}
 

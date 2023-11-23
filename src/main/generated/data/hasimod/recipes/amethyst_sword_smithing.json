@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:amethyst_shard"
+  },
+  "base": {
+    "item": "hasimod:template_sword"
+  },
+  "result": {
+    "item": "hasimod:amethyst_sword"
+  },
+  "template": {
+    "item": "hasimod:amethyst_upgrade_smithing_template"
+  }
+}

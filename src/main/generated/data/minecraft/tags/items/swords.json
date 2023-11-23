@@ -1,6 +1,12 @@
 {
   "replace": false,
   "values": [
-    "hasimod:lonsdaleite_sword"
+    "hasimod:amethyst_sword",
+    "hasimod:copper_sword",
+    "hasimod:emerald_sword",
+    "hasimod:lapis_lazuli_sword",
+    "hasimod:lonsdaleite_sword",
+    "hasimod:quartz_sword",
+    "hasimod:redstone_sword"
   ]
 }

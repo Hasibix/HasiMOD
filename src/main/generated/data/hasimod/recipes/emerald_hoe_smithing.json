@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:emerald"
+  },
+  "base": {
+    "item": "hasimod:template_hoe"
+  },
+  "result": {
+    "item": "hasimod:emerald_hoe"
+  },
+  "template": {
+    "item": "hasimod:emerald_upgrade_smithing_template"
+  }
+}

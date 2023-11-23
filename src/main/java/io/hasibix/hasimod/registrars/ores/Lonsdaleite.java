@@ -17,6 +17,7 @@ import io.hasibix.hasimod.types.Item;
 import io.hasibix.hasimod.types.ToolMaterial;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.yarn.constants.MiningLevels;
 import net.minecraft.block.AbstractBlock.Settings;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.client.Models;
@@ -91,11 +92,12 @@ public class Lonsdaleite implements Registrar {
 	public static final Item LONSDALEITE_APPLE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_apple")),
 			new net.minecraft.item.Item(new FabricItemSettings().fireproof()
-					.food(new FoodComponent.Builder().alwaysEdible().hunger(12).saturationModifier(15)
-							.statusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 6000, 3), 1.0F)
-							.statusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 1200, 4), 1.0F)
-							.statusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 6000, 0), 1.0F)
-							.build())
+					.food(new FoodComponent.Builder().alwaysEdible().hunger(4).saturationModifier(14.4F)
+							.statusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 2400, 5), 1.0F)
+							.statusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 3600, 3), 1.0F)
+							.statusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 3600, 3), 1.0F)
+							.statusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 9600, 0), 1.0F)
+							.statusEffect(new StatusEffectInstance(StatusEffects.HASTE, 3600, 3), 1.0F).build())
 					.rarity(Rarity.EPIC)));
 
 	public static final Item LONSDALEITE_UPGRADE = new Item(
@@ -119,11 +121,11 @@ public class Lonsdaleite implements Registrar {
 					getLonsdaleiteUpgradeEmptyBaseSlotTextures(), getLonsdaleiteUpgradeEmptyAdditionsSlotTextures()));
 
 	// Materials
-	public static final ArmorMaterial LONSDALEITE_ARMOR_MATERIAL = new ArmorMaterial(4096, 50,
-			SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0.2F, HasiMOD.MOD_ID + ":lonsdaleite", 12,
+	public static final ArmorMaterial LONSDALEITE_ARMOR_MATERIAL = new ArmorMaterial(99, 30,
+			SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0.2F, HasiMOD.MOD_ID + ":lonsdaleite", 6,
 			Ingredient.ofItems(LONSDALEITE_GEM.raw.get()), 6.0F);
-	public static final ToolMaterial LONSDALEITE_TOOL_MATERIAL = new ToolMaterial(1.0F, 4096, 50, 4, 18.0F,
-			Ingredient.ofItems(LONSDALEITE_GEM.raw.get()));
+	public static final ToolMaterial LONSDALEITE_TOOL_MATERIAL = new ToolMaterial(6, 1089, 50, MiningLevels.NETHERITE,
+			12, Ingredient.ofItems(LONSDALEITE_GEM.raw.get()));
 
 	// Items
 	// Armors
@@ -145,19 +147,19 @@ public class Lonsdaleite implements Registrar {
 	// Tools
 	public static final Item LONSDALEITE_AXE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_axe")),
-			new AxeItem(LONSDALEITE_TOOL_MATERIAL, 18, 2, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new AxeItem(LONSDALEITE_TOOL_MATERIAL, 4, -3.1F, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item LONSDALEITE_HOE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_hoe")),
-			new HoeItem(LONSDALEITE_TOOL_MATERIAL, 4, 8.0F, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new HoeItem(LONSDALEITE_TOOL_MATERIAL, 1, -1.0F, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item LONSDALEITE_PICKAXE = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_pickaxe")), new PickaxeItem(
-					LONSDALEITE_TOOL_MATERIAL, 12, 2.4F, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_pickaxe")),
+			new PickaxeItem(LONSDALEITE_TOOL_MATERIAL, 2, -2.8F, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item LONSDALEITE_SHOVEL = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_shovel")),
-			new ShovelItem(LONSDALEITE_TOOL_MATERIAL, 12, 2, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new ShovelItem(LONSDALEITE_TOOL_MATERIAL, 2, -3.0F, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item LONSDALEITE_SWORD = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_sword")), new SwordItem(
-					LONSDALEITE_TOOL_MATERIAL, 14, 3.2F, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "lonsdaleite_sword")),
+			new SwordItem(LONSDALEITE_TOOL_MATERIAL, 3, -2.4F, new FabricItemSettings().rarity(Rarity.COMMON)));
 
 	public static List<Block> LONSDALEITE_BLOCKS = List.of(LONSDALEITE_BLOCK, LONSDALEITE_ORE);
 	public static List<Item> LONSDALEITE_ITEMS = List.of(LONSDALEITE_DUST, LONSDALEITE_GEM, LONSDALEITE_APPLE,

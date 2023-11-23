@@ -19,6 +19,7 @@ import io.hasibix.hasimod.types.Item;
 import io.hasibix.hasimod.types.Registrar;
 import io.hasibix.hasimod.types.ToolMaterial;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.yarn.constants.MiningLevels;
 import net.minecraft.data.client.Models;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.SmithingTransformRecipeJsonBuilder;
@@ -41,7 +42,7 @@ import net.minecraft.util.Util;
 
 public class Brass implements Registrar {
 	@Nullable
-	private static final net.minecraft.item.Item BRASS_INGOT = Registries.ITEM
+	public static final net.minecraft.item.Item BRASS_INGOT = Registries.ITEM
 			.get(RegistryKey.of(RegistryKeys.ITEM, Identifier.of("create", "brass_ingot")));
 
 	private static List<Identifier> getBrassUpgradeEmptyBaseSlotTextures() {
@@ -58,13 +59,12 @@ public class Brass implements Registrar {
 	// Ingredients
 	public static final Item BRASS_APPLE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "brass_apple")),
-			new net.minecraft.item.Item(new FabricItemSettings().fireproof()
-					.food(new FoodComponent.Builder().alwaysEdible().hunger(12).saturationModifier(15)
-							.statusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 6000, 3), 1.0F)
-							.statusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 1200, 4), 1.0F)
-							.statusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 6000, 0), 1.0F)
-							.build())
-					.rarity(Rarity.EPIC)));
+			new net.minecraft.item.Item(new FabricItemSettings()
+					.food(new FoodComponent.Builder().alwaysEdible().hunger(2).saturationModifier(9.6F)
+							.statusEffect(new StatusEffectInstance(StatusEffects.HASTE, 4800, 2), 1.0F)
+							.statusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 9600, 0), 1.0F)
+							.statusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, 4800, 2), 1.0F).build())
+					.rarity(Rarity.COMMON)));
 
 	public static final Item BRASS_UPGRADE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "brass_upgrade_smithing_template")),
@@ -86,41 +86,40 @@ public class Brass implements Registrar {
 					getBrassUpgradeEmptyBaseSlotTextures(), getBrassUpgradeEmptyAdditionsSlotTextures()));
 
 	// Materials
-	public static final ArmorMaterial BRASS_ARMOR_MATERIAL = new ArmorMaterial(4096, 50,
-			SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0.2F, HasiMOD.MOD_ID + ":brass", 12, Ingredient.ofItems(BRASS_INGOT),
-			6.0F);
-	public static final ToolMaterial BRASS_TOOL_MATERIAL = new ToolMaterial(1.0F, 4096, 50, 4, 18.0F,
+	public static final ArmorMaterial BRASS_ARMOR_MATERIAL = new ArmorMaterial(33, 10,
+			SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0, HasiMOD.MOD_ID + ":brass", 2, Ingredient.ofItems(BRASS_INGOT), 0);
+	public static final ToolMaterial BRASS_TOOL_MATERIAL = new ToolMaterial(2, 363, 10, MiningLevels.IRON, 4,
 			Ingredient.ofItems(BRASS_INGOT));
 
 	// Items
 	// Armors
 	public static final Item BRASS_HELMET = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "brass_helmet")),
-			new ArmorItem(BRASS_ARMOR_MATERIAL, Type.HELMET, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new ArmorItem(BRASS_ARMOR_MATERIAL, Type.HELMET, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item BRASS_CHESTPLATE = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "brass_chestplate")), new ArmorItem(
-					BRASS_ARMOR_MATERIAL, Type.CHESTPLATE, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "brass_chestplate")),
+			new ArmorItem(BRASS_ARMOR_MATERIAL, Type.CHESTPLATE, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item BRASS_LEGGINGS = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "brass_leggings")), new ArmorItem(BRASS_ARMOR_MATERIAL,
-					Type.LEGGINGS, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "brass_leggings")),
+			new ArmorItem(BRASS_ARMOR_MATERIAL, Type.LEGGINGS, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item BRASS_BOOTS = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "brass_boots")),
-			new ArmorItem(BRASS_ARMOR_MATERIAL, Type.BOOTS, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new ArmorItem(BRASS_ARMOR_MATERIAL, Type.BOOTS, new FabricItemSettings().rarity(Rarity.COMMON)));
 
 	// Tools
 	public static final Item BRASS_AXE = new Item(Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "brass_axe")),
-			new AxeItem(BRASS_TOOL_MATERIAL, 18, 2, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new AxeItem(BRASS_TOOL_MATERIAL, 4, -3.1F, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item BRASS_HOE = new Item(Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "brass_hoe")),
-			new HoeItem(BRASS_TOOL_MATERIAL, 4, 8.0F, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new HoeItem(BRASS_TOOL_MATERIAL, 1, -1.0F, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item BRASS_PICKAXE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "brass_pickaxe")),
-			new PickaxeItem(BRASS_TOOL_MATERIAL, 12, 2.4F, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new PickaxeItem(BRASS_TOOL_MATERIAL, 2, -2.8F, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item BRASS_SHOVEL = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "brass_shovel")),
-			new ShovelItem(BRASS_TOOL_MATERIAL, 12, 2, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new ShovelItem(BRASS_TOOL_MATERIAL, 2, -3.0F, new FabricItemSettings().rarity(Rarity.COMMON)));
 	public static final Item BRASS_SWORD = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "brass_sword")),
-			new SwordItem(BRASS_TOOL_MATERIAL, 14, 3.2F, new FabricItemSettings().fireproof().rarity(Rarity.EPIC)));
+			new SwordItem(BRASS_TOOL_MATERIAL, 3, -2.4F, new FabricItemSettings().rarity(Rarity.COMMON)));
 
 	public static List<Item> BRASS_ITEMS = List.of(BRASS_APPLE, BRASS_UPGRADE);
 	public static List<Item> BRASS_ARMORS = List.of(BRASS_HELMET, BRASS_CHESTPLATE, BRASS_LEGGINGS, BRASS_BOOTS);
