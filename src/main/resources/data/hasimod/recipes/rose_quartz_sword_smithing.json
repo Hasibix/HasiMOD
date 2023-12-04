@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "tag": "hasimod:rose_quartz"
+  },
+  "base": {
+    "item": "hasimod:template_sword"
+  },
+  "result": {
+    "item": "hasimod:rose_quartz_sword"
+  },
+  "template": {
+    "item": "hasimod:rose_quartz_upgrade_smithing_template"
+  }
+}

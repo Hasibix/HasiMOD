@@ -3,10 +3,10 @@
   "category": "misc",
   "key": {
     "#": {
-      "item": "minecraft:quartz"
+      "item": "hasimod:carbon"
     },
     "C": {
-      "item": "minecraft:end_stone"
+      "item": "minecraft:netherrack"
     },
     "S": {
       "item": "hasimod:quartz_upgrade_smithing_template"

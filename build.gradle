@@ -10,7 +10,8 @@ base {
     archivesName = project.archives_base_name
 }
 
-repositories {}
+repositories {
+}
 
 loom {
     runs {
@@ -19,7 +20,7 @@ loom {
             name "Data Generation"
             vmArg "-Dfabric-api.datagen"
             vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/generated")}"
-            vmArg "-Dfabric-api.datagen.modid=${modid}"
+            vmArg "-Dfabric-api.datagen.modid=${mod_id}"
 
             runDir "build/datagen"
         }
@@ -38,6 +39,7 @@ dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 }
 
@@ -45,7 +47,6 @@ processResources {
     Map<String, String> properties = new HashMap<>()
     properties.put("version", "${project.version}")
     properties.put("fabric_loader_version", "${loader_version}")
-    properties.put("fabric_api_version", "${fabric_version}")
     properties.put("minecraft_version", "${minecraft_version}")
     properties.put("simple_trims_version", "${simple_trims_version}")
 

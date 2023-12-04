@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:golden_ingot"
+  },
+  "base": {
+    "item": "hasimod:template_boots"
+  },
+  "result": {
+    "item": "minecraft:golden_boots"
+  },
+  "template": {
+    "item": "hasimod:gold_upgrade_smithing_template"
+  }
+}

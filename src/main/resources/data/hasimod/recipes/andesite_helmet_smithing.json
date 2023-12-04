@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "tag": "hasimod:andesite_alloy"
+  },
+  "base": {
+    "item": "hasimod:template_helmet"
+  },
+  "result": {
+    "item": "hasimod:andesite_helmet"
+  },
+  "template": {
+    "item": "hasimod:andesite_upgrade_smithing_template"
+  }
+}

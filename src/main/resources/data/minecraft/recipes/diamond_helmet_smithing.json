@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:diamond_ingot"
+  },
+  "base": {
+    "item": "hasimod:template_helmet"
+  },
+  "result": {
+    "item": "minecraft:diamond_helmet"
+  },
+  "template": {
+    "item": "hasimod:diamond_upgrade_smithing_template"
+  }
+}

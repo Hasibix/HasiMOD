@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "hasimod:carbon"
+    },
+    "C": {
+      "item": "minecraft:stone"
+    },
+    "S": {
+      "item": "hasimod:zinc_upgrade_smithing_template"
+    }
+  },
+  "pattern": [
+    "#S#",
+    "#C#",
+    "###"
+  ],
+  "result": {
+    "count": 2,
+    "item": "hasimod:zinc_upgrade_smithing_template"
+  },
+  "show_notification": true
+}

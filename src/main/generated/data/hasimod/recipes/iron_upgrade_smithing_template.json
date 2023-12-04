@@ -3,10 +3,10 @@
   "category": "misc",
   "key": {
     "#": {
-      "item": "minecraft:leather"
+      "item": "hasimod:carbon"
     },
     "C": {
-      "item": "minecraft:iron_ingot"
+      "item": "minecraft:stone"
     },
     "S": {
       "item": "hasimod:iron_upgrade_smithing_template"

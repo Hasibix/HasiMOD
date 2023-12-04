@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "tag": "hasimod:brass_ingot"
+  },
+  "base": {
+    "item": "hasimod:template_shovel"
+  },
+  "result": {
+    "item": "hasimod:brass_shovel"
+  },
+  "template": {
+    "item": "hasimod:brass_upgrade_smithing_template"
+  }
+}

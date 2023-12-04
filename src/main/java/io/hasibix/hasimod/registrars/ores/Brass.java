@@ -6,14 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import org.jetbrains.annotations.Nullable;
-
 import io.hasibix.hasimod.HasiMOD;
-import io.hasibix.hasimod.datagen.providers.ItemTagProvider;
 import io.hasibix.hasimod.datagen.providers.ModelProvider;
-import io.hasibix.hasimod.datagen.providers.RecipeProvider;
 import io.hasibix.hasimod.init.Tabs;
-import io.hasibix.hasimod.subregistrars.Items;
 import io.hasibix.hasimod.types.ArmorMaterial;
 import io.hasibix.hasimod.types.Item;
 import io.hasibix.hasimod.types.Registrar;
@@ -21,18 +16,14 @@ import io.hasibix.hasimod.types.ToolMaterial;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.yarn.constants.MiningLevels;
 import net.minecraft.data.client.Models;
-import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.SmithingTransformRecipeJsonBuilder;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.item.*;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorItem.Type;
+import net.minecraft.item.FoodComponent;
 import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.book.RecipeCategory;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -41,9 +32,9 @@ import net.minecraft.util.Rarity;
 import net.minecraft.util.Util;
 
 public class Brass implements Registrar {
-	@Nullable
-	public static final net.minecraft.item.Item BRASS_INGOT = Registries.ITEM
-			.get(RegistryKey.of(RegistryKeys.ITEM, Identifier.of("create", "brass_ingot")));
+	// Helpers
+	public static final TagKey<net.minecraft.item.Item> BRASS_INGOT = TagKey.of(RegistryKeys.ITEM,
+			Identifier.of(HasiMOD.MOD_ID, "brass_ingot"));
 
 	private static List<Identifier> getBrassUpgradeEmptyBaseSlotTextures() {
 		return List.of(EMPTY_ARMOR_SLOT_HELMET_TEXTURE, EMPTY_SLOT_SWORD_TEXTURE, EMPTY_ARMOR_SLOT_CHESTPLATE_TEXTURE,
@@ -56,169 +47,88 @@ public class Brass implements Registrar {
 	}
 
 	// Items
-	// Ingredients
 	public static final Item BRASS_APPLE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "brass_apple")),
-			new net.minecraft.item.Item(new FabricItemSettings()
+			new FabricItemSettings()
 					.food(new FoodComponent.Builder().alwaysEdible().hunger(2).saturationModifier(9.6F)
 							.statusEffect(new StatusEffectInstance(StatusEffects.HASTE, 4800, 2), 1.0F)
 							.statusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 9600, 0), 1.0F)
 							.statusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, 4800, 2), 1.0F).build())
-					.rarity(Rarity.COMMON)));
+					.rarity(Rarity.COMMON));
 
-	public static final Item BRASS_UPGRADE = new Item(
+	public static final Item BRASS_UPGRADE = new Item.SmithingTemplate(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "brass_upgrade_smithing_template")),
-			new SmithingTemplateItem(
-					Text.translatable(Util.createTranslationKey("item",
-							Identifier.of(HasiMOD.MOD_ID, "smithing_template.brass_upgrade.applies_to")))
-							.formatted(Formatting.BLUE),
-					Text.translatable(Util.createTranslationKey("item",
-							Identifier.of(HasiMOD.MOD_ID, "smithing_template.brass_upgrade.ingredients")))
-							.formatted(Formatting.BLUE),
-					Text.translatable(
-							Util.createTranslationKey("upgrade", Identifier.of(HasiMOD.MOD_ID, "brass_upgrade")))
-							.formatted(Formatting.GRAY),
-					Text.translatable(Util.createTranslationKey("item",
-							Identifier.of(HasiMOD.MOD_ID, "smithing_template.brass_upgrade.base_slot_description"))),
-					Text.translatable(Util.createTranslationKey("item",
-							Identifier.of(HasiMOD.MOD_ID,
-									"smithing_template.brass_upgrade.additions_slot_description"))),
-					getBrassUpgradeEmptyBaseSlotTextures(), getBrassUpgradeEmptyAdditionsSlotTextures()));
+			Text.translatable(Util.createTranslationKey("item",
+					Identifier.of(HasiMOD.MOD_ID, "smithing_template.brass_upgrade.applies_to")))
+					.formatted(Formatting.BLUE),
+			Text.translatable(Util.createTranslationKey("item",
+					Identifier.of(HasiMOD.MOD_ID, "smithing_template.brass_upgrade.ingredients")))
+					.formatted(Formatting.BLUE),
+			Text.translatable(Util.createTranslationKey("upgrade", Identifier.of(HasiMOD.MOD_ID, "brass_upgrade")))
+					.formatted(Formatting.GRAY),
+			Text.translatable(Util.createTranslationKey("item",
+					Identifier.of(HasiMOD.MOD_ID, "smithing_template.brass_upgrade.base_slot_description"))),
+			Text.translatable(Util.createTranslationKey("item",
+					Identifier.of(HasiMOD.MOD_ID, "smithing_template.brass_upgrade.additions_slot_description"))),
+			getBrassUpgradeEmptyBaseSlotTextures(), getBrassUpgradeEmptyAdditionsSlotTextures(),
+			new FabricItemSettings());
 
 	// Materials
 	public static final ArmorMaterial BRASS_ARMOR_MATERIAL = new ArmorMaterial(33, 10,
-			SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0, HasiMOD.MOD_ID + ":brass", 2, Ingredient.ofItems(BRASS_INGOT), 0);
+			SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0, HasiMOD.MOD_ID + ":brass", 2, Ingredient.fromTag(BRASS_INGOT), 0);
 	public static final ToolMaterial BRASS_TOOL_MATERIAL = new ToolMaterial(2, 363, 10, MiningLevels.IRON, 4,
-			Ingredient.ofItems(BRASS_INGOT));
+			Ingredient.fromTag(BRASS_INGOT));
 
-	// Items
 	// Armors
-	public static final Item BRASS_HELMET = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "brass_helmet")),
-			new ArmorItem(BRASS_ARMOR_MATERIAL, Type.HELMET, new FabricItemSettings().rarity(Rarity.COMMON)));
-	public static final Item BRASS_CHESTPLATE = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "brass_chestplate")),
-			new ArmorItem(BRASS_ARMOR_MATERIAL, Type.CHESTPLATE, new FabricItemSettings().rarity(Rarity.COMMON)));
-	public static final Item BRASS_LEGGINGS = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "brass_leggings")),
-			new ArmorItem(BRASS_ARMOR_MATERIAL, Type.LEGGINGS, new FabricItemSettings().rarity(Rarity.COMMON)));
-	public static final Item BRASS_BOOTS = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "brass_boots")),
-			new ArmorItem(BRASS_ARMOR_MATERIAL, Type.BOOTS, new FabricItemSettings().rarity(Rarity.COMMON)));
+	public static final Item BRASS_HELMET = new Item.ArmorItem(
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "brass_helmet")), BRASS_ARMOR_MATERIAL, Type.HELMET,
+			new FabricItemSettings().rarity(Rarity.COMMON));
+	public static final Item BRASS_CHESTPLATE = new Item.ArmorItem(
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "brass_chestplate")), BRASS_ARMOR_MATERIAL,
+			Type.CHESTPLATE, new FabricItemSettings().rarity(Rarity.COMMON));
+	public static final Item BRASS_LEGGINGS = new Item.ArmorItem(
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "brass_leggings")), BRASS_ARMOR_MATERIAL,
+			Type.LEGGINGS, new FabricItemSettings().rarity(Rarity.COMMON));
+	public static final Item BRASS_BOOTS = new Item.ArmorItem(
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "brass_boots")), BRASS_ARMOR_MATERIAL, Type.BOOTS,
+			new FabricItemSettings().rarity(Rarity.COMMON));
 
 	// Tools
-	public static final Item BRASS_AXE = new Item(Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "brass_axe")),
-			new AxeItem(BRASS_TOOL_MATERIAL, 4, -3.1F, new FabricItemSettings().rarity(Rarity.COMMON)));
-	public static final Item BRASS_HOE = new Item(Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "brass_hoe")),
-			new HoeItem(BRASS_TOOL_MATERIAL, 1, -1.0F, new FabricItemSettings().rarity(Rarity.COMMON)));
-	public static final Item BRASS_PICKAXE = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "brass_pickaxe")),
-			new PickaxeItem(BRASS_TOOL_MATERIAL, 2, -2.8F, new FabricItemSettings().rarity(Rarity.COMMON)));
-	public static final Item BRASS_SHOVEL = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "brass_shovel")),
-			new ShovelItem(BRASS_TOOL_MATERIAL, 2, -3.0F, new FabricItemSettings().rarity(Rarity.COMMON)));
-	public static final Item BRASS_SWORD = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "brass_sword")),
-			new SwordItem(BRASS_TOOL_MATERIAL, 3, -2.4F, new FabricItemSettings().rarity(Rarity.COMMON)));
+	public static final Item BRASS_AXE = new Item.ToolItem(
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "brass_axe")), Item.ToolItem.Type.AXE,
+			BRASS_TOOL_MATERIAL, 4, -3.1F, new FabricItemSettings().rarity(Rarity.COMMON));
+	public static final Item BRASS_HOE = new Item.ToolItem(
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "brass_hoe")), Item.ToolItem.Type.HOE,
+			BRASS_TOOL_MATERIAL, 1, -1.0F, new FabricItemSettings().rarity(Rarity.COMMON));
+	public static final Item BRASS_PICKAXE = new Item.ToolItem(
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "brass_pickaxe")), Item.ToolItem.Type.PICKAXE,
+			BRASS_TOOL_MATERIAL, 2, -2.8F, new FabricItemSettings().rarity(Rarity.COMMON));
+	public static final Item BRASS_SHOVEL = new Item.ToolItem(
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "brass_shovel")), Item.ToolItem.Type.SHOVEL,
+			BRASS_TOOL_MATERIAL, 2, -3.0F, new FabricItemSettings().rarity(Rarity.COMMON));
+	public static final Item BRASS_SWORD = new Item.ToolItem(
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "brass_sword")), Item.ToolItem.Type.SWORD,
+			BRASS_TOOL_MATERIAL, 3, -2.4F, new FabricItemSettings().rarity(Rarity.COMMON));
 
+	// Lists
 	public static List<Item> BRASS_ITEMS = List.of(BRASS_APPLE, BRASS_UPGRADE);
 	public static List<Item> BRASS_ARMORS = List.of(BRASS_HELMET, BRASS_CHESTPLATE, BRASS_LEGGINGS, BRASS_BOOTS);
 	public static List<Item> BRASS_TOOLS = List.of(BRASS_AXE, BRASS_HOE, BRASS_PICKAXE, BRASS_SHOVEL, BRASS_SWORD);
 
-	// Others
+	// Methods
 	@Override
 	public void registerItems() {
+		// Datagen
 		ModelProvider.addItems(t -> {
 			for (Item i : BRASS_ITEMS) {
-				t.register(i.raw.get(), Models.GENERATED);
+				t.register(i.getRaw().get(), Models.GENERATED);
 			}
 			for (Item i : BRASS_ARMORS) {
-				t.registerArmor((ArmorItem) i.raw.get());
+				t.registerArmor((ArmorItem) i.getRaw().get());
 			}
 			for (Item i : BRASS_TOOLS) {
-				t.register(i.raw.get(), Models.HANDHELD);
+				t.register(i.getRaw().get(), Models.HANDHELD);
 			}
-		});
-
-		ItemTagProvider.addTo(ItemTags.BEACON_PAYMENT_ITEMS, BRASS_INGOT);
-		ItemTagProvider.addTo(ItemTags.TRIM_MATERIALS, BRASS_INGOT);
-
-		ItemTagProvider.addTo(ItemTags.CLUSTER_MAX_HARVESTABLES, BRASS_PICKAXE.raw.get());
-
-		ItemTagProvider.addTo(ItemTags.TRIMMABLE_ARMOR, BRASS_HELMET.raw.get());
-		ItemTagProvider.addTo(ItemTags.TRIMMABLE_ARMOR, BRASS_CHESTPLATE.raw.get());
-		ItemTagProvider.addTo(ItemTags.TRIMMABLE_ARMOR, BRASS_LEGGINGS.raw.get());
-		ItemTagProvider.addTo(ItemTags.TRIMMABLE_ARMOR, BRASS_BOOTS.raw.get());
-
-		ItemTagProvider.addTo(ItemTags.AXES, BRASS_AXE.raw.get());
-		ItemTagProvider.addTo(ItemTags.HOES, BRASS_HOE.raw.get());
-		ItemTagProvider.addTo(ItemTags.PICKAXES, BRASS_PICKAXE.raw.get());
-		ItemTagProvider.addTo(ItemTags.SHOVELS, BRASS_SHOVEL.raw.get());
-		ItemTagProvider.addTo(ItemTags.SWORDS, BRASS_SWORD.raw.get());
-
-		RecipeProvider.addRecipes(t -> {
-			ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, BRASS_UPGRADE.raw.get(), 2).input('#', BRASS_INGOT)
-					.input('C', net.minecraft.item.Items.END_STONE).input('S', BRASS_UPGRADE.raw.get()).pattern("#S#")
-					.pattern("#C#").pattern("###").criterion(RecipeProvider.hasItem(BRASS_UPGRADE.raw.get()),
-							RecipeProvider.conditionsFromItem(BRASS_UPGRADE.raw.get()))
-					.offerTo(t);
-
-			assert BRASS_INGOT != null;
-			SmithingTransformRecipeJsonBuilder
-					.create(Ingredient.ofItems(BRASS_UPGRADE.raw.get()),
-							Ingredient.ofItems(Items.TEMPLATE_HELMET.raw.get()), Ingredient.ofItems(BRASS_INGOT),
-							RecipeCategory.COMBAT, BRASS_HELMET.raw.get())
-					.criterion(RecipeProvider.hasItem(BRASS_INGOT), RecipeProvider.conditionsFromItem(BRASS_INGOT))
-					.offerTo(t, BRASS_HELMET.identifier.getPath() + "_smithing");
-			SmithingTransformRecipeJsonBuilder
-					.create(Ingredient.ofItems(BRASS_UPGRADE.raw.get()),
-							Ingredient.ofItems(Items.TEMPLATE_CHESTPLATE.raw.get()), Ingredient.ofItems(BRASS_INGOT),
-							RecipeCategory.COMBAT, BRASS_CHESTPLATE.raw.get())
-					.criterion(RecipeProvider.hasItem(BRASS_INGOT), RecipeProvider.conditionsFromItem(BRASS_INGOT))
-					.offerTo(t, BRASS_CHESTPLATE.identifier.getPath() + "_smithing");
-			SmithingTransformRecipeJsonBuilder
-					.create(Ingredient.ofItems(BRASS_UPGRADE.raw.get()),
-							Ingredient.ofItems(Items.TEMPLATE_LEGGINGS.raw.get()), Ingredient.ofItems(BRASS_INGOT),
-							RecipeCategory.COMBAT, BRASS_LEGGINGS.raw.get())
-					.criterion(RecipeProvider.hasItem(BRASS_INGOT), RecipeProvider.conditionsFromItem(BRASS_INGOT))
-					.offerTo(t, BRASS_LEGGINGS.identifier.getPath() + "_smithing");
-			SmithingTransformRecipeJsonBuilder
-					.create(Ingredient.ofItems(BRASS_UPGRADE.raw.get()),
-							Ingredient.ofItems(Items.TEMPLATE_BOOTS.raw.get()), Ingredient.ofItems(BRASS_INGOT),
-							RecipeCategory.COMBAT, BRASS_BOOTS.raw.get())
-					.criterion(RecipeProvider.hasItem(BRASS_INGOT), RecipeProvider.conditionsFromItem(BRASS_INGOT))
-					.offerTo(t, BRASS_BOOTS.identifier.getPath() + "_smithing");
-
-			SmithingTransformRecipeJsonBuilder
-					.create(Ingredient.ofItems(BRASS_UPGRADE.raw.get()),
-							Ingredient.ofItems(Items.TEMPLATE_AXE.raw.get()), Ingredient.ofItems(BRASS_INGOT),
-							RecipeCategory.TOOLS, BRASS_AXE.raw.get())
-					.criterion(RecipeProvider.hasItem(BRASS_INGOT), RecipeProvider.conditionsFromItem(BRASS_INGOT))
-					.offerTo(t, BRASS_AXE.identifier.getPath() + "_smithing");
-			SmithingTransformRecipeJsonBuilder
-					.create(Ingredient.ofItems(BRASS_UPGRADE.raw.get()),
-							Ingredient.ofItems(Items.TEMPLATE_HOE.raw.get()), Ingredient.ofItems(BRASS_INGOT),
-							RecipeCategory.TOOLS, BRASS_HOE.raw.get())
-					.criterion(RecipeProvider.hasItem(BRASS_INGOT), RecipeProvider.conditionsFromItem(BRASS_INGOT))
-					.offerTo(t, BRASS_HOE.identifier.getPath() + "_smithing");
-			SmithingTransformRecipeJsonBuilder
-					.create(Ingredient.ofItems(BRASS_UPGRADE.raw.get()),
-							Ingredient.ofItems(Items.TEMPLATE_PICKAXE.raw.get()), Ingredient.ofItems(BRASS_INGOT),
-							RecipeCategory.TOOLS, BRASS_PICKAXE.raw.get())
-					.criterion(RecipeProvider.hasItem(BRASS_INGOT), RecipeProvider.conditionsFromItem(BRASS_INGOT))
-					.offerTo(t, BRASS_PICKAXE.identifier.getPath() + "_smithing");
-			SmithingTransformRecipeJsonBuilder
-					.create(Ingredient.ofItems(BRASS_UPGRADE.raw.get()),
-							Ingredient.ofItems(Items.TEMPLATE_SHOVEL.raw.get()), Ingredient.ofItems(BRASS_INGOT),
-							RecipeCategory.TOOLS, BRASS_SHOVEL.raw.get())
-					.criterion(RecipeProvider.hasItem(BRASS_INGOT), RecipeProvider.conditionsFromItem(BRASS_INGOT))
-					.offerTo(t, BRASS_SHOVEL.identifier.getPath() + "_smithing");
-			SmithingTransformRecipeJsonBuilder
-					.create(Ingredient.ofItems(BRASS_UPGRADE.raw.get()),
-							Ingredient.ofItems(Items.TEMPLATE_SWORD.raw.get()), Ingredient.ofItems(BRASS_INGOT),
-							RecipeCategory.TOOLS, BRASS_SWORD.raw.get())
-					.criterion(RecipeProvider.hasItem(BRASS_INGOT), RecipeProvider.conditionsFromItem(BRASS_INGOT))
-					.offerTo(t, BRASS_SWORD.identifier.getPath() + "_smithing");
 		});
 	}
 
@@ -227,18 +137,18 @@ public class Brass implements Registrar {
 		List<net.minecraft.item.Item> brass_all = new ArrayList<>();
 
 		for (Item i : BRASS_ITEMS) {
-			brass_all.add(i.raw.get());
+			brass_all.add(i.getRaw().get());
 		}
 		for (Item i : BRASS_ARMORS) {
-			brass_all.add(i.raw.get());
+			brass_all.add(i.getRaw().get());
 		}
 		for (Item i : BRASS_TOOLS) {
-			brass_all.add(i.raw.get());
+			brass_all.add(i.getRaw().get());
 		}
 
-		net.minecraft.item.Item[] brass_all_array = brass_all.toArray(new net.minecraft.item.Item[0]);
-
-		Tabs.addContentsTo(Tabs.TAB_HASIMOD_ALL, brass_all_array);
-		Tabs.addContentsTo(Tabs.TAB_HASIMOD_ORES, brass_all_array);
+		brass_all.forEach(t -> {
+			Tabs.addContentsTo(Tabs.TAB_HASIMOD_ALL, t);
+			Tabs.addContentsTo(Tabs.TAB_HASIMOD_ORES, t);
+		});
 	}
 }

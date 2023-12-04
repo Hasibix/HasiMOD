@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:emerald",
+    "minecraft:copper_ingot",
+    "minecraft:lapis_lazuli",
+    "hasimod:lonsdaleite_gem",
+    "minecraft:quartz",
+    "minecraft:redstone",
+    "create:andesite_ingot",
+    "create:brass_ingot",
+    "create:polished_rose_quartz",
+    "create:zinc_ingot"
+  ]
+}

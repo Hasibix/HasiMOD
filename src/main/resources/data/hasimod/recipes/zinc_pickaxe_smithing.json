@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "tag": "hasimod:zinc_ingot"
+  },
+  "base": {
+    "item": "hasimod:template_pickaxe"
+  },
+  "result": {
+    "item": "hasimod:zinc_pickaxe"
+  },
+  "template": {
+    "item": "hasimod:zinc_upgrade_smithing_template"
+  }
+}

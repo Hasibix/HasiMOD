@@ -1,0 +1,22 @@
+{
+  "encoded_palette": true,
+  "asset_name": "zinc",
+  "description": {
+    "color": "#B9E9C1",
+    "translations": [
+      {
+        "lang": "en_us",
+        "string": "Zinc Material"
+      },
+      {
+        "lang": "en_uk",
+        "string": "Zinc Material"
+      },
+      {
+        "lang": "lol_us",
+        "string": "jeenk metereal"
+      }
+    ]
+  },
+  "ingredient": "create:zinc_ingot"
+}

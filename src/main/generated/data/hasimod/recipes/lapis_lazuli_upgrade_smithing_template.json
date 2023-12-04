@@ -3,10 +3,10 @@
   "category": "misc",
   "key": {
     "#": {
-      "item": "minecraft:lapis_lazuli"
+      "item": "hasimod:carbon"
     },
     "C": {
-      "item": "minecraft:end_stone"
+      "item": "minecraft:stone"
     },
     "S": {
       "item": "hasimod:lapis_lazuli_upgrade_smithing_template"

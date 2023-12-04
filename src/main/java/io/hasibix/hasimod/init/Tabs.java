@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
@@ -21,10 +22,10 @@ public class Tabs {
 
 	public static void init() {
 		Registry.register(Registries.ITEM_GROUP, Identifier.of(HasiMOD.MOD_ID, "hasimod_all"),
-				FabricItemGroup.builder().icon(() -> new ItemStack(net.minecraft.item.Items.END_CRYSTAL))
+				FabricItemGroup.builder().icon(() -> new ItemStack(Items.END_CRYSTAL))
 						.displayName(Text.translatable("itemGroup." + HasiMOD.MOD_ID + ".hasimod_all")).build());
 		Registry.register(Registries.ITEM_GROUP, Identifier.of(HasiMOD.MOD_ID, "hasimod_ores"),
-				FabricItemGroup.builder().icon(() -> new ItemStack(Lonsdaleite.LONSDALEITE_GEM.raw.get()))
+				FabricItemGroup.builder().icon(() -> new ItemStack(Lonsdaleite.LONSDALEITE_GEM.getRaw().get()))
 						.displayName(Text.translatable("itemGroup." + HasiMOD.MOD_ID + ".hasimod_ores")).build());
 
 		TAB_HASIMOD_ALL = RegistryKey.of(RegistryKeys.ITEM_GROUP, Identifier.of(HasiMOD.MOD_ID, "hasimod_all"));

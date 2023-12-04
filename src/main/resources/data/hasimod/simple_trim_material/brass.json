@@ -1,0 +1,22 @@
+{
+  "encoded_palette": true,
+  "asset_name": "brass",
+  "description": {
+    "color": "#FBCC68",
+    "translations": [
+      {
+        "lang": "en_us",
+        "string": "Brass Material"
+      },
+      {
+        "lang": "en_uk",
+        "string": "Brass Material"
+      },
+      {
+        "lang": "lol_us",
+        "string": "VERIE REEL GOWLD metereal"
+      }
+    ]
+  },
+  "ingredient": "create:brass_ingot"
+}

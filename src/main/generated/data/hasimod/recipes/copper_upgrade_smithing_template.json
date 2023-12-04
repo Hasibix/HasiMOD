@@ -3,10 +3,10 @@
   "category": "misc",
   "key": {
     "#": {
-      "item": "minecraft:copper_ingot"
+      "item": "hasimod:carbon"
     },
     "C": {
-      "item": "minecraft:end_stone"
+      "item": "minecraft:stone"
     },
     "S": {
       "item": "hasimod:copper_upgrade_smithing_template"

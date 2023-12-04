@@ -13,9 +13,13 @@ public class HasiMOD implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		LOGGER.info("[HasiMOD] Initializing HasiMOD...");
-		Registrars.init();
-		Tabs.init();
-		LOGGER.info("[HasiMOD] Finished initializing HasiMOD!");
+		try {
+			LOGGER.info("[HasiMOD] Initializing HasiMOD...");
+			Registrars.init();
+			Tabs.init();
+			LOGGER.info("[HasiMOD] Finished initializing HasiMOD!");
+		} catch (Exception e) {
+			LOGGER.error("Something went wrong.", e);
+		}
 	}
 }

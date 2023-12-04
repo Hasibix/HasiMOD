@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Objects;
 
 import io.hasibix.hasimod.HasiMOD;
-import io.hasibix.hasimod.datagen.providers.ItemTagProvider;
 import io.hasibix.hasimod.datagen.providers.ModelProvider;
 import io.hasibix.hasimod.datagen.providers.RecipeProvider;
 import io.hasibix.hasimod.init.Tabs;
@@ -24,11 +23,11 @@ import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.SmithingTransformRecipeJsonBuilder;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.item.*;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorItem.Type;
+import net.minecraft.item.FoodComponent;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
-import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -37,6 +36,7 @@ import net.minecraft.util.Rarity;
 import net.minecraft.util.Util;
 
 public class Copper implements Registrar {
+	// Helpers
 	private static List<Identifier> getCopperUpgradeEmptyBaseSlotTextures() {
 		return List.of(EMPTY_ARMOR_SLOT_HELMET_TEXTURE, EMPTY_SLOT_SWORD_TEXTURE, EMPTY_ARMOR_SLOT_CHESTPLATE_TEXTURE,
 				EMPTY_SLOT_PICKAXE_TEXTURE, EMPTY_ARMOR_SLOT_LEGGINGS_TEXTURE, EMPTY_SLOT_AXE_TEXTURE,
@@ -48,34 +48,30 @@ public class Copper implements Registrar {
 	}
 
 	// Items
-	// Ingredients
 	public static final Item COPPER_APPLE = new Item(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "copper_apple")),
-			new net.minecraft.item.Item(new FabricItemSettings()
+			new FabricItemSettings()
 					.food(new FoodComponent.Builder().alwaysEdible().hunger(2).saturationModifier(9.6F)
 							.statusEffect(new StatusEffectInstance(StatusEffects.HASTE, 4800, 2), 1.0F)
 							.statusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 9600, 0), 1.0F)
 							.statusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, 4800, 2), 1.0F).build())
-					.rarity(Rarity.COMMON)));
-
-	public static final Item COPPER_UPGRADE = new Item(
+					.rarity(Rarity.COMMON));
+	public static final Item COPPER_UPGRADE = new Item.SmithingTemplate(
 			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "copper_upgrade_smithing_template")),
-			new SmithingTemplateItem(
-					Text.translatable(Util.createTranslationKey("item",
-							Identifier.of(HasiMOD.MOD_ID, "smithing_template.copper_upgrade.applies_to")))
-							.formatted(Formatting.BLUE),
-					Text.translatable(Util.createTranslationKey("item",
-							Identifier.of(HasiMOD.MOD_ID, "smithing_template.copper_upgrade.ingredients")))
-							.formatted(Formatting.BLUE),
-					Text.translatable(
-							Util.createTranslationKey("upgrade", Identifier.of(HasiMOD.MOD_ID, "copper_upgrade")))
-							.formatted(Formatting.GRAY),
-					Text.translatable(Util.createTranslationKey("item",
-							Identifier.of(HasiMOD.MOD_ID, "smithing_template.copper_upgrade.base_slot_description"))),
-					Text.translatable(Util.createTranslationKey("item",
-							Identifier.of(HasiMOD.MOD_ID,
-									"smithing_template.copper_upgrade.additions_slot_description"))),
-					getCopperUpgradeEmptyBaseSlotTextures(), getCopperUpgradeEmptyAdditionsSlotTextures()));
+			Text.translatable(Util.createTranslationKey("item",
+					Identifier.of(HasiMOD.MOD_ID, "smithing_template.copper_upgrade.applies_to")))
+					.formatted(Formatting.BLUE),
+			Text.translatable(Util.createTranslationKey("item",
+					Identifier.of(HasiMOD.MOD_ID, "smithing_template.copper_upgrade.ingredients")))
+					.formatted(Formatting.BLUE),
+			Text.translatable(Util.createTranslationKey("upgrade", Identifier.of(HasiMOD.MOD_ID, "copper_upgrade")))
+					.formatted(Formatting.GRAY),
+			Text.translatable(Util.createTranslationKey("item",
+					Identifier.of(HasiMOD.MOD_ID, "smithing_template.copper_upgrade.base_slot_description"))),
+			Text.translatable(Util.createTranslationKey("item",
+					Identifier.of(HasiMOD.MOD_ID, "smithing_template.copper_upgrade.additions_slot_description"))),
+			getCopperUpgradeEmptyBaseSlotTextures(), getCopperUpgradeEmptyAdditionsSlotTextures(),
+			new FabricItemSettings());
 
 	// Materials
 	public static final ArmorMaterial COPPER_ARMOR_MATERIAL = new ArmorMaterial(33, 9,
@@ -83,133 +79,122 @@ public class Copper implements Registrar {
 	public static final ToolMaterial COPPER_TOOL_MATERIAL = new ToolMaterial(2, 363, 9, MiningLevels.IRON, 4,
 			Ingredient.ofItems(COPPER_INGOT));
 
-	// Items
 	// Armors
-	public static final Item COPPER_HELMET = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "copper_helmet")),
-			new ArmorItem(COPPER_ARMOR_MATERIAL, Type.HELMET, new FabricItemSettings().rarity(Rarity.COMMON)));
-	public static final Item COPPER_CHESTPLATE = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "copper_chestplate")),
-			new ArmorItem(COPPER_ARMOR_MATERIAL, Type.CHESTPLATE, new FabricItemSettings().rarity(Rarity.COMMON)));
-	public static final Item COPPER_LEGGINGS = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "copper_leggings")),
-			new ArmorItem(COPPER_ARMOR_MATERIAL, Type.LEGGINGS, new FabricItemSettings().rarity(Rarity.COMMON)));
-	public static final Item COPPER_BOOTS = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "copper_boots")),
-			new ArmorItem(COPPER_ARMOR_MATERIAL, Type.BOOTS, new FabricItemSettings().rarity(Rarity.COMMON)));
+	public static final Item COPPER_HELMET = new Item.ArmorItem(
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "copper_helmet")), COPPER_ARMOR_MATERIAL, Type.HELMET,
+			new FabricItemSettings().rarity(Rarity.COMMON));
+	public static final Item COPPER_CHESTPLATE = new Item.ArmorItem(
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "copper_chestplate")), COPPER_ARMOR_MATERIAL,
+			Type.CHESTPLATE, new FabricItemSettings().rarity(Rarity.COMMON));
+	public static final Item COPPER_LEGGINGS = new Item.ArmorItem(
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "copper_leggings")), COPPER_ARMOR_MATERIAL,
+			Type.LEGGINGS, new FabricItemSettings().rarity(Rarity.COMMON));
+	public static final Item COPPER_BOOTS = new Item.ArmorItem(
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "copper_boots")), COPPER_ARMOR_MATERIAL, Type.BOOTS,
+			new FabricItemSettings().rarity(Rarity.COMMON));
 
 	// Tools
-	public static final Item COPPER_AXE = new Item(Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "copper_axe")),
-			new AxeItem(COPPER_TOOL_MATERIAL, 4, -3.1F, new FabricItemSettings().rarity(Rarity.COMMON)));
-	public static final Item COPPER_HOE = new Item(Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "copper_hoe")),
-			new HoeItem(COPPER_TOOL_MATERIAL, 1, -1.0F, new FabricItemSettings().rarity(Rarity.COMMON)));
-	public static final Item COPPER_PICKAXE = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "copper_pickaxe")),
-			new PickaxeItem(COPPER_TOOL_MATERIAL, 2, -2.8F, new FabricItemSettings().rarity(Rarity.COMMON)));
-	public static final Item COPPER_SHOVEL = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "copper_shovel")),
-			new ShovelItem(COPPER_TOOL_MATERIAL, 2, -3.0F, new FabricItemSettings().rarity(Rarity.COMMON)));
-	public static final Item COPPER_SWORD = new Item(
-			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "copper_sword")),
-			new SwordItem(COPPER_TOOL_MATERIAL, 3, -2.4F, new FabricItemSettings().rarity(Rarity.COMMON)));
+	public static final Item COPPER_AXE = new Item.ToolItem(
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "copper_axe")), Item.ToolItem.Type.AXE,
+			COPPER_TOOL_MATERIAL, 4, -3.1F, new FabricItemSettings().rarity(Rarity.COMMON));
+	public static final Item COPPER_HOE = new Item.ToolItem(
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "copper_hoe")), Item.ToolItem.Type.HOE,
+			COPPER_TOOL_MATERIAL, 1, -1.0F, new FabricItemSettings().rarity(Rarity.COMMON));
+	public static final Item COPPER_PICKAXE = new Item.ToolItem(
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "copper_pickaxe")), Item.ToolItem.Type.PICKAXE,
+			COPPER_TOOL_MATERIAL, 2, -2.8F, new FabricItemSettings().rarity(Rarity.COMMON));
+	public static final Item COPPER_SHOVEL = new Item.ToolItem(
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "copper_shovel")), Item.ToolItem.Type.SHOVEL,
+			COPPER_TOOL_MATERIAL, 2, -3.0F, new FabricItemSettings().rarity(Rarity.COMMON));
+	public static final Item COPPER_SWORD = new Item.ToolItem(
+			Objects.requireNonNull(Identifier.of(HasiMOD.MOD_ID, "copper_sword")), Item.ToolItem.Type.SWORD,
+			COPPER_TOOL_MATERIAL, 3, -2.4F, new FabricItemSettings().rarity(Rarity.COMMON));
 
+	// Methods
 	public static List<Item> COPPER_ITEMS = List.of(COPPER_APPLE, COPPER_UPGRADE);
 	public static List<Item> COPPER_ARMORS = List.of(COPPER_HELMET, COPPER_CHESTPLATE, COPPER_LEGGINGS, COPPER_BOOTS);
 	public static List<Item> COPPER_TOOLS = List.of(COPPER_AXE, COPPER_HOE, COPPER_PICKAXE, COPPER_SHOVEL,
 			COPPER_SWORD);
 
-	// Others
+	// Methods
 	@Override
 	public void registerItems() {
+		// Datagen
 		ModelProvider.addItems(t -> {
 			for (Item i : COPPER_ITEMS) {
-				t.register(i.raw.get(), Models.GENERATED);
+				t.register(i.getRaw().get(), Models.GENERATED);
 			}
 			for (Item i : COPPER_ARMORS) {
-				t.registerArmor((ArmorItem) i.raw.get());
+				t.registerArmor((ArmorItem) i.getRaw().get());
 			}
 			for (Item i : COPPER_TOOLS) {
-				t.register(i.raw.get(), Models.HANDHELD);
+				t.register(i.getRaw().get(), Models.HANDHELD);
 			}
 		});
 
-		ItemTagProvider.addTo(ItemTags.BEACON_PAYMENT_ITEMS, COPPER_INGOT);
-
-		ItemTagProvider.addTo(ItemTags.CLUSTER_MAX_HARVESTABLES, COPPER_PICKAXE.raw.get());
-
-		ItemTagProvider.addTo(ItemTags.TRIMMABLE_ARMOR, COPPER_HELMET.raw.get());
-		ItemTagProvider.addTo(ItemTags.TRIMMABLE_ARMOR, COPPER_CHESTPLATE.raw.get());
-		ItemTagProvider.addTo(ItemTags.TRIMMABLE_ARMOR, COPPER_LEGGINGS.raw.get());
-		ItemTagProvider.addTo(ItemTags.TRIMMABLE_ARMOR, COPPER_BOOTS.raw.get());
-
-		ItemTagProvider.addTo(ItemTags.AXES, COPPER_AXE.raw.get());
-		ItemTagProvider.addTo(ItemTags.HOES, COPPER_HOE.raw.get());
-		ItemTagProvider.addTo(ItemTags.PICKAXES, COPPER_PICKAXE.raw.get());
-		ItemTagProvider.addTo(ItemTags.SHOVELS, COPPER_SHOVEL.raw.get());
-		ItemTagProvider.addTo(ItemTags.SWORDS, COPPER_SWORD.raw.get());
-
 		RecipeProvider.addRecipes(t -> {
-			ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, COPPER_UPGRADE.raw.get(), 2).input('#', COPPER_INGOT)
-					.input('C', net.minecraft.item.Items.END_STONE).input('S', COPPER_UPGRADE.raw.get()).pattern("#S#")
-					.pattern("#C#").pattern("###").criterion(RecipeProvider.hasItem(COPPER_UPGRADE.raw.get()),
-							RecipeProvider.conditionsFromItem(COPPER_UPGRADE.raw.get()))
+			ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, COPPER_UPGRADE.getRaw().get(), 2)
+					.input('#', Items.CARBON.getRaw().get()).input('C', net.minecraft.item.Items.STONE)
+					.input('S', COPPER_UPGRADE.getRaw().get()).pattern("#S#").pattern("#C#").pattern("###")
+					.criterion(RecipeProvider.hasItem(COPPER_UPGRADE.getRaw().get()),
+							RecipeProvider.conditionsFromItem(COPPER_UPGRADE.getRaw().get()))
 					.offerTo(t);
 
 			SmithingTransformRecipeJsonBuilder
-					.create(Ingredient.ofItems(COPPER_UPGRADE.raw.get()),
-							Ingredient.ofItems(Items.TEMPLATE_HELMET.raw.get()), Ingredient.ofItems(COPPER_INGOT),
-							RecipeCategory.COMBAT, COPPER_HELMET.raw.get())
+					.create(Ingredient.ofItems(COPPER_UPGRADE.getRaw().get()),
+							Ingredient.ofItems(Items.TEMPLATE_HELMET.getRaw().get()), Ingredient.ofItems(COPPER_INGOT),
+							RecipeCategory.COMBAT, COPPER_HELMET.getRaw().get())
 					.criterion(RecipeProvider.hasItem(COPPER_INGOT), RecipeProvider.conditionsFromItem(COPPER_INGOT))
-					.offerTo(t, COPPER_HELMET.identifier.getPath() + "_smithing");
+					.offerTo(t, COPPER_HELMET.getIdentifier().getPath() + "_smithing");
 			SmithingTransformRecipeJsonBuilder
-					.create(Ingredient.ofItems(COPPER_UPGRADE.raw.get()),
-							Ingredient.ofItems(Items.TEMPLATE_CHESTPLATE.raw.get()), Ingredient.ofItems(COPPER_INGOT),
-							RecipeCategory.COMBAT, COPPER_CHESTPLATE.raw.get())
+					.create(Ingredient.ofItems(COPPER_UPGRADE.getRaw().get()),
+							Ingredient.ofItems(Items.TEMPLATE_CHESTPLATE.getRaw().get()),
+							Ingredient.ofItems(COPPER_INGOT), RecipeCategory.COMBAT, COPPER_CHESTPLATE.getRaw().get())
 					.criterion(RecipeProvider.hasItem(COPPER_INGOT), RecipeProvider.conditionsFromItem(COPPER_INGOT))
-					.offerTo(t, COPPER_CHESTPLATE.identifier.getPath() + "_smithing");
+					.offerTo(t, COPPER_CHESTPLATE.getIdentifier().getPath() + "_smithing");
 			SmithingTransformRecipeJsonBuilder
-					.create(Ingredient.ofItems(COPPER_UPGRADE.raw.get()),
-							Ingredient.ofItems(Items.TEMPLATE_LEGGINGS.raw.get()), Ingredient.ofItems(COPPER_INGOT),
-							RecipeCategory.COMBAT, COPPER_LEGGINGS.raw.get())
+					.create(Ingredient.ofItems(COPPER_UPGRADE.getRaw().get()),
+							Ingredient.ofItems(Items.TEMPLATE_LEGGINGS.getRaw().get()),
+							Ingredient.ofItems(COPPER_INGOT), RecipeCategory.COMBAT, COPPER_LEGGINGS.getRaw().get())
 					.criterion(RecipeProvider.hasItem(COPPER_INGOT), RecipeProvider.conditionsFromItem(COPPER_INGOT))
-					.offerTo(t, COPPER_LEGGINGS.identifier.getPath() + "_smithing");
+					.offerTo(t, COPPER_LEGGINGS.getIdentifier().getPath() + "_smithing");
 			SmithingTransformRecipeJsonBuilder
-					.create(Ingredient.ofItems(COPPER_UPGRADE.raw.get()),
-							Ingredient.ofItems(Items.TEMPLATE_BOOTS.raw.get()), Ingredient.ofItems(COPPER_INGOT),
-							RecipeCategory.COMBAT, COPPER_BOOTS.raw.get())
+					.create(Ingredient.ofItems(COPPER_UPGRADE.getRaw().get()),
+							Ingredient.ofItems(Items.TEMPLATE_BOOTS.getRaw().get()), Ingredient.ofItems(COPPER_INGOT),
+							RecipeCategory.COMBAT, COPPER_BOOTS.getRaw().get())
 					.criterion(RecipeProvider.hasItem(COPPER_INGOT), RecipeProvider.conditionsFromItem(COPPER_INGOT))
-					.offerTo(t, COPPER_BOOTS.identifier.getPath() + "_smithing");
+					.offerTo(t, COPPER_BOOTS.getIdentifier().getPath() + "_smithing");
 
 			SmithingTransformRecipeJsonBuilder
-					.create(Ingredient.ofItems(COPPER_UPGRADE.raw.get()),
-							Ingredient.ofItems(Items.TEMPLATE_AXE.raw.get()), Ingredient.ofItems(COPPER_INGOT),
-							RecipeCategory.TOOLS, COPPER_AXE.raw.get())
+					.create(Ingredient.ofItems(COPPER_UPGRADE.getRaw().get()),
+							Ingredient.ofItems(Items.TEMPLATE_AXE.getRaw().get()), Ingredient.ofItems(COPPER_INGOT),
+							RecipeCategory.TOOLS, COPPER_AXE.getRaw().get())
 					.criterion(RecipeProvider.hasItem(COPPER_INGOT), RecipeProvider.conditionsFromItem(COPPER_INGOT))
-					.offerTo(t, COPPER_AXE.identifier.getPath() + "_smithing");
+					.offerTo(t, COPPER_AXE.getIdentifier().getPath() + "_smithing");
 			SmithingTransformRecipeJsonBuilder
-					.create(Ingredient.ofItems(COPPER_UPGRADE.raw.get()),
-							Ingredient.ofItems(Items.TEMPLATE_HOE.raw.get()), Ingredient.ofItems(COPPER_INGOT),
-							RecipeCategory.TOOLS, COPPER_HOE.raw.get())
+					.create(Ingredient.ofItems(COPPER_UPGRADE.getRaw().get()),
+							Ingredient.ofItems(Items.TEMPLATE_HOE.getRaw().get()), Ingredient.ofItems(COPPER_INGOT),
+							RecipeCategory.TOOLS, COPPER_HOE.getRaw().get())
 					.criterion(RecipeProvider.hasItem(COPPER_INGOT), RecipeProvider.conditionsFromItem(COPPER_INGOT))
-					.offerTo(t, COPPER_HOE.identifier.getPath() + "_smithing");
+					.offerTo(t, COPPER_HOE.getIdentifier().getPath() + "_smithing");
 			SmithingTransformRecipeJsonBuilder
-					.create(Ingredient.ofItems(COPPER_UPGRADE.raw.get()),
-							Ingredient.ofItems(Items.TEMPLATE_PICKAXE.raw.get()), Ingredient.ofItems(COPPER_INGOT),
-							RecipeCategory.TOOLS, COPPER_PICKAXE.raw.get())
+					.create(Ingredient.ofItems(COPPER_UPGRADE.getRaw().get()),
+							Ingredient.ofItems(Items.TEMPLATE_PICKAXE.getRaw().get()), Ingredient.ofItems(COPPER_INGOT),
+							RecipeCategory.TOOLS, COPPER_PICKAXE.getRaw().get())
 					.criterion(RecipeProvider.hasItem(COPPER_INGOT), RecipeProvider.conditionsFromItem(COPPER_INGOT))
-					.offerTo(t, COPPER_PICKAXE.identifier.getPath() + "_smithing");
+					.offerTo(t, COPPER_PICKAXE.getIdentifier().getPath() + "_smithing");
 			SmithingTransformRecipeJsonBuilder
-					.create(Ingredient.ofItems(COPPER_UPGRADE.raw.get()),
-							Ingredient.ofItems(Items.TEMPLATE_SHOVEL.raw.get()), Ingredient.ofItems(COPPER_INGOT),
-							RecipeCategory.TOOLS, COPPER_SHOVEL.raw.get())
+					.create(Ingredient.ofItems(COPPER_UPGRADE.getRaw().get()),
+							Ingredient.ofItems(Items.TEMPLATE_SHOVEL.getRaw().get()), Ingredient.ofItems(COPPER_INGOT),
+							RecipeCategory.TOOLS, COPPER_SHOVEL.getRaw().get())
 					.criterion(RecipeProvider.hasItem(COPPER_INGOT), RecipeProvider.conditionsFromItem(COPPER_INGOT))
-					.offerTo(t, COPPER_SHOVEL.identifier.getPath() + "_smithing");
+					.offerTo(t, COPPER_SHOVEL.getIdentifier().getPath() + "_smithing");
 			SmithingTransformRecipeJsonBuilder
-					.create(Ingredient.ofItems(COPPER_UPGRADE.raw.get()),
-							Ingredient.ofItems(Items.TEMPLATE_SWORD.raw.get()), Ingredient.ofItems(COPPER_INGOT),
-							RecipeCategory.TOOLS, COPPER_SWORD.raw.get())
+					.create(Ingredient.ofItems(COPPER_UPGRADE.getRaw().get()),
+							Ingredient.ofItems(Items.TEMPLATE_SWORD.getRaw().get()), Ingredient.ofItems(COPPER_INGOT),
+							RecipeCategory.TOOLS, COPPER_SWORD.getRaw().get())
 					.criterion(RecipeProvider.hasItem(COPPER_INGOT), RecipeProvider.conditionsFromItem(COPPER_INGOT))
-					.offerTo(t, COPPER_SWORD.identifier.getPath() + "_smithing");
+					.offerTo(t, COPPER_SWORD.getIdentifier().getPath() + "_smithing");
 		});
 	}
 
@@ -218,18 +203,18 @@ public class Copper implements Registrar {
 		List<net.minecraft.item.Item> copper_all = new ArrayList<>();
 
 		for (Item i : COPPER_ITEMS) {
-			copper_all.add(i.raw.get());
+			copper_all.add(i.getRaw().get());
 		}
 		for (Item i : COPPER_ARMORS) {
-			copper_all.add(i.raw.get());
+			copper_all.add(i.getRaw().get());
 		}
 		for (Item i : COPPER_TOOLS) {
-			copper_all.add(i.raw.get());
+			copper_all.add(i.getRaw().get());
 		}
 
-		net.minecraft.item.Item[] copper_all_array = copper_all.toArray(new net.minecraft.item.Item[0]);
-
-		Tabs.addContentsTo(Tabs.TAB_HASIMOD_ALL, copper_all_array);
-		Tabs.addContentsTo(Tabs.TAB_HASIMOD_ORES, copper_all_array);
+		copper_all.forEach(t -> {
+			Tabs.addContentsTo(Tabs.TAB_HASIMOD_ALL, t);
+			Tabs.addContentsTo(Tabs.TAB_HASIMOD_ORES, t);
+		});
 	}
 }

@@ -45,6 +45,6 @@ public enum FabricRenderLayer {
 	}
 
 	public static void addBlockToLayer(Block block) {
-		BlockRenderLayerMap.INSTANCE.putBlock(block.raw.get(), from(block.renderLayer).getRenderLayer());
+		BlockRenderLayerMap.INSTANCE.putBlock(block.getRaw().get(), from(block.getRenderLayer()).getRenderLayer());
 	}
 }
